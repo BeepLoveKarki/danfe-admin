@@ -1,0 +1,5 @@
+.env
+db.txt
+node_modules
+static/assets
+static/email/test-emails
