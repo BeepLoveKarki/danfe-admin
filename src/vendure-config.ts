@@ -34,14 +34,14 @@ apiOptions: {
             settings: {
                 'request.credentials': 'include',
             } as any,
-        },// turn this off for production
-        adminApiDebug: true,*/ // turn this off for production
+        },*/// turn this off for production
+        //adminApiDebug: true, // turn this off for production
         shopApiPath: 'shop-api',
         /*shopApiPlayground: { 
             settings: {
                 'request.credentials': 'include',
             } as any,
-        },*/  // turn this off for production
+        },*/ // turn this off for production
         //shopApiDebug: true,// turn this off for production
     },
     authOptions: {
@@ -53,7 +53,7 @@ apiOptions: {
     },
     dbConnectionOptions: {
         type: 'postgres',
-        //synchronize: true, // turn this off for production
+        synchronize: true, // turn this off for production
         logging: false,
         database: process.env.DATABASE!,
         host: process.env.DB_HOST!,
@@ -72,6 +72,7 @@ apiOptions: {
             route: 'assets',
             assetUploadDir: path.join(__dirname, '../static/assets'),
             port: 3001,
+			assetUrlPrefix: 'https://admin.danfe.store/assets/'
 			namingStrategy: new DefaultAssetNamingStrategy(),
 			storageStrategyFactory: configureS3AssetStorage({
 				bucket: process.env.BUCKET_NAME!,
@@ -110,12 +111,13 @@ apiOptions: {
 					pass: process.env.EMAIL_PASS! ,
 				}
              },			
-            globalTemplateVars: {
+            
+			globalTemplateVars: {
                 fromAddress: process.env.FROM_EMAIL!,
                 verifyEmailAddressUrl: process.env.STOREFRONT_URL!+'account/verify',
                 passwordResetUrl: process.env.STOREFRONT_URL!+'account/reset-password',
                 changeEmailAddressUrl: process.env.STOREFRONT_URL!+'account/change-email-address',
-            },
+            }
 			
         }),
         AdminUiPlugin.init({
