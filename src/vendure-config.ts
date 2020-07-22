@@ -3,7 +3,8 @@ import {
     DefaultJobQueuePlugin,
     DefaultSearchPlugin,
     VendureConfig,
-	DefaultAssetNamingStrategy
+	DefaultAssetNamingStrategy,
+	NativeAuthenticationStrategy
 } from '@vendure/core'; 
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
@@ -16,8 +17,9 @@ import { ReviewsPlugin } from "vendure-reviews-plugin";
 import { SubscriptionPlugin } from "vendure-subscription-plugin";
 import { FeedbackPlugin } from "vendure-feedback-plugin";
 import { VendorPlugin } from "vendure-vendor-plugin";
-
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
+import { SocialAuthenticationStrategy } from './strategies/social-authentication-strategy';
+import { SocialRegisterAuthenticationStrategy } from './strategies/social-register-authentication-strategy';
 import path from 'path';
 
 
@@ -30,19 +32,19 @@ export const config: VendureConfig = {
 apiOptions: {
         port: 3000,
         adminApiPath: 'admin-api',
-        /*adminApiPlayground: {
+        adminApiPlayground: {
             settings: {
                 'request.credentials': 'include',
             } as any,
-        },*/// turn this off for production
-        //adminApiDebug: true, // turn this off for production
+        },// turn this off for production
+        adminApiDebug: true, // turn this off for production
         shopApiPath: 'shop-api',
-        /*shopApiPlayground: { 
+        shopApiPlayground: { 
             settings: {
                 'request.credentials': 'include',
             } as any,
-        },*/ // turn this off for production
-        //shopApiDebug: true,// turn this off for production
+        }, // turn this off for production
+        shopApiDebug: true,// turn this off for production
     },
     authOptions: {
         sessionSecret: process.env.SECRET_KEY!,
@@ -50,6 +52,11 @@ apiOptions: {
             identifier: process.env.IDENTIFIER!,
             password: process.env.PASSWORD!
         },
+        shopAuthenticationStrategy: [
+          new NativeAuthenticationStrategy(),
+          new SocialAuthenticationStrategy(),
+		  new SocialRegisterAuthenticationStrategy()
+        ]
     },
     dbConnectionOptions: {
         type: 'postgres',
@@ -72,7 +79,7 @@ apiOptions: {
             route: 'assets',
             assetUploadDir: path.join(__dirname, '../static/assets'),
             port: 3001,
-			assetUrlPrefix: 'https://admin.danfe.store/assets/'
+			/*assetUrlPrefix: 'https://admin.danfe.store/assets/',
 			namingStrategy: new DefaultAssetNamingStrategy(),
 			storageStrategyFactory: configureS3AssetStorage({
 				bucket: process.env.BUCKET_NAME!,
@@ -80,7 +87,7 @@ apiOptions: {
 					accessKeyId: process.env.ACCESS_KEY_ID!,
 					secretAccessKey: process.env.SECRET_ACCESS_KEY!,
 					},
-			}),
+			}),*/
         }),
         DefaultJobQueuePlugin,
         DefaultSearchPlugin,
@@ -93,14 +100,14 @@ apiOptions: {
 		SubscriptionPlugin,
 		VendorPlugin,
         EmailPlugin.init({
-            /*devMode: true,
+            devMode: true,
             outputPath: path.join(__dirname, '../static/email/test-emails'),
             mailboxPort: 3003,
             handlers: defaultEmailHandlers,
-            templatePath: path.join(__dirname, '../static/email/templates'),*/
+            templatePath: path.join(__dirname, '../static/email/templates'),
 			
 			
-			handlers: defaultEmailHandlers,
+			/*handlers: defaultEmailHandlers,
 			templatePath: path.join(__dirname, '../static/email/templates'),
 			transport: {
 				type: 'smtp',
@@ -110,7 +117,7 @@ apiOptions: {
 					user: process.env.EMAIL_USER!,
 					pass: process.env.EMAIL_PASS! ,
 				}
-             },			
+             },	*/		
             
 			globalTemplateVars: {
                 fromAddress: process.env.FROM_EMAIL!,
