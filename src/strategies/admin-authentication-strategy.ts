@@ -1,6 +1,5 @@
 import{
   AuthenticationStrategy,
-  ExternalAuthenticationService,
   Injector,
   RequestContext,
   User,
@@ -8,18 +7,20 @@ import{
 } from '@vendure/core';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
+import { HttpService } from '@nestjs/common';
 
 export type AdminAuthData = {
   username: string;
   password: string;
   answer: string;
   nodisplay: string;
-  score: string;
+  token: string;
 };
 
 export class AdminAuthenticationStrategy implements AuthenticationStrategy<AdminAuthData> {
   readonly name = 'admin';
   private authService: AuthService;
+  private httpService: HttpService;
 
   constructor() {
     
@@ -27,6 +28,7 @@ export class AdminAuthenticationStrategy implements AuthenticationStrategy<Admin
 
   init(injector: Injector) {
 	this.authService = injector.get(AuthService);
+	this.httpService = injector.get(HttpService);
   }
 
   defineInputType(): DocumentNode {
@@ -36,24 +38,39 @@ export class AdminAuthenticationStrategy implements AuthenticationStrategy<Admin
 			password: String!
 			answer: String!
 			nodisplay: String
-			score: String!
+			token: String!
         }
     `;
   }
 
   async authenticate(ctx: RequestContext, data: AdminAuthData): Promise<User | false> {
     
-	if(data.nodisplay || data.answer!="Sanitize Nepal" || Number(data.score)<0.5){
+	if(data.nodisplay.length!=0 || data.answer!="Sanitize Nepal"){
 	  return false;
 	}else{
-	  let adata = <any>{};
-	  adata["username"] = data.username;
-	  adata["password"] = data.password;
-	  let session = await this.authService.authenticate(ctx,"admin","native",adata);
-	  return session.user;
+	   let res = await this.httpService.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECPATCHA_SECRET_KEY}&response=${data.token}`, 
+	   {
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+       }).toPromise();
+	   if(res.data.success){
+	     if(res.data.score>0.5){
+		    let adata = <any>{};
+			adata["username"] = data.username;
+			adata["password"] = data.password;
+			let session = await this.authService.authenticate(ctx,"admin","native",adata);
+			return session.user;
+            //return false;			
+		 }else{
+		   return false;
+		 }
+	   }else{
+	     return false;
+	   }
+	   
+	  return false;
 	}
-	
-	return false;
   
   }
 }

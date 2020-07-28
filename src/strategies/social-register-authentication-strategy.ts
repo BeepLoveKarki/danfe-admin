@@ -1,6 +1,5 @@
 import{
   AuthenticationStrategy,
-  ExternalAuthenticationService,
   Injector,
   RequestContext,
   User,
@@ -23,7 +22,6 @@ export type SocialRegisterAuthData = {
 
 export class SocialRegisterAuthenticationStrategy implements AuthenticationStrategy<SocialRegisterAuthData> {
   readonly name = 'socialregister';
-  private externalAuthenticationService: ExternalAuthenticationService;
   private customerService: CustomerService;
   private userService: UserService;
 
@@ -32,7 +30,6 @@ export class SocialRegisterAuthenticationStrategy implements AuthenticationStrat
   }
 
   init(injector: Injector) {
-    this.externalAuthenticationService = injector.get(ExternalAuthenticationService);
 	this.customerService = injector.get(CustomerService);
 	this.userService = injector.get(UserService);
   }

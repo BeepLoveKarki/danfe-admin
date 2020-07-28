@@ -21,6 +21,7 @@ import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 import { SocialAuthenticationStrategy } from './strategies/social-authentication-strategy';
 import { SocialRegisterAuthenticationStrategy } from './strategies/social-register-authentication-strategy';
 import { AdminAuthenticationStrategy } from './strategies/admin-authentication-strategy';
+import { ProxyPlugin } from './proxy/proxy-plugin';
 import { KhaltiPaymentHandler } from './payment-gateways/khalti/khalti-payment-handler';
 import path from 'path';
 
@@ -96,6 +97,7 @@ apiOptions: {
 			}),*/
         }),
         DefaultJobQueuePlugin,
+		ProxyPlugin,
         DefaultSearchPlugin,
 		ProductRecommendationsPlugin,
 		BulkDiscountPlugin,
@@ -139,6 +141,10 @@ apiOptions: {
 			app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
 			},
+			
+			adminUiConfig: {
+				loginUrl: '/admin/login',
+            },
 
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
