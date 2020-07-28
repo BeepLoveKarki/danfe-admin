@@ -20,6 +20,8 @@ import { VendorPlugin } from "vendure-vendor-plugin";
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 import { SocialAuthenticationStrategy } from './strategies/social-authentication-strategy';
 import { SocialRegisterAuthenticationStrategy } from './strategies/social-register-authentication-strategy';
+import { AdminAuthenticationStrategy } from './strategies/admin-authentication-strategy';
+import { KhaltiPaymentHandler } from './payment-gateways/khalti/khalti-payment-handler';
 import path from 'path';
 
 
@@ -56,7 +58,11 @@ apiOptions: {
           new NativeAuthenticationStrategy(),
           new SocialAuthenticationStrategy(),
 		  new SocialRegisterAuthenticationStrategy()
-        ]
+        ],
+		adminAuthenticationStrategy: [
+		  new NativeAuthenticationStrategy(),
+		  new AdminAuthenticationStrategy()
+		]
     },
     dbConnectionOptions: {
         type: 'postgres',
@@ -70,7 +76,7 @@ apiOptions: {
         migrations: [path.join(__dirname, '../migrations/*.ts')],
     },
     paymentOptions: {
-        paymentMethodHandlers: [examplePaymentHandler],
+        paymentMethodHandlers: [examplePaymentHandler,KhaltiPaymentHandler],
     },
     customFields: {
 	},
@@ -137,7 +143,7 @@ apiOptions: {
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
-					VendorPlugin.uiExtensions,
+					SubscriptionPlugin.uiExtensions,
                 ]
 			}),*/
 			

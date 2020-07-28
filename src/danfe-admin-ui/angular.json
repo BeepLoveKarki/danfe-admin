@@ -25,7 +25,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              "src/danfeicon.ico",
               "src/vendure-ui-config.json",
               "src/theme.min.css",
               "src/assets",
@@ -62,7 +62,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
+              "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
