@@ -86,7 +86,7 @@ apiOptions: {
             route: 'assets',
             assetUploadDir: path.join(__dirname, '../static/assets'),
             port: 3001,
-			/*assetUrlPrefix: 'https://admin.danfe.store/assets/',
+			assetUrlPrefix: 'https://admin.danfe.store/assets/',
 			namingStrategy: new DefaultAssetNamingStrategy(),
 			storageStrategyFactory: configureS3AssetStorage({
 				bucket: process.env.BUCKET_NAME!,
@@ -94,7 +94,7 @@ apiOptions: {
 					accessKeyId: process.env.ACCESS_KEY_ID!,
 					secretAccessKey: process.env.SECRET_ACCESS_KEY!,
 					},
-			}),*/
+			}),
         }),
         DefaultJobQueuePlugin,
 		ProxyPlugin,
@@ -108,14 +108,14 @@ apiOptions: {
 		SubscriptionPlugin,
 		VendorPlugin,
         EmailPlugin.init({
-            devMode: true,
+            /*devMode: true,
             outputPath: path.join(__dirname, '../static/email/test-emails'),
             mailboxPort: 3003,
             handlers: defaultEmailHandlers,
-            templatePath: path.join(__dirname, '../static/email/templates'),
+            templatePath: path.join(__dirname, '../static/email/templates'),*/
 			
 			
-			/*handlers: defaultEmailHandlers,
+			handlers: defaultEmailHandlers,
 			templatePath: path.join(__dirname, '../static/email/templates'),
 			transport: {
 				type: 'smtp',
@@ -125,7 +125,7 @@ apiOptions: {
 					user: process.env.EMAIL_USER!,
 					pass: process.env.EMAIL_PASS! ,
 				}
-             },	*/		
+             },	
             
 			globalTemplateVars: {
                 fromAddress: process.env.FROM_EMAIL!,

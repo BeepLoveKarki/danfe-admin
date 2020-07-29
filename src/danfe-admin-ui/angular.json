@@ -25,7 +25,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/danfeicon.ico",
+			  "src/danfeicon.ico",
+              "src/favicon.ico",
               "src/vendure-ui-config.json",
               "src/theme.min.css",
               "src/assets",

@@ -7,23 +7,11 @@ import { VendurePlugin, createProxyHandler } from '@vendure/core';
           handler: createProxyHandler({
               label: 'Danfe Admin UI',
               route: 'admin/login',
-              port: 80,
-			  hostname: 'd3j7ndklsm90do.cloudfront.net'
+              port: 8080,
+			  hostname: 'localhost'
           }),
           route: 'admin/login',
       });
-	  
-	  /*config.apiOptions.middleware.push({
-          handler: createProxyHandler({
-              label: 'Admin UI',
-              route: 'danfe-login',
-              port: 8080,
-			  hostname: 'localhost',
-			  basePath: '/admin/login'
-			  
-          }),
-          route: 'danfe-login',
-      });*/
 	  
       return config;
   }
