@@ -317,6 +317,10 @@
     "no-default-tax-zone-set": "This channel has no default tax zone, which will cause errors when calculating prices. Please create or select a zone.",
     "product-variant-form-values-do-not-match": "The number of variants in the product form does not match the actual number of variants"
   },
+  "favorites": {
+    "hide-favorites": "Hide Favorites",
+    "show-favorites": "Show Favorites"
+  },
   "lang": {
     "af": "Afrikaans",
     "ak": "Akan",

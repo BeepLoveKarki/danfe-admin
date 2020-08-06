@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FavoritesUiExtensionModule } from './extensions/17fb80b0773083839f6b3b938818de94c40152dbc25d6cda91ee7fdf0b8fe156/favorites-ui-extension.module';
 import { SubscriptionExtensionModule } from './extensions/a9af16c80b8350127fca1c5ca0d099380624f452297f6cb10aeadc83972207c1/subscription-ui-extension.module';
 import { VendorExtensionModule } from './extensions/a54db48cd17500f6e960d4a4c0a05fb8c04c9626ba390705252a6b732b37a892/vendor-ui-extension.module';
 import { FeedbackExtensionModule } from './extensions/4bd412b956d4c1baedfedaa6aa36beabe17096aeaddd966cdb15d5b0044cbcd1/feedback-ui-extension.module';
@@ -9,6 +10,6 @@ import { ProductRecommendationsInputModule } from './extensions/bd527912b2da6217
 
 
 @NgModule({
-    imports: [CommonModule, SubscriptionExtensionModule, VendorExtensionModule, FeedbackExtensionModule, ReviewsUiExtensionModule, BulkDiscountInputModule, ProductRecommendationsInputModule, ],
+    imports: [CommonModule, FavoritesUiExtensionModule, SubscriptionExtensionModule, VendorExtensionModule, FeedbackExtensionModule, ReviewsUiExtensionModule, BulkDiscountInputModule, ProductRecommendationsInputModule, ],
 })
 export class SharedExtensionsModule {}
