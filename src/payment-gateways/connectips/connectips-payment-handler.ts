@@ -1,5 +1,8 @@
 import { PaymentMethodHandler, SettlePaymentResult, LanguageCode, CreatePaymentFn } from '@vendure/core';
 //import gripeSDK from 'gripe'; //mock test
+import sha256 from 'crypto-js/sha256';
+import Utf8 from 'crypto-js/enc-utf8';
+import Base64 from 'crypto-js/enc-base64';
 
 let postdata = <any>{};
 
@@ -23,7 +26,16 @@ function gettoken(){
    PARTICULARS="+postdata["PARTICULARS"]+",\
    TOKEN=TOKEN";
    
-   return message;
+   let enc = sha256(message);
+   
+   /*const encodedWord = Utf8.parse(message);
+   const encoded = Base64.stringify(encodedWord);
+   
+   
+   console.log(encodedWord);
+   console.log(encoded);*/
+   
+   return enc;
 }
 
 export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
@@ -48,13 +60,12 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
                 source: metadata.authToken,
          });*/
 		 
-		 console.log(order.total);
 		 //console.log(metadata);
 		 
 		 postdata["MERCHANTID"] = args.merchantid;
 		 postdata["APPID"] = args.appid;
 		 postdata["APPNAME"] = args.appname;
-	     postdata["TXNID"] = "DANFEIPS-"+Math.floor(Math.random()*100000001);
+	     postdata["TXNID"] = "DANFEIPS-"+Math.floor(Math.random()*100000001).toString();
 		 postdata["TXNDATE"] = getdate();
 		 postdata["TXNCRNCY"] = args.currency;
 		 postdata["TXNAMT"] = Math.ceil(order.total);
@@ -67,9 +78,9 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		 console.log(postdata);
 		 
 	     /*return {
-                amount: order.total,
+                amount: postdata["TXNAMT"],
                 state: 'Settled' as 'Settled',
-                transactionId: '59089',
+                transactionId: postdata["TXNID"],
                 metadata: {
 					message:"Success"
 				},

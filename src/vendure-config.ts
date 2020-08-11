@@ -111,7 +111,9 @@ apiOptions: {
 		FeedbackPlugin,
 		SubscriptionPlugin,
 		VendorPlugin,
-		FavoritesPlugin,
+		FavoritesPlugin.init({
+		    trackHistory: true
+		}),
         EmailPlugin.init({
             devMode: true,
             outputPath: path.join(__dirname, '../static/email/test-emails'),
