@@ -1,8 +1,9 @@
 import { PaymentMethodHandler, SettlePaymentResult, LanguageCode, CreatePaymentFn } from '@vendure/core';
 //import gripeSDK from 'gripe'; //mock test
-import sha256 from 'crypto-js/sha256';
-import Utf8 from 'crypto-js/enc-utf8';
-import Base64 from 'crypto-js/enc-base64';
+import crypto from 'crypto';
+import * as fs from 'fs';
+import * as pem from 'pem';
+//import * as path from 'path';
 
 let postdata = <any>{};
 
@@ -12,7 +13,7 @@ function getdate(){
    return datestring;
 }
 
-function gettoken(){
+async function gettoken(){
    let message = 
    "MERCHANTID="+postdata["MERCHANTID"]+",\
    APPID="+postdata["APPID"]+",\
@@ -26,16 +27,29 @@ function gettoken(){
    PARTICULARS="+postdata["PARTICULARS"]+",\
    TOKEN=TOKEN";
    
-   let enc = sha256(message);
+   let enc = "a";
    
-   /*const encodedWord = Utf8.parse(message);
-   const encoded = Base64.stringify(encodedWord);
+   let path = __dirname + "/connectips-signature/CREDITOR.pfx";
+   let pfx = fs.readFileSync(path);
    
+   let func = await pem.readPkcs12(pfx, { p12Password: "123" }, (err, cert) => {
+      if(err){
+	    return null;
+	  }else{
+		 let sign = crypto.createSign('SHA256');
+		 sign.update(message);
+		 sign.end();
+		 let signature = sign.sign(cert["key"]);
+		 return signature.toString('base64');
+	  }
+   });
    
-   console.log(encodedWord);
-   console.log(encoded);*/
+   func.then((value:any)=>{
+      console.log(value);
+   });
+
    
-   return enc;
+   //return enc;
 }
 
 export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
@@ -73,9 +87,8 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		 postdata["REFERENCEID"] = "DANFE-REF-001"; 
 		 postdata["REMARKS"] = "DANFE-RMKS-001";
 		 postdata["PARTICULARS"] = "DANFE-PART-001";
-		 postdata["TOKEN"] = gettoken();
-		 
-		 console.log(postdata);
+		 postdata["TOKEN"] = await gettoken();
+		 //console.log(postdata);
 		 
 	     /*return {
                 amount: postdata["TXNAMT"],
