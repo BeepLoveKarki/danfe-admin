@@ -3,4 +3,4 @@ db.txt
 node_modules
 static/assets
 static/email/test-emails
-src/connectips-signature
+src/payment-gateways/connectips/connectips-signature

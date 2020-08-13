@@ -15,11 +15,13 @@
     "tslib": "1.11.2"
   },
   "dependencies": {
+    "@chilkat/ck-node10-win64": "^9.50.83",
     "@types/braintree": "^2.22.3",
     "@types/crypto-js": "^3.1.47",
     "@types/dotenv": "^8.2.0",
     "@types/facebook-js-sdk": "^3.3.0",
     "@types/node": "^14.0.14",
+    "@types/node-forge": "^0.9.5",
     "@types/pem": "^1.9.5",
     "@vendure/admin-ui": "^0.14.0",
     "@vendure/admin-ui-plugin": "0.14.0",
@@ -37,6 +39,7 @@
     "fs": "0.0.1-security",
     "google-auth-library": "^6.0.5",
     "mysql": "^2.18.1",
+    "node-forge": "^0.9.1",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "pem": "^1.14.4",

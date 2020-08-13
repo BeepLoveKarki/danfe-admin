@@ -1,9 +1,6 @@
 import { PaymentMethodHandler, SettlePaymentResult, LanguageCode, CreatePaymentFn } from '@vendure/core';
-//import gripeSDK from 'gripe'; //mock test
 import crypto from 'crypto';
 import * as fs from 'fs';
-import * as pem from 'pem';
-//import * as path from 'path';
 
 let postdata = <any>{};
 
@@ -13,7 +10,7 @@ function getdate(){
    return datestring;
 }
 
-async function gettoken(){
+function gettoken(){
    let message = 
    "MERCHANTID="+postdata["MERCHANTID"]+",\
    APPID="+postdata["APPID"]+",\
@@ -26,30 +23,15 @@ async function gettoken(){
    REMARKS="+postdata["REMARKS"]+",\
    PARTICULARS="+postdata["PARTICULARS"]+",\
    TOKEN=TOKEN";
-   
-   let enc = "a";
-   
-   let path = __dirname + "/connectips-signature/CREDITOR.pfx";
-   let pfx = fs.readFileSync(path);
-   
-   let func = await pem.readPkcs12(pfx, { p12Password: "123" }, (err, cert) => {
-      if(err){
-	    return null;
-	  }else{
-		 let sign = crypto.createSign('SHA256');
-		 sign.update(message);
-		 sign.end();
-		 let signature = sign.sign(cert["key"]);
-		 return signature.toString('base64');
-	  }
-   });
-   
-   func.then((value:any)=>{
-      console.log(value);
-   });
+	
+   let path = __dirname + "/connectips-signature/key.pem";
+   let key = fs.readFileSync(path);
+   let sign = crypto.createSign('SHA256');
+   sign.update(message);
+   sign.end();
+   let signature = sign.sign(key).toString('base64');
 
-   
-   //return enc;
+   return signature;
 }
 
 export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
@@ -68,14 +50,6 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
     
 	async createPayment(order, args, metadata) {
 	   try {
-		 /*const result = await gripeSDK.charges.create({
-                apiKey: args.apiKey,
-                amount: order.total,
-                source: metadata.authToken,
-         });*/
-		 
-		 //console.log(metadata);
-		 
 		 postdata["MERCHANTID"] = args.merchantid;
 		 postdata["APPID"] = args.appid;
 		 postdata["APPNAME"] = args.appname;
@@ -87,8 +61,9 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		 postdata["REFERENCEID"] = "DANFE-REF-001"; 
 		 postdata["REMARKS"] = "DANFE-RMKS-001";
 		 postdata["PARTICULARS"] = "DANFE-PART-001";
-		 postdata["TOKEN"] = await gettoken();
-		 //console.log(postdata);
+		 postdata["TOKEN"] = gettoken();
+		 
+		 console.log(postdata);
 		 
 	     /*return {
                 amount: postdata["TXNAMT"],
