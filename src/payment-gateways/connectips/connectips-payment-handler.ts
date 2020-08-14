@@ -1,6 +1,7 @@
-import { PaymentMethodHandler, SettlePaymentResult, LanguageCode, CreatePaymentFn } from '@vendure/core';
+import {PaymentMethodHandler,LanguageCode} from '@vendure/core';
 import crypto from 'crypto';
 import * as fs from 'fs';
+import axios from 'axios';
 
 let postdata = <any>{};
 
@@ -59,11 +60,15 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		 postdata["TXNAMT"] = Math.ceil(order.total);
 		 
 		 postdata["REFERENCEID"] = "DANFE-REF-001"; 
-		 postdata["REMARKS"] = "DANFE-RMKS-001";
-		 postdata["PARTICULARS"] = "DANFE-PART-001";
+		 postdata["REMARKS"] = "DANFE-ORDER-PAYMENT";
+		 postdata["PARTICULARS"] = "PAID FOR ORDER BY CUSTOMER";
 		 postdata["TOKEN"] = gettoken();
 		 
-		 console.log(postdata);
+		 //console.log(postdata);
+		 
+		 /*let res = await axios.post('https://uat.connectips.com:7443/connectipswebgw/loginpage',postdata);
+		 let data = res;
+		 console.log(data);*/
 		 
 	     /*return {
                 amount: postdata["TXNAMT"],
@@ -97,7 +102,10 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 	  return {
             success: true,
       };
-	}	
+	}
+ 
+    
+    	
 });
 
 
