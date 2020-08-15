@@ -68,10 +68,11 @@ export class ConnectIPSTokenResolver {
 
   @Mutation()
   createConnectIPSToken(@Ctx() ctx: RequestContext, @Args() args: any) {
-	postdata["TXNID"] = "DANFEIPS-"+Math.floor(Math.random()*100000001).toString();
+	let num = Math.floor(Math.random()*100000001).toString();
+	postdata["TXNID"] = "DANFEIPS-"+num;
 	postdata["TXNDATE"] = getdate();
 	postdata["TXNAMT"] = Math.ceil(args.input.total);
-	postdata["REFERENCEID"] = "DANFE-REF-001"; 
+	postdata["REFERENCEID"] = "DANFE-REF-"+num; 
 	postdata["REMARKS"] = "DANFE-ORDER-PAYMENT";
 	postdata["PARTICULARS"] = "PAID FOR ORDER BY CUSTOMER";
 	postdata["TOKEN"] = gettoken();

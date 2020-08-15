@@ -1,5 +1,4 @@
 import {
-    examplePaymentHandler,
     DefaultJobQueuePlugin,
     DefaultSearchPlugin,
     VendureConfig,
@@ -23,6 +22,7 @@ import { SocialRegisterAuthenticationStrategy } from './strategies/social-regist
 import { AdminAuthenticationStrategy } from './strategies/admin-authentication-strategy';
 import { ProxyPlugin } from './proxy/proxy-plugin';
 import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connectips-payment-handler';
+import { CoDPaymentHandler } from './payment-gateways/cod/cod-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
 import { FavoritesPlugin } from "vendure-favorites-plugin";
 import path from 'path';
@@ -80,8 +80,9 @@ apiOptions: {
     },
     paymentOptions: {
         paymentMethodHandlers: [
-		 examplePaymentHandler,
-		 ConnectIPSPaymentHandler
+		 //examplePaymentHandler,
+		 ConnectIPSPaymentHandler,
+		 CoDPaymentHandler
 		],
     },
     customFields: {
