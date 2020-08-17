@@ -1,30 +1,13 @@
 import {PaymentMethodHandler,LanguageCode} from '@vendure/core';
 import crypto from 'crypto';
 import * as fs from 'fs';
-import axios from 'axios';
+import fetch from 'node-fetch';
 
 let postdata = <any>{};
 
-function getdate(){
-   let d = new Date();
-   let datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + d.getFullYear();
-   return datestring;
-}
-
 function gettoken(){
-   let message = 
-   "MERCHANTID="+postdata["MERCHANTID"]+",\
-   APPID="+postdata["APPID"]+",\
-   APPNAME="+postdata["APPNAME"]+",\
-   TXNID="+postdata["TXNID"]+",\
-   TXNDATE="+postdata["TXNDATE"]+",\
-   TXNCRNCY="+postdata["TXNCRNCY"]+",\
-   TXNAMT="+postdata["TXNAMT"]+",\
-   REFERENCEID="+postdata["REFERENCEID"]+",\
-   REMARKS="+postdata["REMARKS"]+",\
-   PARTICULARS="+postdata["PARTICULARS"]+",\
-   TOKEN=TOKEN";
-	
+   let message = "MERCHANTID="+postdata["merchantId"]+",APPID="+postdata["appId"]+",REFERENCEID="+postdata["referenceId"]+",TXNAMT="+postdata["txnAmt"];
+
    let path = __dirname + "/connectips-signature/key.pem";
    let key = fs.readFileSync(path);
    let sign = crypto.createSign('SHA256');
@@ -51,41 +34,52 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
     
 	async createPayment(order, args, metadata) {
 	   try {
-		 postdata["MERCHANTID"] = args.merchantid;
-		 postdata["APPID"] = args.appid;
-		 postdata["APPNAME"] = args.appname;
-	     postdata["TXNID"] = "DANFEIPS-"+Math.floor(Math.random()*100000001).toString();
-		 postdata["TXNDATE"] = getdate();
-		 postdata["TXNCRNCY"] = args.currency;
-		 postdata["TXNAMT"] = Math.ceil(order.total);
+		 postdata["merchantId"] = args.merchantid;
+		 postdata["appId"] = args.appid;
+		 postdata["referenceId"] = metadata["txnid"]; 
+		 postdata["txnAmt"] = Math.ceil(order.total);
+		 postdata["token"] = gettoken();
 		 
-		 postdata["REFERENCEID"] = "DANFE-REF-001"; 
-		 postdata["REMARKS"] = "DANFE-ORDER-PAYMENT";
-		 postdata["PARTICULARS"] = "PAID FOR ORDER BY CUSTOMER";
-		 postdata["TOKEN"] = gettoken();
+		let data =JSON.stringify(postdata);
+		let username = args.appid;
+		let password = process.env.IPS_PASSWORD!;
+		let token = Buffer.from(`${username}:${password}`,'utf8').toString('base64');
+		let url = 'https://uat.connectips.com:7443/connectipswebws/api/creditor/validatetxn';
+		
+		let config = {
+			method: 'post',
+			body : data,
+			headers: { 
+			  'Content-Type': 'application/json',
+			  'Authorization': `Basic ${token}`
+			}
+        };
 		 
-		 //console.log(postdata);
+		 let response = await fetch(url,config);
+		 let resp = await response.json();
 		 
-		 /*let res = await axios.post('https://uat.connectips.com:7443/connectipswebgw/loginpage',postdata);
-		 let data = res;
-		 console.log(data);*/
-		 
-	     /*return {
-                amount: postdata["TXNAMT"],
+		 if(resp.status=='SUCCESS'){
+		    
+			return {
+                amount: postdata["txnAmt"],
                 state: 'Settled' as 'Settled',
-                transactionId: postdata["TXNID"],
+                transactionId: postdata["referenceId"],
                 metadata: {
 					message:"Success"
 				},
-           };*/
+           };
+		 
+		 }else{
 		   
-		   return {
+		  return {
                 amount: order.total,
                 state: 'Declined' as 'Declined',
                 metadata: {
-                    errorMessage: "testing"
+                    errorMessage: "Error Payment"
                 },
-            };
+          };
+		 
+		}
 		   
 	   } catch (err) {
 	       return {

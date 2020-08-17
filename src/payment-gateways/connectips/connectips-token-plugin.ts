@@ -39,19 +39,8 @@ function getdate(){
 }
 
 function gettoken(){
-   let message = 
-   "MERCHANTID="+postdata["MERCHANTID"]+",\
-   APPID="+postdata["APPID"]+",\
-   APPNAME="+postdata["APPNAME"]+",\
-   TXNID="+postdata["TXNID"]+",\
-   TXNDATE="+postdata["TXNDATE"]+",\
-   TXNCRNCY="+postdata["TXNCRNCY"]+",\
-   TXNAMT="+postdata["TXNAMT"]+",\
-   REFERENCEID="+postdata["REFERENCEID"]+",\
-   REMARKS="+postdata["REMARKS"]+",\
-   PARTICULARS="+postdata["PARTICULARS"]+",\
-   TOKEN=TOKEN";
-	
+   let message = "MERCHANTID="+postdata["MERCHANTID"]+",APPID="+postdata["APPID"]+",APPNAME="+postdata["APPNAME"]+",TXNID="+postdata["TXNID"]+",TXNDATE="+postdata["TXNDATE"]+",TXNCRNCY="+postdata["TXNCRNCY"]+",TXNAMT="+postdata["TXNAMT"]+",REFERENCEID="+postdata["REFERENCEID"]+",REMARKS="+postdata["REMARKS"]+",PARTICULARS="+postdata["PARTICULARS"]+",TOKEN=TOKEN";
+   
    let path = __dirname + "/connectips-signature/key.pem";
    let key = fs.readFileSync(path);
    let sign = crypto.createSign('SHA256');
@@ -75,7 +64,6 @@ export class ConnectIPSTokenResolver {
 	postdata["REFERENCEID"] = "DANFE-REF-"+num; 
 	postdata["REMARKS"] = "DANFE-ORDER-PAYMENT";
 	postdata["PARTICULARS"] = "PAID FOR ORDER BY CUSTOMER";
-	postdata["TOKEN"] = gettoken();
 	return this.paymentmethodservice.findAll({}).then((data:any)=>{
 	   for(let i=0;i<data.items.length;i++){
 	      if(data.items[i]["code"]=="connectips-payment-provider"){
@@ -98,6 +86,8 @@ export class ConnectIPSTokenResolver {
 			 break;
 		  }
 	   }
+	   
+	   postdata["TOKEN"] = gettoken();
 	   return postdata;
 	});
   }
