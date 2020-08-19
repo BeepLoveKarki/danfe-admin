@@ -29,7 +29,7 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		merchantid: {type: 'int'},
 		appid: {type: 'string'},
 		appname: {type: 'string'},
-		currency: {type: 'string'},
+		currency: {type: 'string'}
     },
     
 	async createPayment(order, args, metadata) {
