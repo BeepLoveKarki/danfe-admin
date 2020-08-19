@@ -11,5 +11,6 @@
     "es",
     "pl",
     "zh"
-  ]
+  ],
+  "loginUrl": "/admin/login"
 }
