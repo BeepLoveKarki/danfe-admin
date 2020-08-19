@@ -15,8 +15,6 @@
     "tslib": "1.11.2"
   },
   "dependencies": {
-    "@chilkat/ck-node10-win64": "^9.50.83",
-    "@types/axios": "^0.14.0",
     "@types/braintree": "^2.22.3",
     "@types/crypto-js": "^3.1.47",
     "@types/dotenv": "^8.2.0",
