@@ -71,7 +71,8 @@ import { parse } from "graphql";
 })
 export class BulkDiscountControl
   implements CustomFieldControl, OnInit, OnDestroy {
-  customFieldConfig: CustomFieldConfigType;
+  config: CustomFieldConfigType;
+  readonly: boolean;
   formControl: FormControl;
 
   productId: ID | null;

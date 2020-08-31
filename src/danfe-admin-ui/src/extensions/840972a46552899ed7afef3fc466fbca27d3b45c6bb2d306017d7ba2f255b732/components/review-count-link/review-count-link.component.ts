@@ -13,7 +13,8 @@ import { CustomFieldConfigType, CustomFieldControl } from '@vendure/admin-ui/cor
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewCountLinkComponent implements CustomFieldControl {
-    customFieldConfig: CustomFieldConfigType;
+    config: CustomFieldConfigType;
+	readonly: boolean;
     formControl: FormControl;
 
     get productId(): string | null {

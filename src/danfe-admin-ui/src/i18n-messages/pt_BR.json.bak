@@ -320,10 +320,6 @@
     "no-default-tax-zone-set": "Este canal não possui zona de imposto padrão, o que causará erros no cálculo de preços. Por favor, crie ou selecione uma zona.",
     "product-variant-form-values-do-not-match": "O número de variantes no formulário do produto não corresponde ao número real de variantes"
   },
-  "favorites": {
-    "hide-favorites": "Esconder Favoritos",
-    "show-favorites": "Mostrar Favoritos"
-  },
   "lang": {
     "af": "Africâner",
     "ak": "Acãs",

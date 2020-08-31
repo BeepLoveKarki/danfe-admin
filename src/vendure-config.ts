@@ -37,19 +37,19 @@ export const config: VendureConfig = {
 apiOptions: {
         port: 3000,
         adminApiPath: 'admin-api',
-        /*adminApiPlayground: {
+        adminApiPlayground: {
             settings: {
                 'request.credentials': 'include',
             } as any,
-        },*/// turn this off for production
-        //adminApiDebug: true, // turn this off for production
+        },// turn this off for production
+        adminApiDebug: true, // turn this off for production
         shopApiPath: 'shop-api',
-        /*shopApiPlayground: { 
+        shopApiPlayground: { 
             settings: {
                 'request.credentials': 'include',
             } as any,
-        },*/ // turn this off for production
-        //shopApiDebug: true,// turn this off for production
+        }, // turn this off for production
+        shopApiDebug: true,// turn this off for production
     },
     authOptions: {
         sessionSecret: process.env.SECRET_KEY!,
@@ -107,7 +107,7 @@ apiOptions: {
             route: 'assets',
             assetUploadDir: path.join(__dirname, '../static/assets'),
             port: 3001,
-			assetUrlPrefix: 'https://admin.danfe.store/assets/',
+			/*assetUrlPrefix: 'https://admin.danfe.store/assets/',
 			namingStrategy: new DefaultAssetNamingStrategy(),
 			storageStrategyFactory: configureS3AssetStorage({
 				bucket: process.env.BUCKET_NAME!,
@@ -115,8 +115,8 @@ apiOptions: {
 					accessKeyId: process.env.ACCESS_KEY_ID!,
 					secretAccessKey: process.env.SECRET_ACCESS_KEY!,
 					},
-				nativeS3Configuration: {}
-			}),
+					nativeS3Configuration: {}
+			}),*/
         }),
         DefaultJobQueuePlugin,
 		ProxyPlugin,
@@ -134,14 +134,14 @@ apiOptions: {
 		    trackHistory: true
 		}),
         EmailPlugin.init({
-            /*devMode: true,
+            devMode: true,
             outputPath: path.join(__dirname, '../static/email/test-emails'),
             mailboxPort: 3003,
             handlers: defaultEmailHandlers,
-            templatePath: path.join(__dirname, '../static/email/templates'),*/
+            templatePath: path.join(__dirname, '../static/email/templates'),
 			
 			
-			handlers: defaultEmailHandlers,
+			/*handlers: defaultEmailHandlers,
 			templatePath: path.join(__dirname, '../static/email/templates'),
 			transport: {
 				type: 'smtp',
@@ -151,7 +151,7 @@ apiOptions: {
 					user: process.env.EMAIL_USER!,
 					pass: process.env.EMAIL_PASS! ,
 				}
-             },
+             },*/	
             
 			globalTemplateVars: {
                 fromAddress: process.env.FROM_EMAIL!,
@@ -168,9 +168,9 @@ apiOptions: {
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
 			},
 			
-			adminUiConfig: {
+			/*adminUiConfig: {
 				loginUrl: '/admin/login',
-            },
+            },*/
 
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),

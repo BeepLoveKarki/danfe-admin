@@ -18,7 +18,8 @@ type StarType = 'empty' | 'full' | 'half';
     changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FavoritesListComponent implements CustomFieldControl, OnInit, OnDestroy {
-    customFieldConfig!: CustomFieldConfigType;
+    config!: CustomFieldConfigType;
+	readonly: boolean;
     formControl!: FormControl;
     
     showList = false

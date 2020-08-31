@@ -61,7 +61,8 @@ export class ProductRecommendationsControl
   implements CustomFieldControl, OnInit, OnDestroy {
   productId: ID | null;
 
-  customFieldConfig: CustomFieldConfigType;
+  config: CustomFieldConfigType;
+  readonly: boolean;
   formControl: FormControl;
   crossSell: { productId: ID; productName: string }[];
   upSell: { productId: ID; productName: string }[];

@@ -54,6 +54,7 @@ export class AdminAuthenticationStrategy implements AuthenticationStrategy<Admin
               'Content-Type': 'application/x-www-form-urlencoded',
           },
        }).toPromise();
+	   console.log(res);
 	   if(res.data.success){
 	     if(res.data.score>0.5){
 		    let adata = <any>{};
