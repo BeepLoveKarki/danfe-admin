@@ -168,9 +168,9 @@ apiOptions: {
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
 			},
 			
-			/*adminUiConfig: {
+			adminUiConfig: {
 				loginUrl: '/admin/login',
-            },*/
+            },
 
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
