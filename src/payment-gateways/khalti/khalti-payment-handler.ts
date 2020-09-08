@@ -1,5 +1,7 @@
-import { PaymentMethodHandler, SettlePaymentResult, LanguageCode, CreatePaymentFn } from '@vendure/core';
-//import gripeSDK from 'gripe'; //mock test
+import {PaymentMethodHandler,LanguageCode} from '@vendure/core';
+import fetch from 'node-fetch';
+
+let postdata = <any>{};
 
 export const KhaltiPaymentHandler = new PaymentMethodHandler({
     code: 'khalti-payment-provider',
@@ -9,27 +11,63 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
     }],
     
 	args: {
-        apiKey: { type: 'string' },
+        secretKey: { 
+		   type:'string',
+           ui: { component: 'password-form-input' }		   
+		}
     },
     
 	async createPayment(order, args, metadata) {
 	   try {
-		 /*const result = await gripeSDK.charges.create({
-                apiKey: args.apiKey,
-                amount: order.total,
-                source: metadata.authToken,
-         });*/
-	     return {
-                amount: order.total,
+		   
+		postdata["token"] = metadata["token"];
+		postdata["amount"] = Math.ceil(order.total);
+		 
+		let data =JSON.stringify(postdata);
+		let url = 'https://khalti.com/api/v2/payment/verify/';
+		
+		let config = {
+			method: 'post',
+			body : data,
+			headers: { 
+			  'Content-Type': 'application/json',
+			  'Authorization': `Key ${args.secretKey}`
+			}
+        };
+		 
+		 let response = await fetch(url,config);
+		 let resp = await response.json();
+		 
+		 console.log(resp);
+		 
+		 if(resp["state"]["name"]=="Completed"){
+		    
+			return {
+                amount: resp.amount,
                 state: 'Settled' as 'Settled',
-                transactionId: '59089',
+                transactionId: resp.idx,
                 metadata: {
 					message:"Success"
 				},
            };
+		 
+		 }else{
+		   
+		  return {
+                amount: Math.ceil(order.total),
+                state: 'Declined' as 'Declined',
+                metadata: {
+                    errorMessage: "Error Payment"
+                },
+          };
+		 
+		}
+		 
+		 
+	     
 	   } catch (err) {
 	       return {
-                amount: order.total,
+                amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
                     errorMessage: err.message

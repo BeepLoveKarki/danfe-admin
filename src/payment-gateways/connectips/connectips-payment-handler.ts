@@ -29,7 +29,11 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		merchantid: {type: 'int'},
 		appid: {type: 'string'},
 		appname: {type: 'string'},
-		currency: {type: 'string'}
+		apppassword: {
+			type: 'string',
+			ui: { component: 'password-form-input' }
+		},
+		currency: {type: 'string'},
     },
     
 	async createPayment(order, args, metadata) {
@@ -42,7 +46,7 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		 
 		let data =JSON.stringify(postdata);
 		let username = args.appid;
-		let password = process.env.IPS_PASSWORD!;
+		let password = args.apppassword;
 		let token = Buffer.from(`${username}:${password}`,'utf8').toString('base64');
 		let url = 'https://uat.connectips.com:7443/connectipswebws/api/creditor/validatetxn';
 		
@@ -72,7 +76,7 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		 }else{
 		   
 		  return {
-                amount: order.total,
+                amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
                     errorMessage: "Error Payment"
@@ -83,13 +87,14 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		   
 	   } catch (err) {
 	       return {
-                amount: order.total,
+                amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
                     errorMessage: err.message
                 },
             };
 	   }
+	   
 	},
 	
 	async settlePayment(){
@@ -97,17 +102,6 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
             success: true,
       };
 	}
- 
     
     	
 });
-
-
-
-/*mutation {
-    addPaymentToOrder(input: { 
-        method: "connectips-payment-provider", //match with code of the method
-        metadata: { id: "<some id from the payment provider>" }) {
-        ...Order
-    }
-}*/
