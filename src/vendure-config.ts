@@ -23,6 +23,7 @@ import { AdminAuthenticationStrategy } from './strategies/admin-authentication-s
 import { ProxyPlugin } from './proxy/proxy-plugin';
 import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connectips-payment-handler';
 import { KhaltiPaymentHandler } from './payment-gateways/khalti/khalti-payment-handler';
+import { EsewaPaymentHandler } from './payment-gateways/esewa/esewa-payment-handler';
 import { CoDPaymentHandler } from './payment-gateways/cod/cod-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
 import { FavoritesPlugin } from "vendure-favorites-plugin";
@@ -96,6 +97,7 @@ apiOptions: {
     },
     paymentOptions: {
         paymentMethodHandlers: [
+		 EsewaPaymentHandler,
 		 KhaltiPaymentHandler,
 		 ConnectIPSPaymentHandler,
 		 CoDPaymentHandler

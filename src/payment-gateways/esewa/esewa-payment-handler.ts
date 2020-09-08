@@ -3,17 +3,16 @@ import fetch from 'node-fetch';
 
 let postdata = <any>{};
 
-export const KhaltiPaymentHandler = new PaymentMethodHandler({
-    code: 'khalti-payment-provider',
+export const EsewaPaymentHandler = new PaymentMethodHandler({
+    code: 'esewa-payment-provider',
     description: [{
         languageCode: LanguageCode.en,
-        value: 'Khalti Payment Provider',
+        value: 'Esewa Payment Provider',
     }],
     
 	args: {
-        secretKey: { 
-		   type:'string',
-           ui: { component: 'password-form-input' }		   
+        merchantid: { 
+		   type:'string'	   
 		}
     },
     
@@ -21,25 +20,29 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
 	   
 	   try {
 		   
-		postdata["token"] = metadata["token"];
-		postdata["amount"] = Math.ceil(order.total);
+		postdata["amt"] = Math.ceil(order.total);
+		postdata["scd"] = args.merchantid;
+        postdata["pid"] = metadata.pid;
+        postdata["rid"] = metadata.rid;
 		 
 		let data =JSON.stringify(postdata);
-		let url = 'https://khalti.com/api/v2/payment/verify/';
+		let url = 'https://uat.esewa.com.np/epay/transrec';
 		
 		let config = {
 			method: 'post',
 			body : data,
-			headers: { 
+			/*headers: { 
 			  'Content-Type': 'application/json',
 			  'Authorization': `Key ${args.secretKey}`
-			}
+			}*/
         };
 		 
 		 let response = await fetch(url,config);
 		 let resp = await response.json();
 		 
-		 if(resp["state"]["name"]=="Completed"){
+		 console.log(resp);
+		 
+		 /*if(resp["state"]["name"]=="Completed"){
 		    
 			return {
                 amount: resp.amount,
@@ -60,8 +63,15 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
                 },
           };
 		 
-		}
+		}*/
 		 
+		return {
+                amount: Math.ceil(order.total),
+                state: 'Declined' as 'Declined',
+                metadata: {
+                    errorMessage: "Error Payment"
+                },
+          };
 		 
 	     
 	   } catch (err) {
