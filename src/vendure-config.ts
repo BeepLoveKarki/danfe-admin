@@ -3,7 +3,8 @@ import {
     DefaultSearchPlugin,
     VendureConfig,
 	DefaultAssetNamingStrategy,
-	NativeAuthenticationStrategy
+	NativeAuthenticationStrategy,
+	defaultPromotionConditions
 } from '@vendure/core'; 
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
@@ -27,6 +28,8 @@ import { EsewaPaymentHandler } from './payment-gateways/esewa/esewa-payment-hand
 import { CoDPaymentHandler } from './payment-gateways/cod/cod-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
 import { FavoritesPlugin } from "vendure-favorites-plugin";
+import { OnePerOrder } from './promotion-strategies/one-per-order';
+
 import path from 'path';
 
 
@@ -69,6 +72,12 @@ apiOptions: {
 		  new AdminAuthenticationStrategy()
 		]
     },
+	promotionOptions: {
+		promotionConditions: [
+		...defaultPromotionConditions,
+		OnePerOrder,
+	 ],
+    },
 	assetOptions: <any>{
 	  permittedFileTypes:[
 	  "image/*",
@@ -104,7 +113,11 @@ apiOptions: {
 		],
     },
     customFields: {
-		
+		Address: [
+		 { name: 'district', type: 'string', defaultValue:"" },
+		 { name: 'area', type: 'string', defaultValue:"" },
+		 { name: 'addressNotes', type: 'string', defaultValue:"" }
+		]
 	},
     plugins: [
         AssetServerPlugin.init({
