@@ -19,8 +19,8 @@ type StarType = 'empty' | 'full' | 'half';
 })
 export class FavoritesListComponent implements CustomFieldControl, OnInit, OnDestroy {
     config!: CustomFieldConfigType;
-	readonly: boolean;
     formControl!: FormControl;
+	readonly: boolean;
     
     showList = false
     customerId$!: Observable<string | null>;
