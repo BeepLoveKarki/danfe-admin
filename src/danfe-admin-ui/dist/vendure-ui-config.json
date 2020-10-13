@@ -12,5 +12,6 @@
     "pl",
     "zh",
     "pt_BR"
-  ]
+  ],
+  "loginUrl": "/admin/login"
 }

@@ -46,7 +46,9 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
                 state: 'Settled' as 'Settled',
                 transactionId: resp.idx,
                 metadata: {
-					message:"Success"
+				   public:{
+					 message:"Success"
+				   }
 				},
            };
 		 
@@ -56,7 +58,9 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
                 amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
-                    errorMessage: "Error Payment"
+					public:{
+                      errorMessage: "Error Payment"
+					}
                 },
           };
 		 
@@ -69,7 +73,9 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
                 amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
+				  public:{
                     errorMessage: err.message
+				  }
                 },
             };
 	   }

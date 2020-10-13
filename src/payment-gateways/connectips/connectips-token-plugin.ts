@@ -64,7 +64,7 @@ export class ConnectIPSTokenResolver {
 	postdata["REFERENCEID"] = "DANFE-REF-"+num; 
 	postdata["REMARKS"] = "DANFE-ORDER-PAYMENT";
 	postdata["PARTICULARS"] = "PAID FOR ORDER BY CUSTOMER";
-	return this.paymentmethodservice.findAll({}).then((data:any)=>{
+	return this.paymentmethodservice.findAll(ctx,{}).then((data:any)=>{
 	   for(let i=0;i<data.items.length;i++){
 	      if(data.items[i]["code"]=="connectips-payment-provider"){
 		     for(let j=0;j<data.items[i]["configArgs"].length;j++){

@@ -1,4 +1,5 @@
 import { LanguageCode, PromotionCondition } from '@vendure/core';
+import { RequestContext} from '@vendure/core';
 
 export const OnePerOrder = new PromotionCondition({
   code: 'one_per_order',
@@ -10,7 +11,7 @@ export const OnePerOrder = new PromotionCondition({
   args: {
   },
   
-  check(order, args) {
+  check(ctx: RequestContext,order, args) {
 	order.couponCodes = order.couponCodes.slice(0,1);
 	return true;
   },

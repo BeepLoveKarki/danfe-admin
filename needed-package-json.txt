@@ -38,7 +38,14 @@
     "pg": "8.2.1",
     "typescript": "3.8.3",
     "vendure-braintree-plugin": "git+https://github.com/BeepLoveKarki/vendure-braintree-plugin.git",
-    "vendure-bulk-discounts": "^0.1.11"
+    "vendure-bulk-discounts": "^0.1.10",
+    "vendure-favorites-plugin": "^1.1.0",
+    "vendure-feedback-plugin": "0.0.2",
+    "vendure-product-recommendations": "^0.1.12",
+    "vendure-reviews-plugin": "git+https://github.com/BeepLoveKarki/vendure-reviews-plugin.git",
+    "vendure-salestracker-plugin": "0.0.3",
+    "vendure-subscription-plugin": "0.0.1",
+    "vendure-vendor-plugin": "0.0.1"
   },
   "devDependencies": {
     "concurrently": "5.2.0",

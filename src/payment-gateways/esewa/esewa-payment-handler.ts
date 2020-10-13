@@ -49,7 +49,9 @@ export const EsewaPaymentHandler = new PaymentMethodHandler({
                 state: 'Settled' as 'Settled',
                 transactionId: resp.idx,
                 metadata: {
+				   public:{
 					message:"Success"
+				   }
 				},
            };
 		 
@@ -59,7 +61,9 @@ export const EsewaPaymentHandler = new PaymentMethodHandler({
                 amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
-                    errorMessage: "Error Payment"
+					public:{
+                       errorMessage: "Error Payment"
+					}
                 },
           };
 		 

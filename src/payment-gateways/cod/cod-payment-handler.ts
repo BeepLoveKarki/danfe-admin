@@ -16,7 +16,9 @@ export const CoDPaymentHandler = new PaymentMethodHandler({
                 amount: order.total,
                 state: 'Authorized' as 'Authorized',
                 metadata: {
+				  public:{
                     message:"Success"
+				  }
                 },
             };
 	},

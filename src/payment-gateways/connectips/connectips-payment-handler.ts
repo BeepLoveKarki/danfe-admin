@@ -69,7 +69,9 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
                 state: 'Settled' as 'Settled',
                 transactionId: postdata["referenceId"],
                 metadata: {
+				  public:{
 					message:"Success"
+				  }
 				},
            };
 		 
@@ -79,7 +81,9 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
                 amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
+				  public:{
                     errorMessage: "Error Payment"
+				  }
                 },
           };
 		 
@@ -90,7 +94,9 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
                 amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
+				  public:{
                     errorMessage: err.message
+				  }
                 },
             };
 	   }

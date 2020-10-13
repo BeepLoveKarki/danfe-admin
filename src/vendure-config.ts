@@ -9,25 +9,31 @@ import {
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
-import { SalesTrackerPlugin } from 'vendure-salestracker-plugin';
+
+/*import { SalesTrackerPlugin } from 'vendure-salestracker-plugin';
 import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from "vendure-product-recommendations";
 import { BulkDiscountPlugin, BulkDiscountsInputModule } from "vendure-bulk-discounts";
 import { BraintreePlugin } from "vendure-braintree-plugin";
 import { ReviewsPlugin } from "vendure-reviews-plugin";
 import { SubscriptionPlugin } from "vendure-subscription-plugin";
 import { FeedbackPlugin } from "vendure-feedback-plugin";
-import { VendorPlugin } from "vendure-vendor-plugin";
+import { VendorPlugin } from "vendure-vendor-plugin";*/
+
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
-import { SocialAuthenticationStrategy } from './strategies/social-authentication-strategy';
-import { SocialRegisterAuthenticationStrategy } from './strategies/social-register-authentication-strategy';
+
+/*import { SocialAuthenticationStrategy } from './strategies/social-authentication-strategy';
+import { SocialRegisterAuthenticationStrategy } from './strategies/social-register-authentication-strategy';*/
 import { AdminAuthenticationStrategy } from './strategies/admin-authentication-strategy';
+
 import { ProxyPlugin } from './proxy/proxy-plugin';
+
 import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connectips-payment-handler';
 import { KhaltiPaymentHandler } from './payment-gateways/khalti/khalti-payment-handler';
 import { EsewaPaymentHandler } from './payment-gateways/esewa/esewa-payment-handler';
 import { CoDPaymentHandler } from './payment-gateways/cod/cod-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
-import { FavoritesPlugin } from "vendure-favorites-plugin";
+
+//import { FavoritesPlugin } from "vendure-favorites-plugin";
 import { OnePerOrder } from './promotion-strategies/one-per-order';
 
 import path from 'path';
@@ -42,19 +48,19 @@ export const config: VendureConfig = {
 apiOptions: {
         port: 3000,
         adminApiPath: 'admin-api',
-        /*adminApiPlayground: {
+        adminApiPlayground: {
             settings: {
                 'request.credentials': 'include',
             } as any,
-        },*/// turn this off for production
-        //adminApiDebug: true, // turn this off for production
+        },// turn this off for production
+        adminApiDebug: true, // turn this off for production
         shopApiPath: 'shop-api',
-        /*shopApiPlayground: { 
+        shopApiPlayground: { 
             settings: {
                 'request.credentials': 'include',
             } as any,
-        },*/ // turn this off for production
-        //shopApiDebug: true,// turn this off for production
+        }, // turn this off for production
+        shopApiDebug: true,// turn this off for production
     },
     authOptions: {
         sessionSecret: process.env.SECRET_KEY!,
@@ -64,8 +70,8 @@ apiOptions: {
         },
         shopAuthenticationStrategy: [
           new NativeAuthenticationStrategy(),
-          new SocialAuthenticationStrategy(),
-		  new SocialRegisterAuthenticationStrategy()
+          //new SocialAuthenticationStrategy(),
+		  //new SocialRegisterAuthenticationStrategy()
         ],
 		adminAuthenticationStrategy: [
 		  new NativeAuthenticationStrategy(),
@@ -124,7 +130,7 @@ apiOptions: {
             route: 'assets',
             assetUploadDir: path.join(__dirname, '../static/assets'),
             port: 3001,
-			assetUrlPrefix: 'https://admin.danfe.store/assets/',
+			/*assetUrlPrefix: 'https://admin.danfe.store/assets/',
 			namingStrategy: new DefaultAssetNamingStrategy(),
 			storageStrategyFactory: configureS3AssetStorage({
 				bucket: process.env.BUCKET_NAME!,
@@ -133,12 +139,14 @@ apiOptions: {
 					secretAccessKey: process.env.SECRET_ACCESS_KEY!,
 					},
 					nativeS3Configuration: {}
-			}),
+			}),*/
         }),
         DefaultJobQueuePlugin,
 		ProxyPlugin,
         DefaultSearchPlugin,
-		ProductRecommendationsPlugin,
+		ConnectIPSPlugin,
+		
+		/*ProductRecommendationsPlugin,
 		BulkDiscountPlugin,
 		SalesTrackerPlugin,
 		BraintreePlugin,
@@ -146,11 +154,11 @@ apiOptions: {
 		FeedbackPlugin,
 		SubscriptionPlugin,
 		VendorPlugin,
-		ConnectIPSPlugin,
 		FavoritesPlugin.init({
 		    trackHistory: true
-		}),
-        EmailPlugin.init({
+		}),*/
+        
+		EmailPlugin.init({
             /*devMode: true,
             outputPath: path.join(__dirname, '../static/email/test-emails'),
             mailboxPort: 3003,
@@ -181,13 +189,13 @@ apiOptions: {
         AdminUiPlugin.init({
 			port: 3002,
 			
-			app:{
+			/*app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
 			},
 			
 			adminUiConfig: {
 				loginUrl: '/admin/login',
-            },
+            },*/
 
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
