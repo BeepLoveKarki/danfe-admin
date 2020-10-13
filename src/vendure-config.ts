@@ -21,8 +21,8 @@ import { VendorPlugin } from "vendure-vendor-plugin";*/
 
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 
-/*import { SocialAuthenticationStrategy } from './strategies/social-authentication-strategy';
-import { SocialRegisterAuthenticationStrategy } from './strategies/social-register-authentication-strategy';*/
+import { SocialAuthenticationStrategy } from './strategies/social-authentication-strategy';
+import { SocialRegisterAuthenticationStrategy } from './strategies/social-register-authentication-strategy';
 import { AdminAuthenticationStrategy } from './strategies/admin-authentication-strategy';
 
 import { ProxyPlugin } from './proxy/proxy-plugin';
@@ -70,8 +70,8 @@ apiOptions: {
         },
         shopAuthenticationStrategy: [
           new NativeAuthenticationStrategy(),
-          //new SocialAuthenticationStrategy(),
-		  //new SocialRegisterAuthenticationStrategy()
+          new SocialAuthenticationStrategy(),
+		  new SocialRegisterAuthenticationStrategy()
         ],
 		adminAuthenticationStrategy: [
 		  new NativeAuthenticationStrategy(),

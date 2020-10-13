@@ -35,7 +35,7 @@ export class SocialAuthenticationStrategy implements AuthenticationStrategy<Soci
 
   async authenticate(ctx: RequestContext, data: SocialAuthData): Promise<User | false> {
     
-	const user = await this.userService.getUserByEmailAddress(data.email);
+	const user = await this.userService.getUserByEmailAddress(ctx,data.email);
 	if(user){
 	   return user;
 	}else{

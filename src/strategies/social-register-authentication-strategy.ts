@@ -57,7 +57,7 @@ export class SocialRegisterAuthenticationStrategy implements AuthenticationStrat
 		a=1;
 		customer = await this.customerService.create(ctx,data,data.password);
 	}else{
-	    const user = await this.userService.getUserByEmailAddress(data.emailAddress);
+	    const user = await this.userService.getUserByEmailAddress(ctx,data.emailAddress);
 		if(user){ //email pre registered
 		  throw new UserInputError(`error.email-address-must-be-unique`);
 		}else{
@@ -66,7 +66,7 @@ export class SocialRegisterAuthenticationStrategy implements AuthenticationStrat
 	}
 	
 	if(customer){
-	   const user = await this.userService.getUserByEmailAddress(data.emailAddress);
+	   const user = await this.userService.getUserByEmailAddress(ctx,data.emailAddress);
 	   if(user){
 	     if(a==1){
 		   return user;
