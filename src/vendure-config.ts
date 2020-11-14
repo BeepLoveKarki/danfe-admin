@@ -10,14 +10,19 @@ import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 
-/*import { SalesTrackerPlugin } from 'vendure-salestracker-plugin';
-import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from "vendure-product-recommendations";
-import { BulkDiscountPlugin, BulkDiscountsInputModule } from "vendure-bulk-discounts";
-import { BraintreePlugin } from "vendure-braintree-plugin";
-import { ReviewsPlugin } from "vendure-reviews-plugin";
+//import { SalesTrackerPlugin } from 'vendure-salestracker-plugin';
+/*import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from "vendure-product-recommendations";*/
+
+//import { BulkDiscountPlugin, BulkDiscountsInputModule } from "vendure-bulk-discounts";
+
+/*import { BraintreePlugin } from "vendure-braintree-plugin";
+import { ReviewsPlugin } from "vendure-reviews-plugin";*/
+
 import { SubscriptionPlugin } from "vendure-subscription-plugin";
+
 import { FeedbackPlugin } from "vendure-feedback-plugin";
-import { VendorPlugin } from "vendure-vendor-plugin";*/
+
+import { VendorPlugin } from "vendure-vendor-plugin";
 
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 
@@ -145,15 +150,15 @@ apiOptions: {
 		ProxyPlugin,
         DefaultSearchPlugin,
 		ConnectIPSPlugin,
-		
-		/*ProductRecommendationsPlugin,
-		BulkDiscountPlugin,
-		SalesTrackerPlugin,
-		BraintreePlugin,
-		ReviewsPlugin,
-		FeedbackPlugin,
 		SubscriptionPlugin,
 		VendorPlugin,
+		FeedbackPlugin,
+		//SalesTrackerPlugin,
+		//BulkDiscountPlugin,
+		
+		/*ProductRecommendationsPlugin,
+		BraintreePlugin,
+		ReviewsPlugin,
 		FavoritesPlugin.init({
 		    trackHistory: true
 		}),*/
