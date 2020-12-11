@@ -11,7 +11,7 @@ export const CoDPaymentHandler = new PaymentMethodHandler({
 		
     },
 	
-	async createPayment(order, args, metadata) {
+	async createPayment(ctx, order, args, metadata) {
 		   return {
                 amount: order.total,
                 state: 'Authorized' as 'Authorized',

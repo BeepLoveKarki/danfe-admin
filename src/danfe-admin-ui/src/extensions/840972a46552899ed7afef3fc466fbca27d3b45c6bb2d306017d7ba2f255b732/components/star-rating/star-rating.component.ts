@@ -14,8 +14,8 @@ export class StarRatingComponent implements CustomFieldControl {
     @Input() rating: number | null;
     @Input() showLabel = true;
 
+    readonly: boolean;
     config: CustomFieldConfigType;
-	readonly: boolean;
     formControl: FormControl;
 
     get starRating(): number {

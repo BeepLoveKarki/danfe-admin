@@ -36,7 +36,7 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		currency: {type: 'string'},
     },
     
-	async createPayment(order, args, metadata) {
+	async createPayment(ctx, order, args, metadata) {
 	   try {
 		 postdata["merchantId"] = args.merchantid;
 		 postdata["appId"] = args.appid;

@@ -17,7 +17,7 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
 		}
     },
     
-	async createPayment(order, args, metadata) {
+	async createPayment(ctx,order, args, metadata) {
 	   
 	   try {
 		   

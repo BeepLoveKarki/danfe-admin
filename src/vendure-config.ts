@@ -10,13 +10,13 @@ import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 
-//import { SalesTrackerPlugin } from 'vendure-salestracker-plugin';
-/*import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from "vendure-product-recommendations";*/
+import { SalesTrackerPlugin } from 'vendure-salestracker-plugin';
+import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from "vendure-product-recommendations";
 
-//import { BulkDiscountPlugin, BulkDiscountsInputModule } from "vendure-bulk-discounts";
+import { BulkDiscountPlugin, BulkDiscountsInputModule } from "vendure-bulk-discounts";
 
-/*import { BraintreePlugin } from "vendure-braintree-plugin";
-import { ReviewsPlugin } from "vendure-reviews-plugin";*/
+import { BraintreePlugin } from "vendure-braintree-plugin";
+import { ReviewsPlugin } from "vendure-reviews-plugin";
 
 import { SubscriptionPlugin } from "vendure-subscription-plugin";
 
@@ -38,7 +38,8 @@ import { EsewaPaymentHandler } from './payment-gateways/esewa/esewa-payment-hand
 import { CoDPaymentHandler } from './payment-gateways/cod/cod-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
 
-//import { FavoritesPlugin } from "vendure-favorites-plugin";
+import { FavoritesPlugin } from "vendure-favorites-plugin";
+
 import { OnePerOrder } from './promotion-strategies/one-per-order';
 
 import path from 'path';
@@ -153,25 +154,24 @@ apiOptions: {
 		SubscriptionPlugin,
 		VendorPlugin,
 		FeedbackPlugin,
-		//SalesTrackerPlugin,
-		//BulkDiscountPlugin,
-		
-		/*ProductRecommendationsPlugin,
 		BraintreePlugin,
 		ReviewsPlugin,
 		FavoritesPlugin.init({
 		    trackHistory: true
-		}),*/
-        
+		}),
+		SalesTrackerPlugin,
+		BulkDiscountPlugin,
+		
+		ProductRecommendationsPlugin,
 		EmailPlugin.init({
-            /*devMode: true,
+            devMode: true,
             outputPath: path.join(__dirname, '../static/email/test-emails'),
             mailboxPort: 3003,
             handlers: defaultEmailHandlers,
-            templatePath: path.join(__dirname, '../static/email/templates'),*/
+            templatePath: path.join(__dirname, '../static/email/templates'),
 			
 			
-			handlers: defaultEmailHandlers,
+			/*handlers: defaultEmailHandlers,
 			templatePath: path.join(__dirname, '../static/email/templates'),
 			transport: {
 				type: 'smtp',
@@ -188,17 +188,17 @@ apiOptions: {
                 verifyEmailAddressUrl: process.env.STOREFRONT_URL!+'account/verify',
                 passwordResetUrl: process.env.STOREFRONT_URL!+'account/reset-password',
                 changeEmailAddressUrl: process.env.STOREFRONT_URL!+'account/change-email-address',
-            }
+            }*/
 			
         }),
         AdminUiPlugin.init({
 			port: 3002,
 			
-			/*app:{
+			app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
 			},
 			
-			adminUiConfig: {
+			/*adminUiConfig: {
 				loginUrl: '/admin/login',
             },*/
 
@@ -218,11 +218,11 @@ apiOptions: {
 					FeedbackPlugin.uiExtensions,
 					ReviewsPlugin.uiExtensions,
 				    {
-					  extensionPath: path.join(__dirname,"../node_modules/vendure-bulk-discounts/ui-extensions/modules"),
+					  extensionPath: path.join(__dirname,"../node_modules/vendure-bulk-discounts/lib/ui-extensions/modules"),
 			          ngModules: [BulkDiscountsInputModule],
 		            },
 					{
-					  extensionPath: path.join(__dirname,"../node_modules/vendure-product-recommendations/ui-extensions/modules"),
+					  extensionPath: path.join(__dirname,"../node_modules/vendure-product-recommendations/lib/ui-extensions/modules"),
 			          ngModules: [ProductRecommendationsInputModule],
 		            },
 					{

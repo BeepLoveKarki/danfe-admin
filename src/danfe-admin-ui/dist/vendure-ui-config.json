@@ -10,8 +10,9 @@
     "en",
     "es",
     "pl",
-    "zh",
-    "pt_BR"
-  ],
-  "loginUrl": "/admin/login"
+    "zh_Hans",
+    "zh_Hant",
+    "pt_BR",
+    "cs"
+  ]
 }

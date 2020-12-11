@@ -1485,6 +1485,13 @@
   dependencies:
     uuid "8.3.0"
 
+"@ng-select/ng-select@3.7.3":
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-3.7.3.tgz#317fbf94211fb2044f6ab233795cf1cbab4b44a3"
+  integrity sha512-Duw5t0b9Jup/tVEoDHLm+UhGv5RnwQ7pQorCAQc4LZR35oOZFjec8FrEGGtgVAGtwaQAYyd7PSMk3nEsWPg6AQ==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ng-select/ng-select@^5.0.3":
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-5.0.8.tgz#68299204199d8ad2004976f2afeb54e367677f31"
@@ -1711,6 +1718,13 @@
   dependencies:
     "@types/express" "*"
 
+"@types/cors@2.8.8":
+  version "2.8.8"
+  resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.8.tgz#317a8d8561995c60e35b9e0fcaa8d36660c98092"
+  integrity sha512-fO3gf3DxU2Trcbr75O7obVndW/X5k8rJNZkLXlQWStTHhP71PkRqjwPIEI0yMnJdg9R9OasjU+Bsr+Hr1xy/0w==
+  dependencies:
+    "@types/express" "*"
+
 "@types/crypto-js@^3.1.47":
   version "3.1.47"
   resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-3.1.47.tgz#36e549dd3f1322742a3a738e7c113ebe48221860"
@@ -1732,6 +1746,15 @@
   version "4.17.8"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.8.tgz#b8f7b714138536742da222839892e203df569d1c"
   integrity sha512-1SJZ+R3Q/7mLkOD9ewCBDYD2k0WyZQtWYqF/2VvoNN2/uhI49J9CDN4OAm+wGMA0DbArA4ef27xl4+JwMtGggw==
+  dependencies:
+    "@types/node" "*"
+    "@types/qs" "*"
+    "@types/range-parser" "*"
+
+"@types/express-serve-static-core@4.17.13":
+  version "4.17.13"
+  resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.13.tgz#d9af025e925fc8b089be37423b8d1eac781be084"
+  integrity sha512-RgDi5a4nuzam073lRGKTUIaL3eF2+H7LJvJ8eUnCI0wA6SNjXc44DCmWNiTLs/AZ7QlsFWZiw/gTG3nSQGL0fA==
   dependencies:
     "@types/node" "*"
     "@types/qs" "*"
@@ -1984,17 +2007,17 @@
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.1.tgz#5668c0bce55a91f2b9566b1d8a4c0a8dbbc79764"
   integrity sha512-wmk0xQI6Yy7Fs/il4EpOcflG4uonUpYGqvZARESLc2oy4u69fkatFLbJOeW4Q6awO15P4rduAe6xkwHevpXcUQ==
 
-"@vendure/admin-ui-plugin@0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@vendure/admin-ui-plugin/-/admin-ui-plugin-0.16.0.tgz#6fcb4e40fbf157be7d1f7b89c51ad3578de00385"
-  integrity sha512-nHch96a57yAHWMTmiePqOYM1kyWeMDBS9JOWaywinTVXQ3N2X6Ilk+BR34QKnUPt+7f+dDxukts3qpZL+lqksg==
+"@vendure/admin-ui-plugin@0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@vendure/admin-ui-plugin/-/admin-ui-plugin-0.17.1.tgz#a9de2199f700aa1c27e1f4da15ea44c968741251"
+  integrity sha512-FqKivZqILaUf7JWI878TpQ66YvXtBJG+D4XRzHz9AfE0/SQxJxUqcetzhoGN5vO8hP3t9R7iVZI7Uv+d/XOz/Q==
   dependencies:
     fs-extra "^9.0.1"
 
-"@vendure/admin-ui@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@vendure/admin-ui/-/admin-ui-0.16.0.tgz#d334d8db69a2e4865b4f67181f7e3fcd07e46cb0"
-  integrity sha512-IWB3+tElu9n/BY7fIk4hBIceJg1dLQbtXal7MJ3VKKT9KiMqTpZQvPPk174yMIlJ0B1qixMYf0txgmhTmpQp1w==
+"@vendure/admin-ui@^0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@vendure/admin-ui/-/admin-ui-0.17.1.tgz#6f4d56d9a9aad1f20648ea2df4e1ceca4d622bde"
+  integrity sha512-zzTYroRcZ9Sac/LAhU+Mg+Oe5GNc8gpe2/aT+ZQSBabZbGokyVUL9TnG0XLhgXdqCpqGL9fj+382uPDn3z1Mxw==
   dependencies:
     "@angular/animations" "10.1.4"
     "@angular/cdk" "10.2.4"
@@ -2014,7 +2037,7 @@
     "@ng-select/ng-select" "^5.0.3"
     "@ngx-translate/core" "^13.0.0"
     "@ngx-translate/http-loader" "^6.0.0"
-    "@vendure/common" "^0.16.0"
+    "@vendure/common" "^0.17.1"
     "@webcomponents/custom-elements" "^1.2.4"
     apollo-angular "^2.0.4"
     apollo-upload-client "^12.1.0"
@@ -2038,24 +2061,24 @@
     tslib "^2.0.0"
     zone.js "~0.10.2"
 
-"@vendure/asset-server-plugin@0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@vendure/asset-server-plugin/-/asset-server-plugin-0.16.0.tgz#537110184546aef74fda2a7da5e72b3df08a1a77"
-  integrity sha512-CK3qWgmdQVqI2EN0bIubP5ZfbDmQkFkFb87uZPzJd7dhA5d9X7P4HYfcW7nZhbvU8uvvakuIUiSXNGJFZX/ZrA==
+"@vendure/asset-server-plugin@0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@vendure/asset-server-plugin/-/asset-server-plugin-0.17.1.tgz#37dfa75440af4ff014344e57be6e4b80a05bd4ff"
+  integrity sha512-ENU0lMcdnWqZ+4NQYj4oXp3xFDh3/N6vfIJIzBZwSHy18lUsQ9zK52bZSZvvXE9yh5U37DXfccKmQ3lfXkou9g==
   dependencies:
     file-type "^15.0.1"
     fs-extra "^9.0.1"
     sharp "0.25.2"
 
-"@vendure/common@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@vendure/common/-/common-0.16.0.tgz#c801310e5bff21403c898ab6a0a3a0e8b28b8d1c"
-  integrity sha512-cz8qS3BcidLgZ1fMXVQx7fKNFaREA86oy/8YWN+y7rZ3hUhnUMHdd+4h2c6iodrNTFE+crpjTXn3/fDzXWleFg==
+"@vendure/common@^0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@vendure/common/-/common-0.17.1.tgz#84b8208139864e44af203ea07e33353fe6c22cb1"
+  integrity sha512-kGOlsTMM0pOuD/hO3tc7iEOjj+8jumLn16qTV6yO5O/MMH8EHW3oMWcT/mAjy2jDsIqrMoNaDB24goHJFF6Dvg==
 
-"@vendure/core@0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@vendure/core/-/core-0.16.0.tgz#80dd5299ac9f439d70f2c5d4aa07083192f63ffd"
-  integrity sha512-Bli9aLFB/n4uZFCMPTlReFlRIMp+kJhYmPR/EoLsqpcYmS1fcVvGi18FlZifs77r/2VhJH7/6zF9iGqCfebt5w==
+"@vendure/core@0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@vendure/core/-/core-0.17.1.tgz#5671cc2f86a3c5b3d8a58c9f52dc6173f5cfc446"
+  integrity sha512-d8ijQosb5HgAzkDRv92Sur9ZcwrD7W4OIfoH8Uc02SnWCQqubJo+pBV8vEeGMlpgrmIPjtPKG2M0vxkvS1jp7w==
   dependencies:
     "@graphql-tools/stitch" "^6.2.4"
     "@nestjs/common" "7.4.4"
@@ -2067,7 +2090,7 @@
     "@nestjs/testing" "7.4.4"
     "@nestjs/typeorm" "7.1.3"
     "@types/fs-extra" "^9.0.1"
-    "@vendure/common" "^0.16.0"
+    "@vendure/common" "^0.17.1"
     apollo-server-express "2.18.1"
     bcrypt "^5.0.0"
     body-parser "^1.19.0"
@@ -2095,10 +2118,10 @@
     rxjs "^6.6.3"
     typeorm "0.2.28"
 
-"@vendure/email-plugin@0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@vendure/email-plugin/-/email-plugin-0.16.0.tgz#2717aec982c8691f794a7f34d2bdeb2c8dd4d888"
-  integrity sha512-28SOjve0s7KiMuU5cCXUlCtZXrGK0zSiRF+JqkGUlHk5PBIkvVm8Q7B/R7T9YAgu+9yG+rmAHf9a/9PBTYVi/w==
+"@vendure/email-plugin@0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@vendure/email-plugin/-/email-plugin-0.17.1.tgz#b6c020c0976859b63cf3e957439866731fce98e3"
+  integrity sha512-KBewVbNEEUCSa/h8PbarQEsu43ALndhhlCvNG5VbHsO8LC3MX3xd4GrviG/Z6nOmRFqnsBPbiAVF5qCAWMuKXg==
   dependencies:
     dateformat "^3.0.3"
     express "^4.17.1"
@@ -2107,17 +2130,17 @@
     mjml "^4.7.1"
     nodemailer "^6.4.13"
 
-"@vendure/ui-devkit@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@vendure/ui-devkit/-/ui-devkit-0.16.0.tgz#0cecf4de8e6d08ed2b7d88c49e04d72c86787337"
-  integrity sha512-RswCxqHxdQSsLNbW4FTxtIOF4rBuE8jtPfTPL7w9wBwKIsVv8H7fGEmMhWm6wfyVhohW0Z0n8n/BcGl512/OsQ==
+"@vendure/ui-devkit@^0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@vendure/ui-devkit/-/ui-devkit-0.17.1.tgz#31aeea17030a5a47c18794faa890c6a46b44c038"
+  integrity sha512-I4CWBB3BK2cATVi/uJ05VrPUF/SwCk9phk1FZLilWb0sNQoQJ/01EW6S61ridnyPpdCt4U8Xm2vuraBnRjal2Q==
   dependencies:
     "@angular-devkit/build-angular" "~0.1001.4"
     "@angular/cli" "^10.1.4"
     "@angular/compiler" "^10.1.4"
     "@angular/compiler-cli" "^10.1.4"
-    "@vendure/admin-ui" "^0.16.0"
-    "@vendure/common" "^0.16.0"
+    "@vendure/admin-ui" "^0.17.1"
+    "@vendure/common" "^0.17.1"
     chalk "^4.1.0"
     chokidar "^3.4.2"
     fs-extra "^9.0.1"
@@ -2560,6 +2583,14 @@ apollo-cache-control@^0.11.3:
     apollo-server-env "^2.4.5"
     apollo-server-plugin-base "^0.10.1"
 
+apollo-cache-control@^0.11.4:
+  version "0.11.4"
+  resolved "https://registry.yarnpkg.com/apollo-cache-control/-/apollo-cache-control-0.11.4.tgz#06d57d728e6f928e03b9cc3b993f6102f305c32e"
+  integrity sha512-FUKE8ASr8GxVq5rmky/tY8bsf++cleGT591lfLiqnPsP1fo3kAfgRfWA2QRHTCKFNlQxzUhVOEDv+PaysqiOjw==
+  dependencies:
+    apollo-server-env "^2.4.5"
+    apollo-server-plugin-base "^0.10.2"
+
 apollo-datasource@^0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/apollo-datasource/-/apollo-datasource-0.7.2.tgz#1662ee93453a9b89af6f73ce561bde46b41ebf31"
@@ -2650,6 +2681,13 @@ apollo-reporting-protobuf@^0.6.0:
   dependencies:
     "@apollo/protobufjs" "^1.0.3"
 
+apollo-reporting-protobuf@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/apollo-reporting-protobuf/-/apollo-reporting-protobuf-0.6.1.tgz#09294e5f5f6b2285eb94b40621ed42113eaabea3"
+  integrity sha512-qr4DheFP154PGZsd93SSIS9RkqHnR5b6vT+eCloWjy3UIpY+yZ3cVLlttlIjYvOG4xTJ25XEwcHiAExatQo/7g==
+  dependencies:
+    "@apollo/protobufjs" "^1.0.3"
+
 apollo-server-caching@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/apollo-server-caching/-/apollo-server-caching-0.5.2.tgz#bef5d5e0d48473a454927a66b7bb947a0b6eb13e"
@@ -2717,6 +2755,38 @@ apollo-server-core@^2.15.1, apollo-server-core@^2.18.1:
     uuid "^8.0.0"
     ws "^6.0.0"
 
+apollo-server-core@^2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-2.19.0.tgz#ff14e788f228c2d6739478a68cf93f46a16e5bfa"
+  integrity sha512-2aMKUVPyNbomJQaG2tkpfqvp1Tfgxgkdr7nX5zHudYNSzsPrHw+CcYlCbIVFFI/mTZsjoK9czNq1qerFRxZbJw==
+  dependencies:
+    "@apollographql/apollo-tools" "^0.4.3"
+    "@apollographql/graphql-playground-html" "1.6.26"
+    "@types/graphql-upload" "^8.0.0"
+    "@types/ws" "^7.0.0"
+    apollo-cache-control "^0.11.4"
+    apollo-datasource "^0.7.2"
+    apollo-graphql "^0.6.0"
+    apollo-reporting-protobuf "^0.6.1"
+    apollo-server-caching "^0.5.2"
+    apollo-server-env "^2.4.5"
+    apollo-server-errors "^2.4.2"
+    apollo-server-plugin-base "^0.10.2"
+    apollo-server-types "^0.6.1"
+    apollo-tracing "^0.12.0"
+    async-retry "^1.2.1"
+    fast-json-stable-stringify "^2.0.0"
+    graphql-extensions "^0.12.6"
+    graphql-tag "^2.9.2"
+    graphql-tools "^4.0.0"
+    graphql-upload "^8.0.2"
+    loglevel "^1.6.7"
+    lru-cache "^5.0.0"
+    sha.js "^2.4.11"
+    subscriptions-transport-ws "^0.9.11"
+    uuid "^8.0.0"
+    ws "^6.0.0"
+
 apollo-server-env@^2.4.5:
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/apollo-server-env/-/apollo-server-env-2.4.5.tgz#73730b4f0439094a2272a9d0caa4079d4b661d5f"
@@ -2753,12 +2823,42 @@ apollo-server-express@2.18.1:
     subscriptions-transport-ws "^0.9.16"
     type-is "^1.6.16"
 
+apollo-server-express@^2.15.1:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-2.19.0.tgz#a8735e854e2da20e624583bef3c2e54b0cdd6a9b"
+  integrity sha512-3rgSrTme1SlLoecAYtSa8ThH6vYvz29QecgZCigq5Vdc6bFP2SZrCk0ls6BAdD8OZbVKUtizzRxd0yd/uREPAw==
+  dependencies:
+    "@apollographql/graphql-playground-html" "1.6.26"
+    "@types/accepts" "^1.3.5"
+    "@types/body-parser" "1.19.0"
+    "@types/cors" "2.8.8"
+    "@types/express" "4.17.7"
+    "@types/express-serve-static-core" "4.17.13"
+    accepts "^1.3.5"
+    apollo-server-core "^2.19.0"
+    apollo-server-types "^0.6.1"
+    body-parser "^1.18.3"
+    cors "^2.8.4"
+    express "^4.17.1"
+    graphql-subscriptions "^1.0.0"
+    graphql-tools "^4.0.0"
+    parseurl "^1.3.2"
+    subscriptions-transport-ws "^0.9.16"
+    type-is "^1.6.16"
+
 apollo-server-plugin-base@^0.10.1:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/apollo-server-plugin-base/-/apollo-server-plugin-base-0.10.1.tgz#b053d43b1ff5f728735ed35095cf4427657bfa9f"
   integrity sha512-XChCBDNyfByWqVXptsjPwrwrCj5cxMmNbchZZi8KXjtJ0hN2C/9BMNlInJd6bVGXvUbkRJYUakfKCfO5dZmwIg==
   dependencies:
     apollo-server-types "^0.6.0"
+
+apollo-server-plugin-base@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-plugin-base/-/apollo-server-plugin-base-0.10.2.tgz#185aea98ba22afe275fb01659070edeb480a89a7"
+  integrity sha512-uM5uL1lOxbXdgvt/aEIbgs40fV9xA45Y3Mmh0VtQ/ddqq0MXR5aG92nnf8rM+URarBCUfxKJKaYzJJ/CXAnEdA==
+  dependencies:
+    apollo-server-types "^0.6.1"
 
 apollo-server-plugin-base@^0.9.1:
   version "0.9.1"
@@ -2785,6 +2885,15 @@ apollo-server-types@^0.6.0:
     apollo-server-caching "^0.5.2"
     apollo-server-env "^2.4.5"
 
+apollo-server-types@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/apollo-server-types/-/apollo-server-types-0.6.1.tgz#61486980b44cacee2cb4939f0b369a0eb661a098"
+  integrity sha512-IEQ37aYvMLiTUzsySVLOSuvvhxuyYdhI05f3cnH6u2aN1HgGp7vX6bg+U3Ue8wbHfdcifcGIk5UEU+Q+QO6InA==
+  dependencies:
+    apollo-reporting-protobuf "^0.6.1"
+    apollo-server-caching "^0.5.2"
+    apollo-server-env "^2.4.5"
+
 apollo-tracing@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/apollo-tracing/-/apollo-tracing-0.11.1.tgz#3e3a4ce4b21e57dcc57b10bbd539db243b752606"
@@ -2800,6 +2909,14 @@ apollo-tracing@^0.11.4:
   dependencies:
     apollo-server-env "^2.4.5"
     apollo-server-plugin-base "^0.10.1"
+
+apollo-tracing@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/apollo-tracing/-/apollo-tracing-0.12.0.tgz#26250d7789c28aa89d63226eb674706dd69a568a"
+  integrity sha512-cMUYGE6mOEwb9HDqhf4fiPEo2JMhjPIqEprAQEC57El76avRpRig5NM0bnqMZcYJZR5QmLlNcttNccOwf9WrNg==
+  dependencies:
+    apollo-server-env "^2.4.5"
+    apollo-server-plugin-base "^0.10.2"
 
 apollo-upload-client@^12.1.0:
   version "12.1.0"
@@ -5682,6 +5799,15 @@ graphql-extensions@^0.12.5:
     "@apollographql/apollo-tools" "^0.4.3"
     apollo-server-env "^2.4.5"
     apollo-server-types "^0.6.0"
+
+graphql-extensions@^0.12.6:
+  version "0.12.6"
+  resolved "https://registry.yarnpkg.com/graphql-extensions/-/graphql-extensions-0.12.6.tgz#c66be43035662a8cfb0b8efe9df96595338bd13c"
+  integrity sha512-EUNw+OIRXYTPxToSoJjhJvS5aGa94KkdkZnL1I9DCZT64/+rzQNeLeGj+goj2RYuYvoQe1Bmcx0CNZ1GqwBhng==
+  dependencies:
+    "@apollographql/apollo-tools" "^0.4.3"
+    apollo-server-env "^2.4.5"
+    apollo-server-types "^0.6.1"
 
 graphql-iso-date@^3.6.1:
   version "3.6.1"
@@ -11274,7 +11400,7 @@ ts-pnp@^1.1.6:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
-tslib@1.11.2, tslib@2.0.0, tslib@2.0.1, tslib@^1.10.0, tslib@^1.13.0, tslib@^1.9.0, tslib@^1.9.3, tslib@^2.0.0, tslib@~2.0.0, tslib@~2.0.1:
+tslib@1.11.2, tslib@2.0.0, tslib@2.0.1, tslib@^1.10.0, tslib@^1.11.1, tslib@^1.13.0, tslib@^1.9.0, tslib@^1.9.3, tslib@^2.0.0, tslib@~2.0.0, tslib@~2.0.1:
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.11.2.tgz#9c79d83272c9a7aaf166f73915c9667ecdde3cc9"
   integrity sha512-tTSkux6IGPnUGUd1XAZHcpu85MOkIl5zX49pO+jfsie3eP0B6pyhOlLXm3cAC6T7s+euSDDUUV+Acop5WmtkVg==
@@ -11358,15 +11484,15 @@ typeorm@0.2.28:
     yargonaut "^1.1.2"
     yargs "^16.0.3"
 
-typescript@3.8.3:
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
-  integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
-
 typescript@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"
   integrity sha512-e4ERvRV2wb+rRZ/IQeb3jm2VxBsirQLpQhdxplZ2MEzGvDkkMmPglecnNDfSUBivMjP93vRbngYYDQqQ/78bcQ==
+
+typescript@^3.9.2:
+  version "3.9.7"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
+  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
 
 typescript@~3.9.2:
   version "3.9.5"
@@ -11631,6 +11757,56 @@ vendors@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
+
+"vendure-braintree-plugin@git+https://github.com/BeepLoveKarki/vendure-braintree-plugin.git":
+  version "0.0.1"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-braintree-plugin.git#ede06b0bec2d20da0b48a72cee0152442554e1e3"
+  dependencies:
+    "@types/braintree" "^2.22.3"
+    braintree "^2.23.0"
+
+"vendure-bulk-discounts@git+https://github.com/BeepLoveKarki/vendure-bulk-discounts.git":
+  version "0.1.11"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-bulk-discounts.git#f78a3311ea16a2090e7721f0ad9a3d99b128c59f"
+  dependencies:
+    tslib "^1.11.1"
+
+"vendure-favorites-plugin@git+https://github.com/BeepLoveKarki/vendure-favorites-plugin.git":
+  version "0.0.0-development"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-favorites-plugin.git#81d89875ecdf9437e0ed194a7fb1ef55fa25a414"
+
+"vendure-feedback-plugin@git+https://github.com/BeepLoveKarki/vendure-feedback-plugin.git":
+  version "0.0.1"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-feedback-plugin.git#208142ab1179b2f585679a7393f4d73b60eac895"
+  dependencies:
+    apollo-server-express "^2.15.1"
+
+"vendure-product-recommendations@git+https://github.com/BeepLoveKarki/vendure-product-recommendations.git":
+  version "0.1.16"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-product-recommendations.git#5de9b48905447cd5723c9003516b61a5666d17df"
+  dependencies:
+    "@ng-select/ng-select" "3.7.3"
+    tslib "^1.11.1"
+
+"vendure-reviews-plugin@git+https://github.com/BeepLoveKarki/vendure-reviews-plugin.git":
+  version "0.0.1"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-reviews-plugin.git#416a426c7cf8da3f0a968ccf894ca986bae243e9"
+
+"vendure-salestracker-plugin@git+https://github.com/BeepLoveKarki/vendure-salestracker-plugin.git":
+  version "0.0.1"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-salestracker-plugin.git#8a224648904dda4e373ba885894ed422131635b5"
+
+"vendure-subscription-plugin@git+https://github.com/BeepLoveKarki/vendure-subscription-plugin.git":
+  version "0.0.1"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-subscription-plugin.git#869946d1fc5d39669214a29bb9bdae9ce6e6cc3d"
+  dependencies:
+    apollo-server-express "^2.15.1"
+
+"vendure-vendor-plugin@git+https://github.com/BeepLoveKarki/vendure-vendor-plugin.git":
+  version "0.0.1"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-vendor-plugin.git#6611561bfd44b4629217d3e1fb581342e4856654"
+  dependencies:
+    apollo-server-express "^2.15.1"
 
 verror@1.10.0:
   version "1.10.0"
