@@ -2007,17 +2007,17 @@
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.1.tgz#5668c0bce55a91f2b9566b1d8a4c0a8dbbc79764"
   integrity sha512-wmk0xQI6Yy7Fs/il4EpOcflG4uonUpYGqvZARESLc2oy4u69fkatFLbJOeW4Q6awO15P4rduAe6xkwHevpXcUQ==
 
-"@vendure/admin-ui-plugin@0.17.1":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@vendure/admin-ui-plugin/-/admin-ui-plugin-0.17.1.tgz#a9de2199f700aa1c27e1f4da15ea44c968741251"
-  integrity sha512-FqKivZqILaUf7JWI878TpQ66YvXtBJG+D4XRzHz9AfE0/SQxJxUqcetzhoGN5vO8hP3t9R7iVZI7Uv+d/XOz/Q==
+"@vendure/admin-ui-plugin@~0.17.3":
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/@vendure/admin-ui-plugin/-/admin-ui-plugin-0.17.3.tgz#a937448862eb2752c256bb7f25df5edda0c4eeed"
+  integrity sha512-CE0a0tQcSS0WdhxvEIwmsynBw0G1Ti8aAetvRr56mSIvx0de/RT5Im+RNk40J3eLJVSuilq2H7j3EZ6WjIULsg==
   dependencies:
     fs-extra "^9.0.1"
 
-"@vendure/admin-ui@^0.17.1":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@vendure/admin-ui/-/admin-ui-0.17.1.tgz#6f4d56d9a9aad1f20648ea2df4e1ceca4d622bde"
-  integrity sha512-zzTYroRcZ9Sac/LAhU+Mg+Oe5GNc8gpe2/aT+ZQSBabZbGokyVUL9TnG0XLhgXdqCpqGL9fj+382uPDn3z1Mxw==
+"@vendure/admin-ui@^0.17.3", "@vendure/admin-ui@~0.17.3":
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/@vendure/admin-ui/-/admin-ui-0.17.3.tgz#c7793e7d40f4e6952a53e13e207e15f8f27efb18"
+  integrity sha512-s/kyyTR7b+2YKpz+JkMJKbyCkyE8tL0i47t4sE98e7sbF5CTyWSLB5pBdhHnwh/vneJbnBKF+e/oMqM2HVLlWQ==
   dependencies:
     "@angular/animations" "10.1.4"
     "@angular/cdk" "10.2.4"
@@ -2037,7 +2037,7 @@
     "@ng-select/ng-select" "^5.0.3"
     "@ngx-translate/core" "^13.0.0"
     "@ngx-translate/http-loader" "^6.0.0"
-    "@vendure/common" "^0.17.1"
+    "@vendure/common" "^0.17.3"
     "@webcomponents/custom-elements" "^1.2.4"
     apollo-angular "^2.0.4"
     apollo-upload-client "^12.1.0"
@@ -2061,24 +2061,24 @@
     tslib "^2.0.0"
     zone.js "~0.10.2"
 
-"@vendure/asset-server-plugin@0.17.1":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@vendure/asset-server-plugin/-/asset-server-plugin-0.17.1.tgz#37dfa75440af4ff014344e57be6e4b80a05bd4ff"
-  integrity sha512-ENU0lMcdnWqZ+4NQYj4oXp3xFDh3/N6vfIJIzBZwSHy18lUsQ9zK52bZSZvvXE9yh5U37DXfccKmQ3lfXkou9g==
+"@vendure/asset-server-plugin@~0.17.3":
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/@vendure/asset-server-plugin/-/asset-server-plugin-0.17.3.tgz#5eba2923c4fb84db08d3de6e1d8fabd1d4543e26"
+  integrity sha512-tL12zANvhesyUCGAt9+T3sJmftSTfOjFpH0nlWTXzTDL/6ZYenO7JHMZEPWRL5S9SFBy7E+m7bskgjGltY16sQ==
   dependencies:
     file-type "^15.0.1"
     fs-extra "^9.0.1"
     sharp "0.25.2"
 
-"@vendure/common@^0.17.1":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@vendure/common/-/common-0.17.1.tgz#84b8208139864e44af203ea07e33353fe6c22cb1"
-  integrity sha512-kGOlsTMM0pOuD/hO3tc7iEOjj+8jumLn16qTV6yO5O/MMH8EHW3oMWcT/mAjy2jDsIqrMoNaDB24goHJFF6Dvg==
+"@vendure/common@^0.17.3":
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/@vendure/common/-/common-0.17.3.tgz#08a57816e9e4a1291de1a18b1deb92b283998aef"
+  integrity sha512-cOyaiOaxEi6Ccwqu5MjRbbuSXFnGkA7S4Y29M6zvo7xG6WqxIXWAyWsynxP+DqoYEPL2m/3dnHShnPcw6bu+Pg==
 
-"@vendure/core@0.17.1":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@vendure/core/-/core-0.17.1.tgz#5671cc2f86a3c5b3d8a58c9f52dc6173f5cfc446"
-  integrity sha512-d8ijQosb5HgAzkDRv92Sur9ZcwrD7W4OIfoH8Uc02SnWCQqubJo+pBV8vEeGMlpgrmIPjtPKG2M0vxkvS1jp7w==
+"@vendure/core@~0.17.3":
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/@vendure/core/-/core-0.17.3.tgz#605ef2569d384573f789122eed8af524d36d2079"
+  integrity sha512-JAyARTZUjuQ9p3rPYw1Mj8u1R5tSONTPZie3rJcL7P3IJMZDLAnqEjb4lIDpayFtF4ruPvjQwCfvPun1USgfXw==
   dependencies:
     "@graphql-tools/stitch" "^6.2.4"
     "@nestjs/common" "7.4.4"
@@ -2090,7 +2090,7 @@
     "@nestjs/testing" "7.4.4"
     "@nestjs/typeorm" "7.1.3"
     "@types/fs-extra" "^9.0.1"
-    "@vendure/common" "^0.17.1"
+    "@vendure/common" "^0.17.3"
     apollo-server-express "2.18.1"
     bcrypt "^5.0.0"
     body-parser "^1.19.0"
@@ -2118,10 +2118,10 @@
     rxjs "^6.6.3"
     typeorm "0.2.28"
 
-"@vendure/email-plugin@0.17.1":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@vendure/email-plugin/-/email-plugin-0.17.1.tgz#b6c020c0976859b63cf3e957439866731fce98e3"
-  integrity sha512-KBewVbNEEUCSa/h8PbarQEsu43ALndhhlCvNG5VbHsO8LC3MX3xd4GrviG/Z6nOmRFqnsBPbiAVF5qCAWMuKXg==
+"@vendure/email-plugin@~0.17.3":
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/@vendure/email-plugin/-/email-plugin-0.17.3.tgz#e7bdc67ef917dc23c12376bb62b0f9febf7145f2"
+  integrity sha512-EpdjJ9rLBAVMeYlgw/3kxye6/kMxWnP2t6ZmfxLw/LRHGuy+wdD4QjL1sR70acB4wULiVob6GEaSh77ULdWnPQ==
   dependencies:
     dateformat "^3.0.3"
     express "^4.17.1"
@@ -2130,17 +2130,17 @@
     mjml "^4.7.1"
     nodemailer "^6.4.13"
 
-"@vendure/ui-devkit@^0.17.1":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@vendure/ui-devkit/-/ui-devkit-0.17.1.tgz#31aeea17030a5a47c18794faa890c6a46b44c038"
-  integrity sha512-I4CWBB3BK2cATVi/uJ05VrPUF/SwCk9phk1FZLilWb0sNQoQJ/01EW6S61ridnyPpdCt4U8Xm2vuraBnRjal2Q==
+"@vendure/ui-devkit@~0.17.3":
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/@vendure/ui-devkit/-/ui-devkit-0.17.3.tgz#3c864fd93b9381ea0fb163736123c9f2577e3198"
+  integrity sha512-gd0L3Hl+wOWRgWwseoZ/Zji0ho6T5t6TABX/D7d1qmN9U60tzqAUjc/LZl/1chOvQJI4aJo9rXaotBak+hOztw==
   dependencies:
     "@angular-devkit/build-angular" "~0.1001.4"
     "@angular/cli" "^10.1.4"
     "@angular/compiler" "^10.1.4"
     "@angular/compiler-cli" "^10.1.4"
-    "@vendure/admin-ui" "^0.17.1"
-    "@vendure/common" "^0.17.1"
+    "@vendure/admin-ui" "^0.17.3"
+    "@vendure/common" "^0.17.3"
     chalk "^4.1.0"
     chokidar "^3.4.2"
     fs-extra "^9.0.1"
@@ -11765,15 +11765,15 @@ vendors@^1.0.0:
     "@types/braintree" "^2.22.3"
     braintree "^2.23.0"
 
-"vendure-bulk-discounts@git+https://github.com/BeepLoveKarki/vendure-bulk-discounts.git":
+"vendure-bulk-discounts@https://github.com/BeepLoveKarki/vendure-bulk-discounts":
   version "0.1.11"
-  resolved "git+https://github.com/BeepLoveKarki/vendure-bulk-discounts.git#f78a3311ea16a2090e7721f0ad9a3d99b128c59f"
+  resolved "https://github.com/BeepLoveKarki/vendure-bulk-discounts#ee7b78079f1a6abacb304bbbb59af90537f03228"
   dependencies:
     tslib "^1.11.1"
 
-"vendure-favorites-plugin@git+https://github.com/BeepLoveKarki/vendure-favorites-plugin.git":
+"vendure-favorites-plugin@https://github.com/BeepLoveKarki/vendure-favorites-plugin":
   version "0.0.0-development"
-  resolved "git+https://github.com/BeepLoveKarki/vendure-favorites-plugin.git#81d89875ecdf9437e0ed194a7fb1ef55fa25a414"
+  resolved "https://github.com/BeepLoveKarki/vendure-favorites-plugin#e16da384b37fece8b606812592949ba08442a1b3"
 
 "vendure-feedback-plugin@git+https://github.com/BeepLoveKarki/vendure-feedback-plugin.git":
   version "0.0.1"
@@ -11781,9 +11781,9 @@ vendors@^1.0.0:
   dependencies:
     apollo-server-express "^2.15.1"
 
-"vendure-product-recommendations@git+https://github.com/BeepLoveKarki/vendure-product-recommendations.git":
+"vendure-product-recommendations@https://github.com/BeepLoveKarki/vendure-product-recommendations":
   version "0.1.16"
-  resolved "git+https://github.com/BeepLoveKarki/vendure-product-recommendations.git#5de9b48905447cd5723c9003516b61a5666d17df"
+  resolved "https://github.com/BeepLoveKarki/vendure-product-recommendations#89e23e2fc19db7d4e317482faafe6542d71e3800"
   dependencies:
     "@ng-select/ng-select" "3.7.3"
     tslib "^1.11.1"

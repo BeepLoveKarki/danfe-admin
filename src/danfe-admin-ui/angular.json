@@ -45,7 +45,14 @@
                 "./src/styles"
               ]
             },
-            "showCircularDependencies": false
+            "showCircularDependencies": false,
+            "allowedCommonJsDependencies": [
+              "graphql-tag",
+              "zen-observable",
+              "lodash",
+              "apollo-upload-client",
+              "@vendure/common/lib/simple-deep-clone"
+            ]
           },
           "configurations": {
             "production": {
