@@ -4,14 +4,14 @@ import fetch from 'node-fetch';
 let postdata = <any>{};
 
 export const EsewaPaymentHandler = new PaymentMethodHandler({
-    code: 'esewa-payment-provider',
+    code: 'Esewa',
     description: [{
         languageCode: LanguageCode.en,
-        value: 'Esewa Payment Provider',
+        value: 'Pay Via Esewa',
     }],
     
 	args: {
-        merchantid: { 
+        'Merchant Id': { 
 		   type:'string'	   
 		}
     },
@@ -21,7 +21,7 @@ export const EsewaPaymentHandler = new PaymentMethodHandler({
 	   try {
 		   
 		postdata["amt"] = Math.ceil(order.total);
-		postdata["scd"] = args.merchantid;
+		postdata["scd"] = args["Merchant Id"];
         postdata["pid"] = metadata.pid;
         postdata["rid"] = metadata.rid;
 		 

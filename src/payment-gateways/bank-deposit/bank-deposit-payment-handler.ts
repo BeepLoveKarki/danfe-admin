@@ -1,14 +1,25 @@
 import {PaymentMethodHandler,LanguageCode} from '@vendure/core';
 
-export const CoDPaymentHandler = new PaymentMethodHandler({
-    code: 'Cash on Delivery',
+export const BankDepositPaymentHandler = new PaymentMethodHandler({
+    code: 'Bank Deposit',
     description: [{
         languageCode: LanguageCode.en,
-        value: 'Pay via Cash on Delivery',
+        value: 'Pay Via Bank Deposit',
     }],
 	
 	args: {
-		
+	    'Bank Name': {
+			type: 'string',
+			ui: {
+			  component: 'select-form-input',
+			  options:[
+			   {value:"Agriculture Development Bank Ltd."},
+			   {value:"Bank of Kathmandu Ltd."},
+			  ],
+			},
+		 },
+		'Bank Account Owner\'s Name': {type: 'string'},
+		'Bank Account No.': {type: 'int'},
     },
 	
 	async createPayment(ctx, order, args, metadata) {

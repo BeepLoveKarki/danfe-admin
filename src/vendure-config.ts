@@ -15,7 +15,7 @@ import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from 
 
 import { BulkDiscountPlugin, BulkDiscountsInputModule } from "vendure-bulk-discounts";
 
-import { BraintreePlugin } from "vendure-braintree-plugin";
+//import { BraintreePlugin } from "vendure-braintree-plugin";
 import { ReviewsPlugin } from "vendure-reviews-plugin";
 
 import { SubscriptionPlugin } from "vendure-subscription-plugin";
@@ -36,11 +36,15 @@ import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connecti
 import { KhaltiPaymentHandler } from './payment-gateways/khalti/khalti-payment-handler';
 import { EsewaPaymentHandler } from './payment-gateways/esewa/esewa-payment-handler';
 import { CoDPaymentHandler } from './payment-gateways/cod/cod-payment-handler';
+import { InStorePaymentHandler } from './payment-gateways/instore/instore-payment-handler';
+import { BankDepositPaymentHandler } from './payment-gateways/bank-deposit/bank-deposit-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
 
 import { FavoritesPlugin } from "vendure-favorites-plugin";
 
 import { OnePerOrder } from './promotion-strategies/one-per-order';
+
+//import { DefaultShippingModule } from "./plugins/default-shipping"
 
 import path from 'path';
 
@@ -121,7 +125,9 @@ apiOptions: {
 		 EsewaPaymentHandler,
 		 KhaltiPaymentHandler,
 		 ConnectIPSPaymentHandler,
-		 CoDPaymentHandler
+		 CoDPaymentHandler,
+		 BankDepositPaymentHandler,
+		 InStorePaymentHandler
 		],
     },
     customFields: {
@@ -154,7 +160,7 @@ apiOptions: {
 		SubscriptionPlugin,
 		VendorPlugin,
 		FeedbackPlugin,
-		BraintreePlugin,
+		//BraintreePlugin,
 		ReviewsPlugin,
 		FavoritesPlugin.init({
 		    trackHistory: true
@@ -205,7 +211,7 @@ apiOptions: {
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
-					SubscriptionPlugin.uiExtensions,
+					DefaultShippingModule,
                 ]
 			}),*/
 			

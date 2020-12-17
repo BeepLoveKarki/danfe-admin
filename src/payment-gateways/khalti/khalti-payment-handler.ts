@@ -4,14 +4,14 @@ import fetch from 'node-fetch';
 let postdata = <any>{};
 
 export const KhaltiPaymentHandler = new PaymentMethodHandler({
-    code: 'khalti-payment-provider',
+    code: 'Khalti',
     description: [{
         languageCode: LanguageCode.en,
-        value: 'Khalti Payment Provider',
+        value: 'Pay Via Khalti',
     }],
     
 	args: {
-        secretKey: { 
+        'Secret Key': { 
 		   type:'string',
            ui: { component: 'password-form-input' }		   
 		}
@@ -32,7 +32,7 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
 			body : data,
 			headers: { 
 			  'Content-Type': 'application/json',
-			  'Authorization': `Key ${args.secretKey}`
+			  'Authorization': `Key ${args["Secret Key"]}`
 			}
         };
 		 

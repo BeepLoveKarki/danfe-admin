@@ -19,34 +19,34 @@ function gettoken(){
 }
 
 export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
-    code: 'connectips-payment-provider',
+    code: 'Connect IPS',
     description: [{
         languageCode: LanguageCode.en,
-        value: 'ConnectIPS Payment Provider',
+        value: 'Pay Via Connect IPS',
     }],
     
 	args: {
-		merchantid: {type: 'int'},
-		appid: {type: 'string'},
-		appname: {type: 'string'},
-		apppassword: {
+		'Merchant Id': {type: 'int', value:''},
+		'App Id': {type: 'string'},
+		'App Name': {type: 'string'},
+		'App Password': {
 			type: 'string',
 			ui: { component: 'password-form-input' }
 		},
-		currency: {type: 'string'},
+		'Currency': {type: 'string', value:'NPR'},
     },
     
 	async createPayment(ctx, order, args, metadata) {
 	   try {
-		 postdata["merchantId"] = args.merchantid;
-		 postdata["appId"] = args.appid;
+		 postdata["merchantId"] = args["Merchant Id"];
+		 postdata["appId"] = args["App Id"];
 		 postdata["referenceId"] = metadata["txnid"]; 
 		 postdata["txnAmt"] = Math.ceil(order.total);
 		 postdata["token"] = gettoken();
 		 
 		let data =JSON.stringify(postdata);
-		let username = args.appid;
-		let password = args.apppassword;
+		let username = args["App Id"];
+		let password = args["App Password"];
 		let token = Buffer.from(`${username}:${password}`,'utf8').toString('base64');
 		let url = 'https://uat.connectips.com:7443/connectipswebws/api/creditor/validatetxn';
 		
