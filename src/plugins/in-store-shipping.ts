@@ -5,8 +5,8 @@ import { SharedModule, addActionBarItem } from '@vendure/admin-ui/core';
   imports: [SharedModule],
   providers: [
     addActionBarItem({
-       id: 'default-shipping',
-       label: 'Add Default Shipping',
+       id: 'in-store-shipping',
+       label: 'Add In Store Pick Up',
        locationId: 'shipping-method-list',
        buttonStyle: 'outline',
        //routerLink: ['/'],
@@ -17,4 +17,4 @@ import { SharedModule, addActionBarItem } from '@vendure/admin-ui/core';
     }),
   ],
 })
-export class DefaultShippingModule {}
+export class InStorePickupModule {}

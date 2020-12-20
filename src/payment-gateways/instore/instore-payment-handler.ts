@@ -1,7 +1,7 @@
 import {PaymentMethodHandler,LanguageCode} from '@vendure/core';
 
 export const InStorePaymentHandler = new PaymentMethodHandler({
-    code: 'In Store Visit',
+    code: 'In Store Pick Up',
     description: [{
         languageCode: LanguageCode.en,
         value: 'Visit In Store for Payment',

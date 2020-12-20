@@ -44,8 +44,6 @@ import { FavoritesPlugin } from "vendure-favorites-plugin";
 
 import { OnePerOrder } from './promotion-strategies/one-per-order';
 
-//import { DefaultShippingModule } from "./plugins/default-shipping"
-
 import path from 'path';
 
 
@@ -211,8 +209,31 @@ apiOptions: {
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
-					DefaultShippingModule,
-                ]
+				 
+				 {	
+				    extensionPath: path.join(__dirname,'plugins'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'default-shipping.ts',
+	                   ngModuleName: 'DefaultShippingModule',
+                      },
+					],
+				 },
+				 
+				 {	
+				    extensionPath: path.join(__dirname,'plugins'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'in-store-shipping.ts',
+	                   ngModuleName: 'InStorePickupModule',
+                      },
+					],
+				 },
+				 
+				 
+				],
 			}),*/
 			
 		  /*app: compileUiExtensions({
