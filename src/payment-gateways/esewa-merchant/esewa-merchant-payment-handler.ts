@@ -3,43 +3,46 @@ import fetch from 'node-fetch';
 
 let postdata = <any>{};
 
-export const KhaltiPaymentHandler = new PaymentMethodHandler({
-    code: 'Khalti',
+export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
+    code: 'Esewa Merchant',
     description: [{
         languageCode: LanguageCode.en,
-        value: 'Pay Via Khalti',
+        value: 'Pay to Esewa Merchant Account of Seller',
     }],
     
 	args: {
-        'Secret Key': { 
-		   type:'string',
-           ui: { component: 'password-form-input' }		   
+        'Merchant Id': { 
+		   type:'string'	   
 		}
     },
     
-	async createPayment(ctx,order, args, metadata) {
+	async createPayment(ctx, order, args, metadata) {
 	   
 	   try {
 		   
-		postdata["token"] = metadata["token"];
-		postdata["amount"] = Math.ceil(order.total);
+		postdata["amt"] = Math.ceil(order.total);
+		postdata["scd"] = args["Merchant Id"];
+        postdata["pid"] = metadata.pid;
+        postdata["rid"] = metadata.rid;
 		 
 		let data =JSON.stringify(postdata);
-		let url = 'https://khalti.com/api/v2/payment/verify/';
+		let url = 'https://uat.esewa.com.np/epay/transrec';
 		
 		let config = {
 			method: 'post',
 			body : data,
-			headers: { 
+			/*headers: { 
 			  'Content-Type': 'application/json',
-			  'Authorization': `Key ${args["Secret Key"]}`
-			}
+			  'Authorization': `Key ${args.secretKey}`
+			}*/
         };
 		 
 		 let response = await fetch(url,config);
 		 let resp = await response.json();
 		 
-		 if(resp["state"]["name"]=="Completed"){
+		 console.log(resp);
+		 
+		 /*if(resp["state"]["name"]=="Completed"){
 		    
 			return {
                 amount: resp.amount,
@@ -47,7 +50,7 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
                 transactionId: resp.idx,
                 metadata: {
 				   public:{
-					 message:"Success"
+					message:"Success"
 				   }
 				},
            };
@@ -59,13 +62,20 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
                 state: 'Declined' as 'Declined',
                 metadata: {
 					public:{
-                      errorMessage: "Error Payment"
+                       errorMessage: "Error Payment"
 					}
                 },
           };
 		 
-		}
+		}*/
 		 
+		return {
+                amount: Math.ceil(order.total),
+                state: 'Declined' as 'Declined',
+                metadata: {
+                    errorMessage: "Error Payment"
+                },
+          };
 		 
 	     
 	   } catch (err) {
@@ -73,9 +83,7 @@ export const KhaltiPaymentHandler = new PaymentMethodHandler({
                 amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
-				  public:{
                     errorMessage: err.message
-				  }
                 },
             };
 	   }

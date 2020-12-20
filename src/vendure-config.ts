@@ -4,7 +4,8 @@ import {
     VendureConfig,
 	DefaultAssetNamingStrategy,
 	NativeAuthenticationStrategy,
-	defaultPromotionConditions
+	defaultPromotionConditions,
+	LanguageCode
 } from '@vendure/core'; 
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
@@ -32,12 +33,16 @@ import { AdminAuthenticationStrategy } from './strategies/admin-authentication-s
 
 import { ProxyPlugin } from './proxy/proxy-plugin';
 
-import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connectips-payment-handler';
-import { KhaltiPaymentHandler } from './payment-gateways/khalti/khalti-payment-handler';
-import { EsewaPaymentHandler } from './payment-gateways/esewa/esewa-payment-handler';
-import { CoDPaymentHandler } from './payment-gateways/cod/cod-payment-handler';
-import { InStorePaymentHandler } from './payment-gateways/instore/instore-payment-handler';
+import { KhaltiMerchantPaymentHandler } from './payment-gateways/khalti-merchant/khalti-merchant-payment-handler';
+import { KhaltiPersonalPaymentHandler } from './payment-gateways/khalti-personal/khalti-personal-payment-handler';
+
+import { EsewaMerchantPaymentHandler } from './payment-gateways/esewa-merchant/esewa-merchant-payment-handler';
+import { EsewaPersonalPaymentHandler } from './payment-gateways/esewa-personal/esewa-personal-payment-handler';
+
+import { CashPaymentHandler } from './payment-gateways/cash/cash-payment-handler';
 import { BankDepositPaymentHandler } from './payment-gateways/bank-deposit/bank-deposit-payment-handler';
+
+import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connectips-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
 
 import { FavoritesPlugin } from "vendure-favorites-plugin";
@@ -120,19 +125,44 @@ apiOptions: {
     },
     paymentOptions: {
         paymentMethodHandlers: [
-		 EsewaPaymentHandler,
-		 KhaltiPaymentHandler,
+		 EsewaMerchantPaymentHandler,
+		 EsewaPersonalPaymentHandler,
+		 KhaltiMerchantPaymentHandler,
+		 KhaltiPersonalPaymentHandler,
 		 ConnectIPSPaymentHandler,
-		 CoDPaymentHandler,
 		 BankDepositPaymentHandler,
-		 InStorePaymentHandler
+		 CashPaymentHandler
 		],
     },
     customFields: {
 		Address: [
-		 { name: 'district', type: 'string', defaultValue:"" },
-		 { name: 'area', type: 'string', defaultValue:"" },
-		 { name: 'addressNotes', type: 'string', defaultValue:"" }
+		 { 
+		   name: 'district', 
+		   type: 'string',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'District',
+		   }],	
+		   defaultValue:"" 
+		 },
+		 { 
+		   name: 'area', 
+		   type: 'string',
+           label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Area',
+		   }],			   
+		   defaultValue:"" 
+		 },
+		 { 
+		   name: 'addressNotes',
+		   type: 'string',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Address Notes',
+		   }],
+		   defaultValue:""
+		 }
 		]
 	},
     plugins: [
