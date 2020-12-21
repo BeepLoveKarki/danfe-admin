@@ -15,6 +15,7 @@ import { SharedModule, CustomFieldControl,
 	<option value = "Saturday">Sunday</option>
    </select>
    {{ formControl.value }}
+   
    <input
       type="time"
       [formControl]="formControl" />
