@@ -163,6 +163,18 @@ apiOptions: {
 		   }],
 		   defaultValue:""
 		 }
+		],
+		
+		Customer: [
+		 {
+		  name: 'operationTimes',
+		  type: 'string',
+		  label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Operation Times',
+		  }],
+		  list:true
+		 }
 		]
 	},
     plugins: [
@@ -228,13 +240,42 @@ apiOptions: {
         AdminUiPlugin.init({
 			port: 3002,
 			
-			app:{
+			/*app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
-			},
+			},*/
 			
 			/*adminUiConfig: {
 				loginUrl: '/admin/login',
             },*/
+			
+			app: compileUiExtensions({
+			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
+				extensions: [
+				 
+				 {	
+				    extensionPath: path.join(__dirname,'plugins'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'from-timing-control-field.ts',
+	                   ngModuleName: 'FromTimingControlFieldModule',
+                      },
+					],
+				 },
+				 
+				 {	
+				    extensionPath: path.join(__dirname,'plugins'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'to-timing-control-field.ts',
+	                   ngModuleName: 'ToTimingControlFieldModule',
+                      },
+					],
+				 },
+				 
+				],
+			}),
 
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),

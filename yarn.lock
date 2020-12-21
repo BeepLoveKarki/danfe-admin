@@ -11765,25 +11765,25 @@ vendors@^1.0.0:
     "@types/braintree" "^2.22.3"
     braintree "^2.23.0"
 
-"vendure-bulk-discounts@https://github.com/BeepLoveKarki/vendure-bulk-discounts":
+"vendure-bulk-discounts@git+https://github.com/BeepLoveKarki/vendure-bulk-discounts.git":
   version "0.1.11"
-  resolved "https://github.com/BeepLoveKarki/vendure-bulk-discounts#ee7b78079f1a6abacb304bbbb59af90537f03228"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-bulk-discounts.git#ee7b78079f1a6abacb304bbbb59af90537f03228"
   dependencies:
     tslib "^1.11.1"
 
-"vendure-favorites-plugin@https://github.com/BeepLoveKarki/vendure-favorites-plugin":
+"vendure-favorites-plugin@git+https://github.com/BeepLoveKarki/vendure-favorites-plugin.git":
   version "0.0.0-development"
-  resolved "https://github.com/BeepLoveKarki/vendure-favorites-plugin#e16da384b37fece8b606812592949ba08442a1b3"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-favorites-plugin.git#e16da384b37fece8b606812592949ba08442a1b3"
 
-"vendure-feedback-plugin@git+https://github.com/BeepLoveKarki/vendure-feedback-plugin.git":
+"vendure-feedback-plugin@https://github.com/BeepLoveKarki/vendure-feedback-plugin":
   version "0.0.1"
-  resolved "git+https://github.com/BeepLoveKarki/vendure-feedback-plugin.git#208142ab1179b2f585679a7393f4d73b60eac895"
+  resolved "https://github.com/BeepLoveKarki/vendure-feedback-plugin#073aad5ee4f7973fb77f4df6a5d5f4e5bd651d23"
   dependencies:
     apollo-server-express "^2.15.1"
 
-"vendure-product-recommendations@https://github.com/BeepLoveKarki/vendure-product-recommendations":
+"vendure-product-recommendations@git+https://github.com/BeepLoveKarki/vendure-product-recommendations.git":
   version "0.1.16"
-  resolved "https://github.com/BeepLoveKarki/vendure-product-recommendations#89e23e2fc19db7d4e317482faafe6542d71e3800"
+  resolved "git+https://github.com/BeepLoveKarki/vendure-product-recommendations.git#89e23e2fc19db7d4e317482faafe6542d71e3800"
   dependencies:
     "@ng-select/ng-select" "3.7.3"
     tslib "^1.11.1"
@@ -11796,15 +11796,15 @@ vendors@^1.0.0:
   version "0.0.1"
   resolved "git+https://github.com/BeepLoveKarki/vendure-salestracker-plugin.git#8a224648904dda4e373ba885894ed422131635b5"
 
-"vendure-subscription-plugin@git+https://github.com/BeepLoveKarki/vendure-subscription-plugin.git":
+"vendure-subscription-plugin@https://github.com/BeepLoveKarki/vendure-subscription-plugin":
   version "0.0.1"
-  resolved "git+https://github.com/BeepLoveKarki/vendure-subscription-plugin.git#869946d1fc5d39669214a29bb9bdae9ce6e6cc3d"
+  resolved "https://github.com/BeepLoveKarki/vendure-subscription-plugin#c4f966e7210603e705c61ad933c8707d7fd558fb"
   dependencies:
     apollo-server-express "^2.15.1"
 
-"vendure-vendor-plugin@git+https://github.com/BeepLoveKarki/vendure-vendor-plugin.git":
+"vendure-vendor-plugin@https://github.com/BeepLoveKarki/vendure-vendor-plugin":
   version "0.0.1"
-  resolved "git+https://github.com/BeepLoveKarki/vendure-vendor-plugin.git#6611561bfd44b4629217d3e1fb581342e4856654"
+  resolved "https://github.com/BeepLoveKarki/vendure-vendor-plugin#8166cfa6e579da11379bf9d8a805d63f1798685c"
   dependencies:
     apollo-server-express "^2.15.1"
 
