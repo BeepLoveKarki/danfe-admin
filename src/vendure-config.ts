@@ -165,13 +165,24 @@ apiOptions: {
 		 }
 		],
 		
+		ShippingMethod: [
+		  {
+		   name: 'additionalNotes',
+		   type: 'string',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Additional Notes',
+		   }]
+		  }
+		],
+		
 		Customer: [
 		 {
 		  name: 'operationTimes',
 		  type: 'string',
 		  label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Operation Times',
+			  value: 'Store Operating Times',
 		  }],
 		  list:true
 		 }
@@ -257,19 +268,8 @@ apiOptions: {
 					ngModules:[
 					  {
                        type: 'shared',
-                       ngModuleFileName: 'from-timing-control-field.ts',
-	                   ngModuleName: 'FromTimingControlFieldModule',
-                      },
-					],
-				 },
-				 
-				 {	
-				    extensionPath: path.join(__dirname,'plugins'),
-					ngModules:[
-					  {
-                       type: 'shared',
-                       ngModuleFileName: 'to-timing-control-field.ts',
-	                   ngModuleName: 'ToTimingControlFieldModule',
+                       ngModuleFileName: 'timing-control-field.ts',
+	                   ngModuleName: 'TimingControlFieldModule',
                       },
 					],
 				 },
