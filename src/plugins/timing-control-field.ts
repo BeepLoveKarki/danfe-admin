@@ -1,48 +1,87 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule, Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SharedModule, CustomFieldControl, 
   CustomFieldConfigType, registerCustomFieldComponent } from '@vendure/admin-ui/core';
+import { Subscription } from 'rxjs/internal/Subscription';
+
 
 @Component({
   template: `
    <form [formGroup]="timeForm">
+	
 	<select formControlName="weekDay">
-     <option value = "Sunday">Sunday</option>
-	 <option value = "Monday">Monday</option>
-	 <option value = "Tuesday">Tuesday</option>
-	 <option value = "Wednesday">Wednesday</option>
-	 <option value = "Thursday">Thursday</option>
-	 <option value = "Friday">Friday</option>
-	 <option value = "Saturday">Saturday</option>
-   </select>
-	<input formControlName="fromTime" type="time">
+      <option value="" disabled>Choose Week Day</option>
+      <option *ngFor="let day of week" [ngValue]="day">{{day}}</option>
+    </select>
+	<br/><br/>
+	<input formControlName="fromTime" type="time"> -
     <input formControlName="toTime" type="time">
+   
    </form>
    `
 })
 
-export class TimingControl implements CustomFieldControl {
+
+export class TimingControl implements CustomFieldControl,OnInit,OnDestroy {
   readonly: boolean;
   config: CustomFieldConfigType;
   formControl: FormControl;
+  week: any = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  subs: Subscription;
+  datas = new Array();
   
   timeForm = new FormGroup({
 	 weekDay: new FormControl(''),
      fromTime: new FormControl(''),
 	 toTime: new FormControl('')
-  });
+   });
+
   
   ngOnInit() {
 	
-    if(this.formControl){
-	  this.timeForm.setValue(this.formControl.value);
+	//console.log(this.formControl.value);
+	
+    if(!this.formControl.value){
+	  this.formControl.setValue(JSON.stringify({
+	    weekDay: "",
+		fromTime: "",
+		toTime: ""
+	  }));
+	}else{
+	   
 	}
 	
+	this.timeForm.setValue(this.formControl.value);
+	 
     this.timeForm.valueChanges.subscribe((value) => {
-       this.formControl.setValue(JSON.stringify(value));
-    }); 
+		if(this.checknotempty(value)){
+		   this.datas.push(JSON.stringify(value));
+		}
+		this.formControl.setValue(this.datas.toString());
+    });	
   
+ }
+ 
+ checknotempty(object){
+  let i=0;
+  Object.keys(object).forEach(function (key) {
+    if (object[key] === '') {
+      i++;
+    }
+  });
+  
+  if(i>=3){
+    return false;
   }
+  
+  return true;
+ 
+ }
+ 
+ ngOnDestroy(){
+     //this.formControl.reset();
+	 //this.subs.unsubscribe();
+ }
   
 }
 
