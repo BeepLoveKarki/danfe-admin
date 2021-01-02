@@ -11,9 +11,9 @@ export const CashPaymentHandler = new PaymentMethodHandler({
 		
     },
 	
-	async createPayment(ctx, order, args, metadata) {
+	async createPayment(ctx, order, amount, args, metadata) {
 		   return {
-                amount: order.total,
+                amount: amount,
                 state: 'Authorized' as 'Authorized',
                 metadata: {
 				  public:{

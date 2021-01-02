@@ -13,14 +13,6 @@ a:focus, button:focus {
     outline-color: $color-primary-400;
 }
 
-.flex {
-    display: flex;
-}
-
-.flex-spacer {
-    flex: 1;
-}
-
 .align-center {
     align-items: center;
 }
@@ -77,6 +69,7 @@ table tr .dropdown-menu button.dropdown-item {
     z-index: 1060;
 }
 
+
 .current {
     border-bottom-color: #0f6124 !important;
 }
@@ -103,3 +96,8 @@ table tr .dropdown-menu button.dropdown-item {
 .version{
    display:none !important;
 }
+
+vdr-welcome-widget p.p5 {
+  display:none !important;
+}
+

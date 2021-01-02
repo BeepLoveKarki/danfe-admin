@@ -16,11 +16,11 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 		}
     },
     
-	async createPayment(ctx, order, args, metadata) {
+	async createPayment(ctx, order, amount, args, metadata) {
 	   
 	   try {
 		   
-		postdata["amt"] = Math.ceil(order.total);
+		postdata["amt"] = Math.ceil(amount);
 		postdata["scd"] = args["Merchant Id"];
         postdata["pid"] = metadata.pid;
         postdata["rid"] = metadata.rid;

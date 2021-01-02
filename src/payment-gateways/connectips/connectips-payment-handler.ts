@@ -36,12 +36,12 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 		'Currency': {type: 'string', value:'NPR'},
     },
     
-	async createPayment(ctx, order, args, metadata) {
+	async createPayment(ctx, order, amount, args, metadata) {
 	   try {
 		 postdata["merchantId"] = args["Merchant Id"];
 		 postdata["appId"] = args["App Id"];
 		 postdata["referenceId"] = metadata["txnid"]; 
-		 postdata["txnAmt"] = Math.ceil(order.total);
+		 postdata["txnAmt"] = Math.ceil(amount);
 		 postdata["token"] = gettoken();
 		 
 		let data =JSON.stringify(postdata);

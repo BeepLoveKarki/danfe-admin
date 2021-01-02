@@ -91,12 +91,12 @@ apiOptions: {
 		  new AdminAuthenticationStrategy()
 		]
     },
-	promotionOptions: {
+	/*promotionOptions: {
 		promotionConditions: [
 		...defaultPromotionConditions,
 		OnePerOrder,
 	 ],
-    },
+    },*/
 	assetOptions: <any>{
 	  permittedFileTypes:[
 	  "image/*",
@@ -176,7 +176,7 @@ apiOptions: {
 		  }
 		],
 		
-		Customer: [
+		/*Customer: [
 		 {
 		  name: 'operationTimes',
 		  type: 'string',
@@ -186,7 +186,7 @@ apiOptions: {
 		  }],
 		  list:true
 		 }
-		]
+		]*/
 	},
     plugins: [
         AssetServerPlugin.init({
@@ -251,15 +251,29 @@ apiOptions: {
         AdminUiPlugin.init({
 			port: 3002,
 			
-			/*app:{
+			app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
-			},*/
+			},
 			
 			/*adminUiConfig: {
 				loginUrl: '/admin/login',
             },*/
 			
-			app: compileUiExtensions({
+			/*app: compileUiExtensions({
+			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
+				extensions: [{
+					translations: {
+						en: path.join(__dirname, 'translations/en.json'),
+                   }
+                }],
+			}),
+			
+			adminUiConfig:{
+				defaultLanguage: LanguageCode.en,
+				availableLanguages: [LanguageCode.en],
+            }*/
+			
+			/*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
 				 
@@ -275,7 +289,7 @@ apiOptions: {
 				 },
 				 
 				],
-			}),
+			}),*/
 
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
@@ -310,7 +324,12 @@ apiOptions: {
 		  /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
-				    FavoritesPlugin.uiExtensions,
+					{
+					  translations: {
+						en: path.join(__dirname, 'translations/en.json'),
+                     }
+                    },
+					FavoritesPlugin.uiExtensions,
 					SubscriptionPlugin.uiExtensions,
 					VendorPlugin.uiExtensions,
 					FeedbackPlugin.uiExtensions,
@@ -339,7 +358,12 @@ apiOptions: {
                     },
 				]
 		
-		}),*/
+		}),
+		
+		adminUiConfig:{
+				defaultLanguage: LanguageCode.en,
+				availableLanguages: [LanguageCode.en],
+        }*/
 			
        })    
 	], 

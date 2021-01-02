@@ -17,12 +17,12 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
 		}
     },
     
-	async createPayment(ctx,order, args, metadata) {
+	async createPayment(ctx,order, amount, args, metadata) {
 	   
 	   try {
 		   
 		postdata["token"] = metadata["token"];
-		postdata["amount"] = Math.ceil(order.total);
+		postdata["amount"] = Math.ceil(amount);
 		 
 		let data =JSON.stringify(postdata);
 		let url = 'https://khalti.com/api/v2/payment/verify/';
