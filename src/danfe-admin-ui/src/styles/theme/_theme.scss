@@ -68,36 +68,3 @@ table tr .dropdown-menu button.dropdown-item {
 .cdk-overlay-container {
     z-index: 1060;
 }
-
-
-.current {
-    border-bottom-color: #0f6124 !important;
-}
-
-.btn-link{
-   color: #0f6124 !important;
-}
-
-.btn-primary{
-   color: white !important;
-   background-color: #0f6124 !important;
-   border-color: #0f6124 !important;
-}
-
-.btn-outline,.btn-secondary{
-  color: #0f6124 !important;
-  border-color: #0f6124 !important;
-}
-
-.login-wrapper .login .login-group .btn{
-   margin-top: 1rem !important;
-}
-
-.version{
-   display:none !important;
-}
-
-vdr-welcome-widget p.p5 {
-  display:none !important;
-}
-

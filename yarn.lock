@@ -11777,7 +11777,7 @@ vendors@^1.0.0:
 
 "vendure-feedback-plugin@https://github.com/BeepLoveKarki/vendure-feedback-plugin":
   version "0.0.1"
-  resolved "https://github.com/BeepLoveKarki/vendure-feedback-plugin#073aad5ee4f7973fb77f4df6a5d5f4e5bd651d23"
+  resolved "https://github.com/BeepLoveKarki/vendure-feedback-plugin#d95c5250cfecd1d6fee80baea9b43be7548e5382"
   dependencies:
     apollo-server-express "^2.15.1"
 
@@ -11798,13 +11798,13 @@ vendors@^1.0.0:
 
 "vendure-subscription-plugin@https://github.com/BeepLoveKarki/vendure-subscription-plugin":
   version "0.0.1"
-  resolved "https://github.com/BeepLoveKarki/vendure-subscription-plugin#c4f966e7210603e705c61ad933c8707d7fd558fb"
+  resolved "https://github.com/BeepLoveKarki/vendure-subscription-plugin#4ad22b4e1e59995976b9430f42c5cf5fcb002810"
   dependencies:
     apollo-server-express "^2.15.1"
 
 "vendure-vendor-plugin@https://github.com/BeepLoveKarki/vendure-vendor-plugin":
   version "0.0.1"
-  resolved "https://github.com/BeepLoveKarki/vendure-vendor-plugin#8166cfa6e579da11379bf9d8a805d63f1798685c"
+  resolved "https://github.com/BeepLoveKarki/vendure-vendor-plugin#3855c2da2bf8135c05da6858909c31dcb9f14a1e"
   dependencies:
     apollo-server-express "^2.15.1"
 

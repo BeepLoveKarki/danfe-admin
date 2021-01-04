@@ -47,3 +47,4 @@
   }
   ${A}
 `;class $ extends h.w{constructor(e,t){super(e,{__typename:"Feedback",id:"",name:"",email:"",phone:"",feedback:"",createdAt:"",updatedAt:""},e=>t.query(W,{id:e}).mapStream(e=>e.Feedback))}}$.\u0275fac=function(e){return new(e||$)(T.mc(f.e),T.mc(h.M))},$.\u0275prov=T.Yb({token:$,factory:$.\u0275fac});var q=a("YtkY");class J{}function Q(e){return e.entity.pipe(Object(q.a)(e=>[{label:"Feedbacks",link:["/extensions","feedbacks"]},{label:"Update Feedback",link:[]}]))}J.\u0275mod=T.ac({type:J}),J.\u0275inj=T.Zb({factory:function(e){return new(e||J)},providers:[$],imports:[[h.Mb,f.i.forChild([{path:"",pathMatch:"full",component:K,data:{breadcrumb:"Feedbacks"}},{path:"create",component:z,data:{breadcrumb:[{label:"Feedbacks",link:["/extensions","feedbacks"]},{label:"Create Feedback",link:[]}]}},{path:":id",component:z,resolve:Object(h.Yb)($),data:{breadcrumb:Q}}])]]})}}]);
+//# sourceMappingURL=6-es2015.9a473e46bc3f943697e6.js.map

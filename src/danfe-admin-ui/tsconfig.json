@@ -5,7 +5,7 @@
     "importHelpers": true,
     "module": "esnext",
     "outDir": "./dist/out-tsc",
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,

@@ -11,7 +11,7 @@
     "**/*.d.ts"
   ],
   "angularCompilerOptions": {
-    "strictMetadataEmit": false,
+    "strictMetadataEmit": true,
     "fullTemplateTypeCheck": false,
     "strictInjectionParameters": true
   }

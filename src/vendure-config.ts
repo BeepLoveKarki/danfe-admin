@@ -49,6 +49,7 @@ import { FavoritesPlugin } from "vendure-favorites-plugin";
 
 import { OnePerOrder } from './promotion-strategies/one-per-order';
 
+
 import path from 'path';
 
 
@@ -251,9 +252,9 @@ apiOptions: {
         AdminUiPlugin.init({
 			port: 3002,
 			
-			app:{
+			/*app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
-			},
+			},*/
 			
 			/*adminUiConfig: {
 				loginUrl: '/admin/login',
@@ -284,6 +285,24 @@ apiOptions: {
                        type: 'shared',
                        ngModuleFileName: 'timing-control-field.ts',
 	                   ngModuleName: 'TimingControlFieldModule',
+                      },
+					],
+				 },
+				 
+				],
+			}),*/
+			
+			/*app: compileUiExtensions({
+			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
+				extensions: [
+				 
+				 {	
+				    extensionPath: path.join(__dirname,'plugins'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'navbar-hiding-module.ts',
+	                   ngModuleName: 'NavBarHidingModule',
                       },
 					],
 				 },
@@ -321,9 +340,19 @@ apiOptions: {
 				],
 			}),*/
 			
-		  /*app: compileUiExtensions({
+		  app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
+					{	
+				    extensionPath: path.join(__dirname,'plugins'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'navbar-hiding-module.ts',
+	                   ngModuleName: 'NavBarHidingModule',
+                      },
+					 ],
+				    },
 					{
 					  translations: {
 						en: path.join(__dirname, 'translations/en.json'),
@@ -363,7 +392,7 @@ apiOptions: {
 		adminUiConfig:{
 				defaultLanguage: LanguageCode.en,
 				availableLanguages: [LanguageCode.en],
-        }*/
+        }
 			
        })    
 	], 

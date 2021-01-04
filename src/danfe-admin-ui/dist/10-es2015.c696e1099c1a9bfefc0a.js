@@ -37,3 +37,4 @@
   }
   ${m.b}
 `;class L extends i.w{constructor(e,t){super(e,{__typename:"Phone",id:"",phone:"",createdAt:"",updatedAt:""},e=>t.query(q,{id:e}).mapStream(e=>e.SubscriptionPhone))}}L.\u0275fac=function(e){return new(e||L)(g.mc(n.e),g.mc(i.M))},L.\u0275prov=g.Yb({token:L,factory:L.\u0275fac});var Z=c("YtkY");class E{}function B(e){return e.entity.pipe(Object(Z.a)(e=>[{label:"Subscribed Phones",link:["/extensions","subscribedphones"]},{label:""+e.phone,link:[]}]))}E.\u0275mod=g.ac({type:E}),E.\u0275inj=g.Zb({factory:function(e){return new(e||E)},providers:[L],imports:[[i.Mb,n.i.forChild([{path:"",pathMatch:"full",component:D,data:{breadcrumb:"Subscribed Phones"}},{path:"create",component:A,data:{breadcrumb:[{label:"Subscribed Phones",link:["/extensions","subscribedphones"]},{label:"Create Phone",link:[]}]}},{path:":id",component:A,resolve:Object(i.Yb)(L),data:{breadcrumb:B}}])]]})}}]);
+//# sourceMappingURL=10-es2015.c696e1099c1a9bfefc0a.js.map
