@@ -857,6 +857,22 @@
     "job-state": "Job state",
     "jobs-in-progress": "{ count } {count, plural, one {job} other {jobs}} in progress"
   },
+  "vdr-feedback-plugin": {
+    "confirm-delete-feedback": "Delete Feedback?",
+    "create-new-feedback": "Create New Feedback",
+    "created": "Created At",
+    "download-csv": "Download CSV",
+    "email": "Email Address",
+    "email-label": "Email Address",
+    "feedback": "Feedback",
+    "feedback-label": "Feedback",
+    "name": "Name",
+    "name-label": "Name",
+    "phone": "Phone Number",
+    "phone-label": "Phone Number",
+    "search-feedback": "Search Feedback",
+    "updated": "Updated At"
+  },
   "vdr-subscription-plugin": {
     "confirm-delete-email": "Delete Email?",
     "confirm-delete-phone": "Delete Phone?",

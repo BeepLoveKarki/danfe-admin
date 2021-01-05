@@ -8,7 +8,7 @@ import { SharedModule, addNavMenuItem } from '@vendure/admin-ui/core';
         {
           id: 'channels',
           label: 'Channels',
-          routerLink: ['/admin/settings/channels'],
+          routerLink: ['/settings/channels'],
           icon: 'layers',
           requiresPermission: 'SuperAdmin',
         },
@@ -18,7 +18,7 @@ import { SharedModule, addNavMenuItem } from '@vendure/admin-ui/core';
         {
           id: 'job-queue',
           label: 'Job queue',
-          routerLink: ['/admin/system/jobs'],
+          routerLink: ['/system/jobs'],
           icon: 'tick-chart',
           requiresPermission: 'SuperAdmin',
         },

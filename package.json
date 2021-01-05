@@ -36,16 +36,7 @@
     "node-fetch": "^2.6.0",
     "pem": "^1.14.4",
     "pg": "8.2.1",
-    "typescript": "^3.9.2",
-    "vendure-braintree-plugin": "git+https://github.com/BeepLoveKarki/vendure-braintree-plugin.git",
-    "vendure-bulk-discounts": "git+https://github.com/BeepLoveKarki/vendure-bulk-discounts.git",
-    "vendure-favorites-plugin": "git+https://github.com/BeepLoveKarki/vendure-favorites-plugin.git",
-    "vendure-feedback-plugin": "https://github.com/BeepLoveKarki/vendure-feedback-plugin",
-    "vendure-product-recommendations": "git+https://github.com/BeepLoveKarki/vendure-product-recommendations.git",
-    "vendure-reviews-plugin": "git+https://github.com/BeepLoveKarki/vendure-reviews-plugin.git",
-    "vendure-salestracker-plugin": "git+https://github.com/BeepLoveKarki/vendure-salestracker-plugin.git",
-    "vendure-subscription-plugin": "https://github.com/BeepLoveKarki/vendure-subscription-plugin",
-    "vendure-vendor-plugin": "https://github.com/BeepLoveKarki/vendure-vendor-plugin"
+    "typescript": "^3.9.2"
   },
   "devDependencies": {
     "concurrently": "5.2.0",

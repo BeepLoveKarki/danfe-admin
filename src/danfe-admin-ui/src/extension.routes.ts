@@ -1,20 +1,20 @@
 export const extensionRoutes = [  {
     path: 'extensions/subscribedmails',
-    loadChildren: () => import('./extensions/a9af16c80b8350127fca1c5ca0d099380624f452297f6cb10aeadc83972207c1/mailsubscription-ui-lazy.module').then(m => m.MailSubscriptionUIModule),
+    loadChildren: () => import('./extensions/6238c1d037144377bad80515f98dd7ee464176b0c1a8dcd56038bea394ef450b/mailsubscription-ui-lazy.module').then(m => m.MailSubscriptionUIModule),
   },
   {
     path: 'extensions/subscribedphones',
-    loadChildren: () => import('./extensions/a9af16c80b8350127fca1c5ca0d099380624f452297f6cb10aeadc83972207c1/phonesubscription-ui-lazy.module').then(m => m.PhoneSubscriptionUIModule),
+    loadChildren: () => import('./extensions/6238c1d037144377bad80515f98dd7ee464176b0c1a8dcd56038bea394ef450b/phonesubscription-ui-lazy.module').then(m => m.PhoneSubscriptionUIModule),
   },
   {
     path: 'extensions/vendors',
-    loadChildren: () => import('./extensions/a54db48cd17500f6e960d4a4c0a05fb8c04c9626ba390705252a6b732b37a892/vendor-ui-lazy.module').then(m => m.VendorUIModule),
+    loadChildren: () => import('./extensions/b20298563d7f0082af4f022b5cb6565205a6b799890da1f10637a87a945bd945/vendor-ui-lazy.module').then(m => m.VendorUIModule),
   },
   {
     path: 'extensions/feedbacks',
-    loadChildren: () => import('./extensions/4bd412b956d4c1baedfedaa6aa36beabe17096aeaddd966cdb15d5b0044cbcd1/feedback-ui-lazy.module').then(m => m.FeedbackUIModule),
+    loadChildren: () => import('./extensions/c2fc3167a7637e3e6047f9aa1c5029be8eb7d391e740b899c390029a2b24b36d/feedback-ui-lazy.module').then(m => m.FeedbackUIModule),
   },
   {
     path: 'extensions/product-reviews',
-    loadChildren: () => import('./extensions/840972a46552899ed7afef3fc466fbca27d3b45c6bb2d306017d7ba2f255b732/reviews-ui-lazy.module').then(m => m.ReviewsUiLazyModule),
+    loadChildren: () => import('./extensions/ffb0af830fea2fe89b88721fb90200f0aad96b92cfb92d649e95f7ef7f6f41dc/reviews-ui-lazy.module').then(m => m.ReviewsUiLazyModule),
   }];

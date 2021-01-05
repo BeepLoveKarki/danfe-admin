@@ -11,19 +11,21 @@ import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 
-import { SalesTrackerPlugin } from 'vendure-salestracker-plugin';
-import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from "vendure-product-recommendations";
+import { SalesTrackerPlugin } from './finalized-plugins/vendure-salestracker-plugin';
+import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from "./finalized-plugins/vendure-product-recommendations";
 
-import { BulkDiscountPlugin, BulkDiscountsInputModule } from "vendure-bulk-discounts";
+import { BulkDiscountPlugin, BulkDiscountsInputModule } from "./finalized-plugins/vendure-bulk-discounts";
 
-//import { BraintreePlugin } from "vendure-braintree-plugin";
-import { ReviewsPlugin } from "vendure-reviews-plugin";
+//import { BraintreePlugin } from "./finalized-plugins/vendure-braintree-plugin";
+import { ReviewsPlugin } from "./finalized-plugins/vendure-reviews-plugin";
 
-import { SubscriptionPlugin } from "vendure-subscription-plugin";
+import { SubscriptionPlugin } from "./finalized-plugins/vendure-subscription-plugin";
 
-import { FeedbackPlugin } from "vendure-feedback-plugin";
+import { FeedbackPlugin } from "./finalized-plugins/vendure-feedback-plugin";
 
-import { VendorPlugin } from "vendure-vendor-plugin";
+import { VendorPlugin } from "./finalized-plugins/vendure-vendor-plugin";
+
+import { FavoritesPlugin } from "./finalized-plugins/vendure-favorites-plugin";
 
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 
@@ -44,8 +46,6 @@ import { BankDepositPaymentHandler } from './payment-gateways/bank-deposit/bank-
 
 import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connectips-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
-
-import { FavoritesPlugin } from "vendure-favorites-plugin";
 
 import { OnePerOrder } from './promotion-strategies/one-per-order';
 
@@ -364,11 +364,11 @@ apiOptions: {
 					FeedbackPlugin.uiExtensions,
 					ReviewsPlugin.uiExtensions,
 				    {
-					  extensionPath: path.join(__dirname,"../node_modules/vendure-bulk-discounts/lib/ui-extensions/modules"),
+					  extensionPath: path.join(__dirname,"./finalized-plugins/vendure-bulk-discounts/lib/ui-extensions/modules"),
 			          ngModules: [BulkDiscountsInputModule],
 		            },
 					{
-					  extensionPath: path.join(__dirname,"../node_modules/vendure-product-recommendations/lib/ui-extensions/modules"),
+					  extensionPath: path.join(__dirname,"./finalized-plugins/vendure-product-recommendations/lib/ui-extensions/modules"),
 			          ngModules: [ProductRecommendationsInputModule],
 		            },
 					{
