@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavBarHidingModule } from './extensions/c79fc65b54ffa482dd21b40692181bc3bc33c31190e13c0da1d23110296c3b3e/navbar-hiding-module';
+import { InStorePickupModule } from './extensions/ce53b4c9eec40791f636c243830621a554981ef823ec94285ff477676308adc8/in-store-shipping';
 import { FavoritesUiExtensionModule } from './extensions/fe945b4f371b1fc2016698fc3d196d73bc96de26a697ebd7a4d81d5acd224f78/favorites-ui-extension.module';
 import { SubscriptionExtensionModule } from './extensions/6238c1d037144377bad80515f98dd7ee464176b0c1a8dcd56038bea394ef450b/subscription-ui-extension.module';
 import { VendorExtensionModule } from './extensions/b20298563d7f0082af4f022b5cb6565205a6b799890da1f10637a87a945bd945/vendor-ui-extension.module';
@@ -11,6 +12,6 @@ import { ProductRecommendationsInputModule } from './extensions/9b1b52c8548552ec
 
 
 @NgModule({
-    imports: [CommonModule, NavBarHidingModule, FavoritesUiExtensionModule, SubscriptionExtensionModule, VendorExtensionModule, FeedbackExtensionModule, ReviewsUiExtensionModule, BulkDiscountInputModule, ProductRecommendationsInputModule, ],
+    imports: [CommonModule, NavBarHidingModule, InStorePickupModule, FavoritesUiExtensionModule, SubscriptionExtensionModule, VendorExtensionModule, FeedbackExtensionModule, ReviewsUiExtensionModule, BulkDiscountInputModule, ProductRecommendationsInputModule],
 })
 export class SharedExtensionsModule {}

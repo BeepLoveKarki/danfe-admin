@@ -27,7 +27,7 @@ import { VendorPlugin } from "./finalized-plugins/vendure-vendor-plugin";
 
 import { FavoritesPlugin } from "./finalized-plugins/vendure-favorites-plugin";
 
-import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
+import { compileUiExtensions, setBranding } from '@vendure/ui-devkit/compiler';
 
 import { SocialAuthenticationStrategy } from './strategies/social-authentication-strategy';
 import { SocialRegisterAuthenticationStrategy } from './strategies/social-register-authentication-strategy';
@@ -319,14 +319,14 @@ apiOptions: {
 					ngModules:[
 					  {
                        type: 'shared',
-                       ngModuleFileName: 'default-shipping.ts',
-	                   ngModuleName: 'DefaultShippingModule',
+                       ngModuleFileName: 'danfe-shipping.ts',
+	                   ngModuleName: 'DanfeShippingModule',
                       },
 					],
 				 },
 				 
 				 {	
-				    extensionPath: path.join(__dirname,'plugins'),
+				    extensionPath: path.join(__dirname,'plugins/shipping-methods'),
 					ngModules:[
 					  {
                        type: 'shared',
@@ -343,6 +343,11 @@ apiOptions: {
 		  app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
+				    
+					{
+                      globalStyles: path.join(__dirname, 'styles/danfe-theme.scss')
+                    },		
+					
 					{	
 				    extensionPath: path.join(__dirname,'plugins'),
 					ngModules:[
@@ -353,11 +358,24 @@ apiOptions: {
                       },
 					 ],
 				    },
+					
+					{	
+				    extensionPath: path.join(__dirname,'plugins/shipping-methods'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'in-store-shipping.ts',
+	                   ngModuleName: 'InStorePickupModule',
+                      },
+					 ],
+				    },
+					
 					{
 					  translations: {
 						en: path.join(__dirname, 'translations/en.json'),
                      }
                     },
+					
 					FavoritesPlugin.uiExtensions,
 					SubscriptionPlugin.uiExtensions,
 					VendorPlugin.uiExtensions,
@@ -371,28 +389,27 @@ apiOptions: {
 					  extensionPath: path.join(__dirname,"./finalized-plugins/vendure-product-recommendations/lib/ui-extensions/modules"),
 			          ngModules: [ProductRecommendationsInputModule],
 		            },
-					{
-                      extensionPath: path.join(__dirname, 'images'),
-                      ngModules: [],
-                      staticAssets: [
-                      {
-                        path: path.join(__dirname, 'images/name.png'),
-                        rename: 'cube-logo-75px.png',
-                       },
-                       {
-                        path: path.join(__dirname, 'images/logo.png'),
-                        rename: 'cube-logo-300px.png',
-                       },
-                      ],
-                    },
+					
+					setBranding({
+                      // The small logo appears in the top left of the screen  
+			          smallLogoPath: path.join(__dirname, 'images/name.png'),
+                      // The large logo is used on the login page  
+                      largeLogoPath: path.join(__dirname, 'images/logo.png'),
+                      faviconPath: path.join(__dirname, 'images/danfeicon.ico'),
+                     }),
+				
 				]
 		
 		}),
 		
 		adminUiConfig:{
-				defaultLanguage: LanguageCode.en,
-				availableLanguages: [LanguageCode.en],
+           brand: 'Danfe | Admin Panel',
+           hideVendureBranding: true,
+           hideVersion: true,
+		   defaultLanguage: LanguageCode.en,
+		   availableLanguages: [LanguageCode.en],
         }
+		
 			
        })    
 	], 
