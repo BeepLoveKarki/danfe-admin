@@ -252,9 +252,9 @@ apiOptions: {
         AdminUiPlugin.init({
 			port: 3002,
 			
-			/*app:{
+			app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
-			},*/
+			},
 			
 			/*adminUiConfig: {
 				loginUrl: '/admin/login',
@@ -292,27 +292,38 @@ apiOptions: {
 				],
 			}),*/
 			
-			app: compileUiExtensions({
+			/*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
 				 
 				 {	
-				    extensionPath: path.join(__dirname,'widgets/statswidget'),
+				    extensionPath: path.join(__dirname,'widgets'),
 					ngModules:[
 					  {
                        type: 'shared',
-                       ngModuleFileName: 'UIStatsModule.ts',
-	                   ngModuleName: 'UIStatsModule',
+                       ngModuleFileName: 'WidgetModule.ts',
+	                   ngModuleName: 'WidgetModule',
                       },
 					],
 				 },
 				 
 				],
-			}),
+			}),*/
 
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
+				 
+				 {	
+				    extensionPath: path.join(__dirname,'widgets'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'WidgetModule.ts',
+	                   ngModuleName: 'WidgetModule',
+                      },
+					],
+				 },
 				 
 				 {	
 				    extensionPath: path.join(__dirname,'plugins'),
@@ -344,6 +355,17 @@ apiOptions: {
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
 				    
+					{	
+				    extensionPath: path.join(__dirname,'widgets'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'WidgetModule.ts',
+	                   ngModuleName: 'WidgetModule',
+                      },
+					],
+				   },
+					
 					{
                       globalStyles: path.join(__dirname, 'styles/danfe-theme.scss')
                     },		

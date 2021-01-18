@@ -1,0 +1,14 @@
+{
+  "adminApiPath": "admin-api",
+  "apiHost": "auto",
+  "apiPort": "auto",
+  "tokenMethod": "cookie",
+  "authTokenHeaderKey": "vendure-auth-token",
+  "defaultLanguage": "en",
+  "availableLanguages": [
+    "en"
+  ],
+  "brand": "Danfe | Admin Panel",
+  "hideVendureBranding": true,
+  "hideVersion": true
+}
