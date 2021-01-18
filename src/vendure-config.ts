@@ -292,23 +292,23 @@ apiOptions: {
 				],
 			}),*/
 			
-			/*app: compileUiExtensions({
+			app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
 				 
 				 {	
-				    extensionPath: path.join(__dirname,'plugins'),
+				    extensionPath: path.join(__dirname,'widgets/statswidget'),
 					ngModules:[
 					  {
                        type: 'shared',
-                       ngModuleFileName: 'navbar-hiding-module.ts',
-	                   ngModuleName: 'NavBarHidingModule',
+                       ngModuleFileName: 'UIStats.ts',
+	                   ngModuleName: 'UIStatsModule',
                       },
 					],
 				 },
 				 
 				],
-			}),*/
+			}),
 
             /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
@@ -340,7 +340,7 @@ apiOptions: {
 				],
 			}),*/
 			
-		  app: compileUiExtensions({
+		  /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
 				    
@@ -408,7 +408,7 @@ apiOptions: {
            hideVersion: true,
 		   defaultLanguage: LanguageCode.en,
 		   availableLanguages: [LanguageCode.en],
-        }
+        }*/
 		
 			
        })    
