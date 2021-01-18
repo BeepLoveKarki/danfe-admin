@@ -301,7 +301,7 @@ apiOptions: {
 					ngModules:[
 					  {
                        type: 'shared',
-                       ngModuleFileName: 'UIStats.ts',
+                       ngModuleFileName: 'UIStatsModule.ts',
 	                   ngModuleName: 'UIStatsModule',
                       },
 					],
