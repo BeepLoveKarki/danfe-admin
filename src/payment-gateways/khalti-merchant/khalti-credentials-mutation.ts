@@ -3,8 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin } from '@vendure/core';
-import crypto from 'crypto';
-import * as fs from 'fs';
 
 let postdata = <any>{};
 
