@@ -54,6 +54,8 @@ import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token
 //import { OnePerOrder } from './promotion-strategies/one-per-order';
 
 import { ChannelsPlugin } from './plugins/channels/channels-plugin';
+import { ProductExtensionPlugin } from './plugins/channels/product-extension-plugin';
+import { ProductVariantExtensionPlugin } from './plugins/channels/product-variant-extension-plugin';
 
 
 import path from 'path';
@@ -221,6 +223,8 @@ apiOptions: {
 		VendorPlugin,
 		FeedbackPlugin,
 		ChannelsPlugin,
+		ProductExtensionPlugin,
+		ProductVariantExtensionPlugin,
 		//BraintreePlugin,
 		ReviewsPlugin,
 		FavoritesPlugin.init({

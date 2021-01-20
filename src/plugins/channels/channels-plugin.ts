@@ -3,7 +3,6 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin } from '@vendure/core';
 
-let postdata = <any>{};
 
 const schemaExtension = gql`
 	
