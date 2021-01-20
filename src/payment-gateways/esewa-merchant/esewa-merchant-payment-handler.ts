@@ -7,7 +7,7 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
     code: 'Esewa Merchant',
     description: [{
         languageCode: LanguageCode.en,
-        value: 'Pay to Esewa Merchant Account of Seller',
+        value: 'Payment to Esewa Merchant Account of Seller',
     }],
     
 	args: {
@@ -21,8 +21,13 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 	   try {
 		   
 		postdata["amt"] = Math.ceil(amount);
-		postdata["scd"] = args["Merchant Id"];
-        postdata["pid"] = metadata.pid;
+		
+		if(metadata["error"]){ //if error is occurred, use our payment gateway
+		  postdata["scd"] = process.env.esewa_default_merchant_id;
+		}else{
+		  postdata["scd"] = args["Merchant Id"];
+        }
+		postdata["pid"] = metadata.pid;
         postdata["rid"] = metadata.rid;
 		 
 		let data =JSON.stringify(postdata);

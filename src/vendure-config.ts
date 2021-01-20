@@ -36,9 +36,13 @@ import { AdminAuthenticationStrategy } from './strategies/admin-authentication-s
 import { ProxyPlugin } from './proxy/proxy-plugin';
 
 import { KhaltiMerchantPaymentHandler } from './payment-gateways/khalti-merchant/khalti-merchant-payment-handler';
+import { KhaltiCredentialsPlugin } from './payment-gateways/khalti-merchant/khalti-credentials-mutation';
+
 import { KhaltiPersonalPaymentHandler } from './payment-gateways/khalti-personal/khalti-personal-payment-handler';
 
 import { EsewaMerchantPaymentHandler } from './payment-gateways/esewa-merchant/esewa-merchant-payment-handler';
+import { EsewaCredentialsPlugin } from './payment-gateways/esewa-merchant/esewa-credentials-mutation';
+
 import { EsewaPersonalPaymentHandler } from './payment-gateways/esewa-personal/esewa-personal-payment-handler';
 
 import { CashPaymentHandler } from './payment-gateways/cash/cash-payment-handler';
@@ -209,6 +213,8 @@ apiOptions: {
 		ProxyPlugin,
         DefaultSearchPlugin,
 		ConnectIPSPlugin,
+		KhaltiCredentialsPlugin,
+		EsewaCredentialsPlugin,
 		SubscriptionPlugin,
 		VendorPlugin,
 		FeedbackPlugin,

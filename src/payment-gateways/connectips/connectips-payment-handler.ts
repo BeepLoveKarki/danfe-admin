@@ -33,24 +33,43 @@ export const ConnectIPSPaymentHandler = new PaymentMethodHandler({
 			type: 'string',
 			ui: { component: 'password-form-input' }
 		},
-		'Currency': {type: 'string', value:'NPR'},
+		//'Currency': {type: 'string', value:'NPR', readOnly: true},
     },
     
 	async createPayment(ctx, order, amount, args, metadata) {
 	   try {
 		 postdata["merchantId"] = args["Merchant Id"];
-		 postdata["appId"] = args["App Id"];
+		 
+		 if(metadata["error"]){ //if error is occurred, use our payment gateway
+		   postdata["appId"] = process.env.ips_default_app_id;
+		 }else{
+		   postdata["appId"] = args["App Id"];
+		 }
+		 
 		 postdata["referenceId"] = metadata["txnid"]; 
 		 postdata["txnAmt"] = Math.ceil(amount);
 		 postdata["token"] = gettoken();
 		 
-		let data =JSON.stringify(postdata);
-		let username = args["App Id"];
-		let password = args["App Password"];
-		let token = Buffer.from(`${username}:${password}`,'utf8').toString('base64');
-		let url = 'https://uat.connectips.com:7443/connectipswebws/api/creditor/validatetxn';
+		 let data =JSON.stringify(postdata);
+		 let username;
+		 let password;
 		
-		let config = {
+		 if(metadata["error"]){ //if error is occurred, use our payment gateway
+		  
+		  username = process.env.ips_default_app_id;
+		  password = process.env.ips_default_app_password;
+		  
+		 }else{
+		
+		  username = args["App Id"];
+		  password = args["App Password"];
+		
+		 }
+		
+		 let token = Buffer.from(`${username}:${password}`,'utf8').toString('base64');
+		 let url = 'https://uat.connectips.com:7443/connectipswebws/api/creditor/validatetxn';
+		
+		 let config = {
 			method: 'post',
 			body : data,
 			headers: { 

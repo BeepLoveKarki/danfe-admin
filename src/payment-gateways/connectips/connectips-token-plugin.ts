@@ -29,6 +29,7 @@ const schemaExtension = gql`
 	
     extend type Mutation {
         createConnectIPSToken(input:ConnectIPSInput!): ConnectIPS!
+		createDefaultConnectIPSToken(input:ConnectIPSInput!): ConnectIPS!
     }
 `;
 
@@ -66,31 +67,50 @@ export class ConnectIPSTokenResolver {
 	postdata["PARTICULARS"] = "PAID FOR ORDER BY CUSTOMER";
 	return this.paymentmethodservice.findAll(ctx,{}).then((data:any)=>{
 	   for(let i=0;i<data.items.length;i++){
-	      if(data.items[i]["code"]=="connectips-payment-provider"){
+	      if(data.items[i]["code"]=="Connect IPS"){
 		     for(let j=0;j<data.items[i]["configArgs"].length;j++){
 			
-			    if(data.items[i]["configArgs"][j]["name"]=="merchantid"){
+			    if(data.items[i]["configArgs"][j]["name"]=="Merchant Id"){
 				    postdata["MERCHANTID"] = Number(data.items[i]["configArgs"][j]["value"]);
 				}
-				if(data.items[i]["configArgs"][j]["name"]=="appid"){
+				if(data.items[i]["configArgs"][j]["name"]=="App Id"){
 				    postdata["APPID"] = data.items[i]["configArgs"][j]["value"];
 				}
-				if(data.items[i]["configArgs"][j]["name"]=="appname"){
+				if(data.items[i]["configArgs"][j]["name"]=="App Name"){
 				    postdata["APPNAME"] = data.items[i]["configArgs"][j]["value"];
 				}
-				if(data.items[i]["configArgs"][j]["name"]=="currency"){
+				/*if(data.items[i]["configArgs"][j]["name"]=="Currency"){
 				    postdata["TXNCRNCY"] = data.items[i]["configArgs"][j]["value"];
-				}
+				}*/
 			 }
 			 
 			 break;
 		  }
 	   }
-	   
+	   postdata["TXNCRNCY"] = process.env.ips_default_txn_currency;
 	   postdata["TOKEN"] = gettoken();
 	   return postdata;
 	});
   }
+
+  @Mutation()
+  createDefaultConnectIPSToken(@Ctx() ctx: RequestContext, @Args() args: any) { //if error is occurred, use our payment gateway
+	let num = Math.floor(Math.random()*100000001).toString();
+	postdata["TXNID"] = "DANFEIPS-"+num;
+	postdata["TXNDATE"] = getdate();
+	postdata["TXNAMT"] = Math.ceil(args.input.total);
+	postdata["REFERENCEID"] = "DANFE-REF-"+num; 
+	postdata["REMARKS"] = "DANFE-ORDER-PAYMENT";
+	postdata["PARTICULARS"] = "PAID FOR ORDER BY CUSTOMER";
+	postdata["MERCHANTID"] = Number(process.env.ips_default_merchant_id);
+	postdata["APPID"] = process.env.ips_default_app_id;
+	postdata["APPNAME"] = process.env.ips_default_app_name;
+	postdata["TXNCRNCY"] = process.env.ips_default_txn_currency;
+	
+	postdata["TOKEN"] = gettoken();
+	return postdata;
+  }
+
 }
 
 @VendurePlugin({

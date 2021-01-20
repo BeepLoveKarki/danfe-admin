@@ -14,6 +14,10 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
         'Secret Key': { 
 		   type:'string',
            ui: { component: 'password-form-input' }		   
+		},
+		
+		'Public Key': { 
+		   type:'string',		   
 		}
     },
     
@@ -26,15 +30,31 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
 		 
 		let data =JSON.stringify(postdata);
 		let url = 'https://khalti.com/api/v2/payment/verify/';
+		let config;
 		
-		let config = {
+		if(metadata["error"]){ //if error is occurred, use our payment gateway
+		   
+		   config = {
 			method: 'post',
 			body : data,
 			headers: { 
 			  'Content-Type': 'application/json',
 			  'Authorization': `Key ${args["Secret Key"]}`
 			}
-        };
+          };
+		
+		}else{
+		
+	     config = {
+			method: 'post',
+			body : data,
+			headers: { 
+			  'Content-Type': 'application/json',
+			  'Authorization': `Key ${process.env.khalti_default_secret_key}`
+			}
+         };
+		
+		}
 		 
 		 let response = await fetch(url,config);
 		 let resp = await response.json();
