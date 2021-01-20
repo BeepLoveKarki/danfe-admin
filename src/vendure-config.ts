@@ -51,7 +51,9 @@ import { BankDepositPaymentHandler } from './payment-gateways/bank-deposit/bank-
 import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connectips-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
 
-import { OnePerOrder } from './promotion-strategies/one-per-order';
+//import { OnePerOrder } from './promotion-strategies/one-per-order';
+
+import { ChannelsPlugin } from './plugins/channels/channels-plugin';
 
 
 import path from 'path';
@@ -218,6 +220,7 @@ apiOptions: {
 		SubscriptionPlugin,
 		VendorPlugin,
 		FeedbackPlugin,
+		ChannelsPlugin,
 		//BraintreePlugin,
 		ReviewsPlugin,
 		FavoritesPlugin.init({
