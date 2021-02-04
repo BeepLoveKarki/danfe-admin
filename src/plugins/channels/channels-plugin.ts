@@ -7,7 +7,8 @@ import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin }
 const schemaExtension = gql`
 	
     extend type Query {
-        Channels: [Channel!]!
+        channels: [Channel!]!
+		channel(id: ID): Channel!
     }
 `;
 
@@ -17,9 +18,16 @@ export class ChannelsResolver {
   constructor(private channelservice:ChannelService) {}
 
   @Query()
-  Channels(@Ctx() ctx: RequestContext, @Args() args: any) {
+  channels(@Ctx() ctx: RequestContext, @Args() args: any) {
 	  
 	return this.channelservice.findAll(ctx);
+  }
+  
+  
+  @Query()
+  channel(@Ctx() ctx: RequestContext, @Args() args: any) {
+	  
+	return this.channelservice.findOne(ctx,args.id);
   }
 
 }

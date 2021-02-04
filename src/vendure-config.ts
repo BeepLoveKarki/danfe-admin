@@ -54,6 +54,7 @@ import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token
 //import { OnePerOrder } from './promotion-strategies/one-per-order';
 
 import { ChannelsPlugin } from './plugins/channels/channels-plugin';
+import { AssetsPlugin } from './plugins/assets/assets-plugin';
 
 
 import { ProductExtensionPlugin } from './plugins/channels/product-extension-plugin';
@@ -225,6 +226,7 @@ apiOptions: {
 		VendorPlugin,
 		FeedbackPlugin,
 		ChannelsPlugin,
+		AssetsPlugin,
 		
 		ProductExtensionPlugin,
 		ProductVariantExtensionPlugin,
