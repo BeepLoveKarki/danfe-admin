@@ -8,16 +8,7 @@ export const BankDepositPaymentHandler = new PaymentMethodHandler({
     }],
 	
 	args: {
-	    'Bank Name': {
-			type: 'string',
-			ui: {
-			  component: 'select-form-input',
-			  options:[
-			   {value:"Agriculture Development Bank Ltd."},
-			   {value:"Bank of Kathmandu Ltd."},
-			  ],
-			},
-		 },
+	    'Bank Name': {type: 'string'},
 		'Bank Account Owner\'s Name': {type: 'string'},
 		'Bank Account No.': {type: 'int'},
     },

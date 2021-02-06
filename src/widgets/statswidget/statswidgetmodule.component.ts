@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 @Component({
   selector: 'stats-widget',
   template: ` 
-	<h1> {{ getSellersCount$ | async }} </h1> <br/> SELLERS
+	<h1> {{ getSellersCount$ | async }} </h1> <br/> BRANDS
 	<h1> {{ getAdministratorsCount$ | async }} </h1> <br/> ADMINISTRATORS
 	<h1> {{ getCustomersCount$ | async }} </h1> <br/> CUSTOMERS
 	<h1> {{ getOrdersCount$ | async }} </h1> <br/> ORDERS 

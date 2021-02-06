@@ -15,6 +15,7 @@ export const VENDOR_FRAGMENT = gql`
 		panvat
 		panvatnum
 		producttype
+		celebs
         assetid
 		assetsource
         createdAt

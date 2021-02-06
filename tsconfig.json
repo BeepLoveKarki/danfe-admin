@@ -10,7 +10,8 @@
 	"strictPropertyInitialization": false,
     "sourceMap": false,
     "outDir": "./dist",
-    "baseUrl": "./"
+    "baseUrl": "./",
+	"typeRoots": [ "./types", "./node_modules/@types"]
   },
-  "exclude": ["node_modules", "migration.ts"]
+  "exclude": ["node_modules", "migration.ts", "types"]
 }

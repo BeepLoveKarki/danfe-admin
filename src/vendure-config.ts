@@ -5,7 +5,8 @@ import {
 	DefaultAssetNamingStrategy,
 	NativeAuthenticationStrategy,
 	defaultPromotionConditions,
-	LanguageCode
+	LanguageCode,
+	defaultShippingEligibilityChecker
 } from '@vendure/core'; 
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
@@ -13,8 +14,6 @@ import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 
 import { SalesTrackerPlugin } from './finalized-plugins/vendure-salestracker-plugin';
 import { ProductRecommendationsPlugin, ProductRecommendationsInputModule } from "./finalized-plugins/vendure-product-recommendations";
-
-import { BulkDiscountPlugin, BulkDiscountsInputModule } from "./finalized-plugins/vendure-bulk-discounts";
 
 //import { BraintreePlugin } from "./finalized-plugins/vendure-braintree-plugin";
 import { ReviewsPlugin } from "./finalized-plugins/vendure-reviews-plugin";
@@ -38,12 +37,12 @@ import { ProxyPlugin } from './proxy/proxy-plugin';
 import { KhaltiMerchantPaymentHandler } from './payment-gateways/khalti-merchant/khalti-merchant-payment-handler';
 import { KhaltiCredentialsPlugin } from './payment-gateways/khalti-merchant/khalti-credentials-mutation';
 
-import { KhaltiPersonalPaymentHandler } from './payment-gateways/khalti-personal/khalti-personal-payment-handler';
+//import { KhaltiPersonalPaymentHandler } from './payment-gateways/khalti-personal/khalti-personal-payment-handler';
 
 import { EsewaMerchantPaymentHandler } from './payment-gateways/esewa-merchant/esewa-merchant-payment-handler';
 import { EsewaCredentialsPlugin } from './payment-gateways/esewa-merchant/esewa-credentials-mutation';
 
-import { EsewaPersonalPaymentHandler } from './payment-gateways/esewa-personal/esewa-personal-payment-handler';
+//import { EsewaPersonalPaymentHandler } from './payment-gateways/esewa-personal/esewa-personal-payment-handler';
 
 import { CashPaymentHandler } from './payment-gateways/cash/cash-payment-handler';
 import { BankDepositPaymentHandler } from './payment-gateways/bank-deposit/bank-deposit-payment-handler';
@@ -56,10 +55,13 @@ import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token
 import { ChannelsPlugin } from './plugins/channels/channels-plugin';
 import { AssetsPlugin } from './plugins/assets/assets-plugin';
 
+import { ShippingDistrictChecker } from './plugins/shipping-logics/shipping-district-checker';
+import { ShippingDistrictAmountChecker } from './plugins/shipping-logics/shipping-district-amount-checker';
 
 import { ProductExtensionPlugin } from './plugins/channels/product-extension-plugin';
 import { ProductVariantExtensionPlugin } from './plugins/channels/product-variant-extension-plugin';
 
+import { NepalPlugin } from './plugins/miscellanous/nepal-plugin';
 
 import path from 'path';
 
@@ -109,6 +111,13 @@ apiOptions: {
 		OnePerOrder,
 	 ],
     },*/
+	shippingOptions: {
+    shippingEligibilityCheckers: [
+      defaultShippingEligibilityChecker,
+      ShippingDistrictChecker,
+	  ShippingDistrictAmountChecker
+     ],
+    },
 	assetOptions: <any>{
 	  permittedFileTypes:[
 	  "image/*",
@@ -138,15 +147,34 @@ apiOptions: {
     paymentOptions: {
         paymentMethodHandlers: [
 		 EsewaMerchantPaymentHandler,
-		 EsewaPersonalPaymentHandler,
+		 //EsewaPersonalPaymentHandler,
 		 KhaltiMerchantPaymentHandler,
-		 KhaltiPersonalPaymentHandler,
+		 //KhaltiPersonalPaymentHandler,
 		 ConnectIPSPaymentHandler,
 		 BankDepositPaymentHandler,
 		 CashPaymentHandler
 		],
     },
     customFields: {
+		ProductVariant: [
+		 {
+		   name: 'minorder',
+		   type:'int',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Minimum Order Allowed',
+		   }],	
+		   defaultValue:1 
+		  },
+		  {
+		   name: 'maxorder',
+		   type:'int',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Maximum Order Allowed',
+		   }],
+		  }
+		],
 		Address: [
 		 { 
 		   name: 'district', 
@@ -227,6 +255,7 @@ apiOptions: {
 		FeedbackPlugin,
 		ChannelsPlugin,
 		AssetsPlugin,
+		NepalPlugin,
 		
 		ProductExtensionPlugin,
 		ProductVariantExtensionPlugin,
@@ -236,7 +265,6 @@ apiOptions: {
 		    trackHistory: true
 		}),
 		SalesTrackerPlugin,
-		BulkDiscountPlugin,
 		
 		ProductRecommendationsPlugin,
 		EmailPlugin.init({
@@ -297,7 +325,7 @@ apiOptions: {
 				extensions: [
 				 
 				 {	
-				    extensionPath: path.join(__dirname,'plugins'),
+				    extensionPath: path.join(__dirname,'plugins/miscellanous'),
 					ngModules:[
 					  {
                        type: 'shared',
@@ -313,18 +341,10 @@ apiOptions: {
 			/*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
-				 
-				 {	
-				    extensionPath: path.join(__dirname,'widgets'),
-					ngModules:[
-					  {
-                       type: 'shared',
-                       ngModuleFileName: 'WidgetModule.ts',
-	                   ngModuleName: 'WidgetModule',
-                      },
-					],
-				 },
-				 
+				 {
+				   extensionPath: path.join(__dirname,"./finalized-plugins/vendure-bulk-discounts/lib/ui-extensions/modules"),
+			       ngModules: [BulkDiscountsInputModule],
+		         },
 				],
 			}),*/
 
@@ -389,7 +409,7 @@ apiOptions: {
                     },		
 					
 					{	
-				    extensionPath: path.join(__dirname,'plugins'),
+				    extensionPath: path.join(__dirname,'plugins/miscellanous'),
 					ngModules:[
 					  {
                        type: 'shared',
@@ -398,18 +418,6 @@ apiOptions: {
                       },
 					 ],
 				    },
-					
-					{	
-				    extensionPath: path.join(__dirname,'plugins/shipping-methods'),
-					ngModules:[
-					  {
-                       type: 'shared',
-                       ngModuleFileName: 'in-store-shipping.ts',
-	                   ngModuleName: 'InStorePickupModule',
-                      },
-					 ],
-				    },
-					
 					{
 					  translations: {
 						en: path.join(__dirname, 'translations/en.json'),
@@ -421,10 +429,6 @@ apiOptions: {
 					VendorPlugin.uiExtensions,
 					FeedbackPlugin.uiExtensions,
 					ReviewsPlugin.uiExtensions,
-				    {
-					  extensionPath: path.join(__dirname,"./finalized-plugins/vendure-bulk-discounts/lib/ui-extensions/modules"),
-			          ngModules: [BulkDiscountsInputModule],
-		            },
 					{
 					  extensionPath: path.join(__dirname,"./finalized-plugins/vendure-product-recommendations/lib/ui-extensions/modules"),
 			          ngModules: [ProductRecommendationsInputModule],

@@ -17,6 +17,7 @@ const commonExtensions = apollo_server_core_1.gql `
 		panvat:String!
 		panvatnum:String!
 		producttype:[String!]!
+		celebs: [String!]!
         assetid:String
         assetsource:String		
         createdAt: DateTime!
@@ -37,6 +38,7 @@ const commonExtensions = apollo_server_core_1.gql `
 	  panvat:String!
 	  panvatnum:String!
 	  producttype:[String!]! 
+	  celebs: [String!]!
   }
   
   input VendorAddInputShop{
@@ -52,7 +54,8 @@ const commonExtensions = apollo_server_core_1.gql `
 	  file: Upload!
 	  panvat:String!
 	  panvatnum:String!
-	  producttype:[String!]! 
+	  producttype:[String!]!
+      celebs: [String!]!	  
   }
   
 `;
@@ -82,6 +85,7 @@ exports.adminApiExtensions = apollo_server_core_1.gql `
 	  panvat:String!
 	  panvatnum:String!
 	  producttype:[String!]!
+	  celebs: [String!]!
 	}
 	
 	type VendorList implements PaginatedList {

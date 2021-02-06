@@ -71,6 +71,10 @@ __decorate([
     __metadata("design:type", Array)
 ], VendorEntity.prototype, "producttype", void 0);
 __decorate([
+    typeorm_1.Column("simple-array"),
+    __metadata("design:type", Array)
+], VendorEntity.prototype, "celebs", void 0);
+__decorate([
     typeorm_1.Column({ default: "" }),
     __metadata("design:type", String)
 ], VendorEntity.prototype, "assetid", void 0);
