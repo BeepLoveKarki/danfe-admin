@@ -6,16 +6,9 @@
   "authTokenHeaderKey": "vendure-auth-token",
   "defaultLanguage": "en",
   "availableLanguages": [
-    "de",
-    "en",
-    "es",
-    "pl",
-    "zh_Hans",
-    "zh_Hant",
-    "pt_BR",
-    "cs",
-    "fr"
+    "en"
   ],
-  "hideVendureBranding": false,
-  "hideVersion": false
+  "brand": "Danfe | Admin Panel",
+  "hideVendureBranding": true,
+  "hideVersion": true
 }

@@ -32,7 +32,7 @@ export default class VendorDetailResolver extends BaseEntityResolver<
 		panvat:'',
 		panvatnum:'',
 		producttype:[''],
-		celebs: ['']
+		celebs: [''],
 		assetid:'',
 		assetsource:'',
 		createdAt:'',

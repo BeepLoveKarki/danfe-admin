@@ -191,7 +191,7 @@ export class VendorDetailComponent extends BaseDetailComponent<VendorsFragment>
 			 panvat:entity.panvat,
 			 panvatnum:entity.panvatnum,
 			 producttype:entity.producttype.join(","),
-			 celebs:formValue.celebs.join(",")
+			 celebs:entity.celebs.join(",")
 		  });
 	}
     

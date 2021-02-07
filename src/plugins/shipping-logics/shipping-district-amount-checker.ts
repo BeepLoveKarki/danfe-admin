@@ -1,4 +1,5 @@
 import { LanguageCode, ShippingEligibilityChecker } from '@vendure/core';
+import { getDistricts }  from "./get-districts";
 
 export const ShippingDistrictAmountChecker = new ShippingEligibilityChecker({
   code: 'shipping-district-checker',
@@ -22,10 +23,9 @@ export const ShippingDistrictAmountChecker = new ShippingEligibilityChecker({
 	},
     district: {
       type: 'string',
+	  defaultValue: 'Kathmandu',
       ui: { component: 'select-form-input', 
-	        options:[
-			   {value:"Kathmandu"},
-		     ]
+	        options:getDistricts()
 		   },
       label: [{ languageCode: LanguageCode.en, value: 'Shipping District' }],
       description: [

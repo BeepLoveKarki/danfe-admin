@@ -45,19 +45,20 @@ export class VendorDetailComponent extends BaseDetailComponent<VendorsFragment>
         super(route, router, serverConfigService, dataService);
         
 		this.detailForm = this.formBuilder.group({
-			firstname:['',Validators.required],
-			lastname:['',Validators.required],
+			firstname:[''],
+			lastname:[''],
 			email:['',Validators.required],
 			phone:['',Validators.required],
 			companyname:['',Validators.required],
-			companyaddr:['',Validators.required],
+			companyaddr:[''],
 			companydesc:'',
-			companyphone:['',Validators.required],
-			companycategory:['',Validators.required],
+			companyphone:[''],
+			companycategory:[''],
 			companydoc:'',
-			panvat:['',Validators.required],
-			panvatnum:['',Validators.required],
-			producttype:['',Validators.required]
+			panvat:[''],
+			panvatnum:[''],
+			producttype:[''],
+			celebs: ['']
         });
 		
     }
@@ -134,14 +135,13 @@ export class VendorDetailComponent extends BaseDetailComponent<VendorsFragment>
 				panvat:formValue.panvat,
 				panvatnum:formValue.panvatnum,
 				file:this.data,
-				producttype:formValue.producttype.split(",")
+				producttype:formValue.producttype.split(","),
+				celebs:formValue.celebs.split(",")
             };
-			console.log("b");
             return this.dataService.mutate<CreateVendor.Mutation,CreateVendor.Variables>(CREATE_VENDOR, {
                     input,
             }).pipe(mapTo(true));
 		} else {
-			console.log("a");
             return of(false);
         }
 	}
@@ -164,7 +164,8 @@ export class VendorDetailComponent extends BaseDetailComponent<VendorsFragment>
 				panvat:formValue.panvat,
 				panvatnum:formValue.panvatnum,
 				file:this.data,
-				producttype:formValue.producttype.split(",")
+				producttype:formValue.producttype.split(","),
+				celebs:formValue.celebs.split(",")
             };
             return this.dataService
                 .mutate<UpdateVendor.Mutation,UpdateVendor.Variables>(UPDATE_VENDOR, {
@@ -190,6 +191,7 @@ export class VendorDetailComponent extends BaseDetailComponent<VendorsFragment>
 			 panvat:entity.panvat,
 			 panvatnum:entity.panvatnum,
 			 producttype:entity.producttype.join(","),
+			 celebs:entity.celebs.join(",")
 		  });
 	}
     

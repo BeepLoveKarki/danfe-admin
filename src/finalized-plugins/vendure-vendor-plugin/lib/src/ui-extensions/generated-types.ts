@@ -4231,6 +4231,7 @@ export type Vendor = Node & {
   panvat: Scalars['String'];
   panvatnum: Scalars['String'];
   producttype: Array<Scalars['String']>;
+  celebs: Array<Scalars['String']>;
   assetid?: Maybe<Scalars['String']>;
   assetsource?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
@@ -4251,6 +4252,7 @@ export type VendorAddInput = {
   panvat: Scalars['String'];
   panvatnum: Scalars['String'];
   producttype: Array<Scalars['String']>;
+  celebs: Array<Scalars['String']>;
 };
 
 export type VendorAddInputShop = {
@@ -4267,6 +4269,7 @@ export type VendorAddInputShop = {
   panvat: Scalars['String'];
   panvatnum: Scalars['String'];
   producttype: Array<Scalars['String']>;
+  celebs: Array<Scalars['String']>;
 };
 
 export type VendorFilterParameter = {
@@ -4332,6 +4335,7 @@ export type VendorUpdateInput = {
   panvat: Scalars['String'];
   panvatnum: Scalars['String'];
   producttype: Array<Scalars['String']>;
+  celebs: Array<Scalars['String']>;
 };
 
 export type Zone = Node & {
@@ -4380,7 +4384,7 @@ export namespace GetVendor {
 
 export type VendorsFragment = (
   { __typename?: 'Vendor' }
-  & Pick<Vendor, 'id' | 'firstname' | 'lastname' | 'email' | 'phone' | 'companyname' | 'companyaddr' | 'companydesc' | 'companyphone' | 'companycategory' | 'panvat' | 'panvatnum' | 'producttype' | 'assetid' | 'assetsource' | 'createdAt' | 'updatedAt'>
+  & Pick<Vendor, 'id' | 'firstname' | 'lastname' | 'email' | 'phone' | 'companyname' | 'companyaddr' | 'companydesc' | 'companyphone' | 'companycategory' | 'panvat' | 'panvatnum' | 'producttype' | 'celebs' | 'assetid' | 'assetsource' | 'createdAt' | 'updatedAt'>
 );
 
 export type GetAllVendorsQueryVariables = Exact<{

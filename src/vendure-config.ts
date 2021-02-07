@@ -298,9 +298,9 @@ apiOptions: {
         AdminUiPlugin.init({
 			port: 3002,
 			
-			app:{
+			/*app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
-			},
+			},*/
 			
 			/*adminUiConfig: {
 				loginUrl: '/admin/login',
@@ -389,7 +389,7 @@ apiOptions: {
 				],
 			}),*/
 			
-		  /*app: compileUiExtensions({
+		  app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
 				    
@@ -452,7 +452,7 @@ apiOptions: {
            hideVersion: true,
 		   defaultLanguage: LanguageCode.en,
 		   availableLanguages: [LanguageCode.en],
-        }*/
+        }
 		
 			
        })    
