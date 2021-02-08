@@ -21,12 +21,7 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 	   try {
 		   
 		postdata["amt"] = Math.ceil(amount);
-		
-		if(metadata["error"]){ //if error is occurred, use our payment gateway
-		  postdata["scd"] = process.env.esewa_default_merchant_id;
-		}else{
-		  postdata["scd"] = args["Merchant Id"];
-        }
+		postdata["scd"] = args["Merchant Id"];
 		postdata["pid"] = metadata.pid;
         postdata["rid"] = metadata.rid;
 		 
@@ -36,10 +31,10 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 		let config = {
 			method: 'post',
 			body : data,
-			/*headers: { 
+			headers: { 
 			  'Content-Type': 'application/json',
 			  'Authorization': `Key ${args.secretKey}`
-			}*/
+			}
         };
 		 
 		 let response = await fetch(url,config);
@@ -47,7 +42,7 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 		 
 		 console.log(resp);
 		 
-		 /*if(resp["state"]["name"]=="Completed"){
+		 if(resp["state"]["name"]=="Completed"){
 		    
 			return {
                 amount: resp.amount,
@@ -60,19 +55,7 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 				},
            };
 		 
-		 }else{
-		   
-		  return {
-                amount: Math.ceil(order.total),
-                state: 'Declined' as 'Declined',
-                metadata: {
-					public:{
-                       errorMessage: "Error Payment"
-					}
-                },
-          };
-		 
-		}*/
+		}
 		 
 		return {
                 amount: Math.ceil(order.total),
