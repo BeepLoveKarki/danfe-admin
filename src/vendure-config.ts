@@ -156,6 +156,17 @@ apiOptions: {
 		],
     },
     customFields: {
+		Collection: [
+		  {
+			name: 'musthave',
+			type:'boolean',
+			label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Show in Must Have?',
+		   }],	
+		   defaultValue:false
+		  }
+		],
 		ProductVariant: [
 		 {
 		   name: 'minorder',
@@ -298,9 +309,9 @@ apiOptions: {
         AdminUiPlugin.init({
 			port: 3002,
 			
-			/*app:{
+			app:{
 			  path: path.join(__dirname, 'danfe-admin-ui/dist')
-			},*/
+			},
 			
 			/*adminUiConfig: {
 				loginUrl: '/admin/login',
@@ -389,7 +400,7 @@ apiOptions: {
 				],
 			}),*/
 			
-		  app: compileUiExtensions({
+		  /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
 				    
@@ -438,8 +449,8 @@ apiOptions: {
                       // The small logo appears in the top left of the screen  
 			          smallLogoPath: path.join(__dirname, 'images/name.png'),
                       // The large logo is used on the login page  
-                      largeLogoPath: path.join(__dirname, 'images/logo.png'),
-                      faviconPath: path.join(__dirname, 'images/danfeicon.ico'),
+                      largeLogoPath: path.join(__dirname, 'images/danfe-new.png'),
+                      faviconPath: path.join(__dirname, 'images/favicon.ico'),
                      }),
 				
 				]
@@ -452,7 +463,7 @@ apiOptions: {
            hideVersion: true,
 		   defaultLanguage: LanguageCode.en,
 		   availableLanguages: [LanguageCode.en],
-        }
+        }*/
 		
 			
        })    

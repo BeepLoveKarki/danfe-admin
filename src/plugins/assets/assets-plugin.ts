@@ -41,7 +41,7 @@ export class AssetsResolver {
 	const options = {
       filter:{
         name: {
-        contains: "danfe"
+        contains: "danfeheader"
        }
       }
 	 };
