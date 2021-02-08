@@ -62,6 +62,7 @@ import { ProductExtensionPlugin } from './plugins/channels/product-extension-plu
 import { ProductVariantExtensionPlugin } from './plugins/channels/product-variant-extension-plugin';
 
 import { NepalPlugin } from './plugins/miscellanous/nepal-plugin';
+import { DiscountsPlugin } from './plugins/discounts/discounts-plugin';
 
 import path from 'path';
 
@@ -168,6 +169,7 @@ apiOptions: {
 		  }
 		],
 		ProductVariant: [
+		 
 		 {
 		   name: 'minorder',
 		   type:'int',
@@ -177,6 +179,7 @@ apiOptions: {
 		   }],	
 		   defaultValue:1 
 		  },
+		  
 		  {
 		   name: 'maxorder',
 		   type:'int',
@@ -184,7 +187,40 @@ apiOptions: {
 			  languageCode: LanguageCode.en,
 			  value: 'Maximum Order Allowed',
 		   }],
-		  }
+		  },
+		  
+		  
+		  {
+		   name: 'discounttype',
+		   type: 'string',
+		   defaultValue: 'amount',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Type of Discount',
+		   }]
+		  },
+		  
+		  {
+		   name: 'originalprice',
+		   type: 'int',
+		   //defaultValue: '',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Original Price',
+		   }]
+		  },
+		  
+		  {
+		   name: 'discountby',
+		   type:'float',
+		   defaultValue: 0.00,   //this is is rupees for amount. Convert to paisa on backend conversion
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Discount By',
+		   }],
+		  },
+		  
+		  
 		],
 		Address: [
 		 { 
@@ -267,6 +303,7 @@ apiOptions: {
 		ChannelsPlugin,
 		AssetsPlugin,
 		NepalPlugin,
+		DiscountsPlugin,
 		
 		ProductExtensionPlugin,
 		ProductVariantExtensionPlugin,

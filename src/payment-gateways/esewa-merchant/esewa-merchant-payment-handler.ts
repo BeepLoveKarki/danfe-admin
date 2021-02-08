@@ -13,7 +13,8 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 	args: {
         'Merchant Id': { 
 		   type:'string'	   
-		}
+		},
+		
     },
     
 	async createPayment(ctx, order, amount, args, metadata) {
@@ -33,7 +34,7 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 			body : data,
 			headers: { 
 			  'Content-Type': 'application/json',
-			  'Authorization': `Key ${args.secretKey}`
+			  //'Authorization': `Key ${args.secretKey}`
 			}
         };
 		 
