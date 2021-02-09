@@ -12,7 +12,6 @@ const schemaExtension = gql`
 	
     extend type Mutation {
         getEsewaMerchantId: Esewa!
-		getDefaultEsewaMerchantId: Esewa!
     }
 `;
 
@@ -40,12 +39,6 @@ export class EsewaCredentialsResolver {
 	   
 	   return postdata;
 	});
-  }
-
-  @Mutation()
-  getDefaultEsewaMerchantId(@Ctx() ctx: RequestContext, @Args() args: any) { //if error is occurred, use our payment gateway
-	postdata["MERCHANTID"] = process.env.esewa_default_merchant_id;
-	return postdata;
   }
 
 }

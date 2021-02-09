@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WidgetModule } from './extensions/b56fb9cdcdc63b969b2316b16e91948a34b2d6d2d536505a0f555e1737c5e94a/WidgetModule';
+import { ProductVariantDiscounttypeControlFieldModule } from './extensions/686959688f6c722ac93f57a927d750cd188a7a9767c125ae0835bb753c1149eb/product-variant-discount-field';
+import { GlobalSettingsDiscounttypeControlFieldModule } from './extensions/686959688f6c722ac93f57a927d750cd188a7a9767c125ae0835bb753c1149eb/global-settings-discount-field';
+import { EcommerceDescriptionControlFieldModule } from './extensions/686959688f6c722ac93f57a927d750cd188a7a9767c125ae0835bb753c1149eb/ecommerce-description-field';
 import { NavBarHidingModule } from './extensions/1b367534d1b0fd7fb0d753724bf8466b4476cf59cffcedf9b353248074b4edb7/navbar-hiding-module';
 import { FavoritesUiExtensionModule } from './extensions/fe945b4f371b1fc2016698fc3d196d73bc96de26a697ebd7a4d81d5acd224f78/favorites-ui-extension.module';
 import { SubscriptionExtensionModule } from './extensions/6238c1d037144377bad80515f98dd7ee464176b0c1a8dcd56038bea394ef450b/subscription-ui-extension.module';
@@ -11,6 +14,6 @@ import { ProductRecommendationsInputModule } from './extensions/9b1b52c8548552ec
 
 
 @NgModule({
-    imports: [CommonModule, WidgetModule, NavBarHidingModule, FavoritesUiExtensionModule, SubscriptionExtensionModule, VendorExtensionModule, FeedbackExtensionModule, ReviewsUiExtensionModule, ProductRecommendationsInputModule],
+    imports: [CommonModule, WidgetModule, ProductVariantDiscounttypeControlFieldModule, GlobalSettingsDiscounttypeControlFieldModule, EcommerceDescriptionControlFieldModule, NavBarHidingModule, FavoritesUiExtensionModule, SubscriptionExtensionModule, VendorExtensionModule, FeedbackExtensionModule, ReviewsUiExtensionModule, ProductRecommendationsInputModule],
 })
 export class SharedExtensionsModule {}

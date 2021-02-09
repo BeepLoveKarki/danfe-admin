@@ -6,6 +6,7 @@ import {getConnection, In} from 'typeorm';
 const schemaExtension = gql`
 	
 	type Discount{
+	      discounttag: String
 	      discounttype: String
 		  discountvalue: String
 		  discountamount: Int
@@ -33,19 +34,20 @@ export class DiscountEntityResolver {
 	   let pdata = JSON.parse(JSON.stringify(productvariant.customFields));	   
 	   
 	   if(pdata.discountvalue!=0){
-	   Discount["discounttype"] = pdata.discounttype;  
+	   Discount["discounttag"] = pdata.discounttag; 
+	   Discount["discounttype"] = pdata.discounttype;   
 	   
-	   if(pdata.discounttype=="amount"){
+	   if(pdata.discounttype=="Amount"){
 	     Discount["discountvalue"] = proddata.currencyCode+" "+String(pdata.discountvalue);
 		 Discount["discountamount"]=Math.floor(pdata.discountvalue*100); //fix amount discount 
 	   }
 	   
-	   if(pdata.discounttype=="percentage"){
+	   if(pdata.discounttype=="Percentage"){
 		 Discount["discountvalue"] = String(pdata.discountvalue)+"%";
 		 Discount["discountamount"]=Math.floor((pdata.discountvalue/100)*proddata.priceWithTax); //fix percent discount 
 	   }
 	   
-	   if(pdata.discounttype=="new price"){
+	   if(pdata.discounttype=="New Price"){
 		 Discount["discountvalue"] = proddata.currencyCode+" "+String(pdata.discountvalue);
 	     Discount["discountamount"] = Math.floor(proddata.priceWithTax-pdata.discountvalue*100); //fix new price
 	   }
@@ -62,6 +64,7 @@ export class DiscountEntityResolver {
 	        Discount = this.checkglobal(ctx,proddata);
 			return Discount;
 		 }else{
+		   Discount["discounttag"] = pdata.discounttag; 
 		   Discount["discounttype"] = pdata.discounttype;  
 		   Discount["discountvalue"] = 0;
 		   Discount["discountamount"]= 0;
@@ -84,15 +87,16 @@ export class DiscountEntityResolver {
 	 let gdiscounts = JSON.parse(JSON.stringify(settings.customFields));
 	 
 	 if(gdiscounts.globaldiscountvalue!=0){
+	   Discount["discounttag"] = gdiscounts.globaldiscounttag; 
 	   Discount["discounttype"] = gdiscounts.globaldiscounttype;
 	   Discount["discountvalue"] = gdiscounts.globaldiscountvalue;
 	   
-	   if(gdiscounts.globaldiscounttype=="amount"){
+	   if(gdiscounts.globaldiscounttype=="Amount"){
 	     Discount["discountvalue"] = proddata.currencyCode+" "+String(gdiscounts.globaldiscountvalue);
 		 Discount["discountamount"]=Math.floor(gdiscounts.globaldiscountvalue*100); //fix amount discount 
 	   }
 	   
-	   if(gdiscounts.globaldiscounttype=="percentage"){
+	   if(gdiscounts.globaldiscounttype=="Percentage"){
 		 Discount["discountvalue"] = String(gdiscounts.globaldiscountvalue)+"%";
 		 Discount["discountamount"]=Math.floor((gdiscounts.globaldiscountvalue/100)*proddata.priceWithTax); //fix percent discount 
 	   }
@@ -104,6 +108,7 @@ export class DiscountEntityResolver {
 	   Discount["discountedamount"] = proddata.priceWithTax-Discount["discountamount"]; 
 	   
 	 }else{
+	   Discount["discounttag"] = gdiscounts.globaldiscounttag; 
 	   Discount["discounttype"] = gdiscounts.globaldiscounttype;  
 	   Discount["discountvalue"] = 0;
 	   Discount["discountamount"]= 0;

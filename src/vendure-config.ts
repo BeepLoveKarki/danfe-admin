@@ -45,7 +45,9 @@ import { EsewaCredentialsPlugin } from './payment-gateways/esewa-merchant/esewa-
 //import { EsewaPersonalPaymentHandler } from './payment-gateways/esewa-personal/esewa-personal-payment-handler';
 
 import { CashPaymentHandler } from './payment-gateways/cash/cash-payment-handler';
+
 import { BankDepositPaymentHandler } from './payment-gateways/bank-deposit/bank-deposit-payment-handler';
+import { BankDepositPlugin } from './payment-gateways/bank-deposit/bank-deposit-details-mutation';
 
 import { ConnectIPSPaymentHandler } from './payment-gateways/connectips/connectips-payment-handler';
 import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token-plugin';
@@ -53,6 +55,7 @@ import { ConnectIPSPlugin } from './payment-gateways/connectips/connectips-token
 //import { OnePerOrder } from './promotion-strategies/one-per-order';
 
 import { ChannelsPlugin } from './plugins/channels/channels-plugin';
+import { GlobalSettingsPlugin } from './plugins/globalsettings/globalsettings-plugin';
 import { AssetsPlugin } from './plugins/assets/assets-plugin';
 
 import { ShippingDistrictChecker } from './plugins/shipping-logics/shipping-district-checker';
@@ -157,13 +160,25 @@ apiOptions: {
 		],
     },
     customFields: {
+		
+		Product:[
+		 {
+		   name: 'visitnumber',
+		   type:'int',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Visit Number',
+		   }],	
+		  }, 
+		],
+		
 		Collection: [
 		  {
-			name: 'musthave',
+			name: 'topcategory',
 			type:'boolean',
 			label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Show in Must Have?',
+			  value: 'Show in Top Categories?',
 		   }],	
 		   defaultValue:false
 		  }
@@ -203,7 +218,7 @@ apiOptions: {
 		  {
 		   name: 'discounttype',
 		   type: 'string',
-		   defaultValue: 'amount',
+		   defaultValue: 'Amount',
 		   label: [{
 			  languageCode: LanguageCode.en,
 			  value: 'Type of Discount',
@@ -220,15 +235,24 @@ apiOptions: {
 		   }],
 		  },
 		  
+		  {
+		   name: 'discounttag',
+		   type: 'string',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Discount Offer Name',
+		   }]
+		  },
+		  
 		  
 		],
 		
 		GlobalSettings:[
-		
+		  
 		  {
 		   name: 'globaldiscounttype',
 		   type: 'string',
-		   defaultValue: 'amount',
+		   defaultValue: 'Amount',
 		   label: [{
 			  languageCode: LanguageCode.en,
 			  value: 'Global Discount Type',
@@ -245,6 +269,113 @@ apiOptions: {
 		   }],
 		  },
 		  
+		  {
+		   name: 'globaldiscounttag',
+		   type: 'string',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Global Discount Offer Name',
+		   }]
+		  },
+		  
+		  
+		  {
+		   name: 'undermaintenance',
+		   type:'boolean',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Under Maintenance?',
+		   }],	
+		   defaultValue:false 
+		  },
+		  
+		 {
+		   name: 'ecommercename',
+		   type: 'string',
+		   defaultValue: 'Danfe Brand House',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Ecommerce Name',
+		   }]
+		  },
+		  
+		  {
+		   name: 'ecommercedescription',
+		   type: 'string',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Ecommerce Description',
+		   }]
+		  },	  
+		  
+		  {
+		   name: 'companyname',
+		   type: 'string',
+		   defaultValue: 'Innovatex Multipurpose Pvt. Ltd.',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Holding Company name',
+		   }]
+		  },
+		  
+		  {
+		   name: 'panvatnumber',
+		   type: 'int',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'PAN/VAT Number',
+		   }]
+		  },
+		  
+		  {
+		   name: 'regnumber',
+		   type: 'int',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Registration Number',
+		   }]
+		  },	
+		  
+		  {
+		   name: 'contactaddress',
+		   type: 'string',
+		   list: true,
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Address/Addresses',
+		   }]
+		  },
+		  
+		  {
+		   name: 'contactnumber',
+		   type: 'int',
+		   list: true,
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Contact Number(s)',
+		   }]
+		  },
+		  
+		  {
+		   name: 'companyemail',
+		   type: 'int',
+		   list: true,
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Contact Email(s)',
+		   }]
+		  },
+		  
+		  {
+		   name: 'contactperson',
+		   type: 'int',
+		   list: true,
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Contact Person(s) [Separate name, post and number by -. Ex: A-CEO-99]',
+		   }]
+		  },	  
+		  
 		
 		],
 		
@@ -255,8 +386,7 @@ apiOptions: {
 		   label: [{
 			  languageCode: LanguageCode.en,
 			  value: 'District',
-		   }],	
-		   defaultValue:"" 
+		   }],	 
 		 },
 		 { 
 		   name: 'area', 
@@ -265,7 +395,6 @@ apiOptions: {
 			  languageCode: LanguageCode.en,
 			  value: 'Area',
 		   }],			   
-		   defaultValue:"" 
 		 },
 		 { 
 		   name: 'addressNotes',
@@ -274,7 +403,6 @@ apiOptions: {
 			  languageCode: LanguageCode.en,
 			  value: 'Address Notes',
 		   }],
-		   defaultValue:""
 		 }
 		],
 		
@@ -288,18 +416,6 @@ apiOptions: {
 		   }]
 		  }
 		],
-		
-		/*Customer: [
-		 {
-		  name: 'operationTimes',
-		  type: 'string',
-		  label: [{
-			  languageCode: LanguageCode.en,
-			  value: 'Store Operating Times',
-		  }],
-		  list:true
-		 }
-		]*/
 	},
     plugins: [
         AssetServerPlugin.init({
@@ -323,6 +439,7 @@ apiOptions: {
 		ConnectIPSPlugin,
 		KhaltiCredentialsPlugin,
 		EsewaCredentialsPlugin,
+		BankDepositPlugin,
 		SubscriptionPlugin,
 		VendorPlugin,
 		FeedbackPlugin,
@@ -330,6 +447,7 @@ apiOptions: {
 		AssetsPlugin,
 		NepalPlugin,
 		DiscountsPlugin,
+		GlobalSettingsPlugin,
 		
 		ProductExtensionPlugin,
 		ProductVariantExtensionPlugin,
@@ -379,90 +497,7 @@ apiOptions: {
 			/*adminUiConfig: {
 				loginUrl: '/admin/login',
             },*/
-			
-			/*app: compileUiExtensions({
-			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
-				extensions: [{
-					translations: {
-						en: path.join(__dirname, 'translations/en.json'),
-                   }
-                }],
-			}),
-			
-			adminUiConfig:{
-				defaultLanguage: LanguageCode.en,
-				availableLanguages: [LanguageCode.en],
-            }*/
-			
-			/*app: compileUiExtensions({
-			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
-				extensions: [
-				 
-				 {	
-				    extensionPath: path.join(__dirname,'plugins/miscellanous'),
-					ngModules:[
-					  {
-                       type: 'shared',
-                       ngModuleFileName: 'timing-control-field.ts',
-	                   ngModuleName: 'TimingControlFieldModule',
-                      },
-					],
-				 },
-				 
-				],
-			}),*/
-			
-			/*app: compileUiExtensions({
-			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
-				extensions: [
-				 {
-				   extensionPath: path.join(__dirname,"./finalized-plugins/vendure-bulk-discounts/lib/ui-extensions/modules"),
-			       ngModules: [BulkDiscountsInputModule],
-		         },
-				],
-			}),*/
-
-            /*app: compileUiExtensions({
-			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
-				extensions: [
-				 
-				 {	
-				    extensionPath: path.join(__dirname,'widgets'),
-					ngModules:[
-					  {
-                       type: 'shared',
-                       ngModuleFileName: 'WidgetModule.ts',
-	                   ngModuleName: 'WidgetModule',
-                      },
-					],
-				 },
-				 
-				 {	
-				    extensionPath: path.join(__dirname,'plugins'),
-					ngModules:[
-					  {
-                       type: 'shared',
-                       ngModuleFileName: 'danfe-shipping.ts',
-	                   ngModuleName: 'DanfeShippingModule',
-                      },
-					],
-				 },
-				 
-				 {	
-				    extensionPath: path.join(__dirname,'plugins/shipping-methods'),
-					ngModules:[
-					  {
-                       type: 'shared',
-                       ngModuleFileName: 'in-store-shipping.ts',
-	                   ngModuleName: 'InStorePickupModule',
-                      },
-					],
-				 },
-				 
-				 
-				],
-			}),*/
-			
+          
 		  /*app: compileUiExtensions({
 			    outputPath: path.join(__dirname, 'danfe-admin-ui'),
 				extensions: [
@@ -477,6 +512,27 @@ apiOptions: {
                       },
 					],
 				   },
+				   
+				   {	
+				    extensionPath: path.join(__dirname,'plugins/miscellanous'),
+					ngModules:[
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'product-variant-discount-field.ts',
+	                   ngModuleName: 'ProductVariantDiscounttypeControlFieldModule',
+                      },
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'global-settings-discount-field.ts',
+	                   ngModuleName: 'GlobalSettingsDiscounttypeControlFieldModule',
+                      },
+					  {
+                       type: 'shared',
+                       ngModuleFileName: 'ecommerce-description-field.ts',
+	                   ngModuleName: 'EcommerceDescriptionControlFieldModule',
+                      },
+					 ],
+				    },
 					
 					{
                       globalStyles: path.join(__dirname, 'styles/danfe-theme.scss')

@@ -12,7 +12,6 @@ const schemaExtension = gql`
 	
     extend type Mutation {
         getKhaltiPublicKey: Khalti!
-		getDefaultKhaltiPublicKey: Khalti!
     }
 `;
 
@@ -40,12 +39,6 @@ export class KhaltiCredentialsResolver {
 	   
 	   return postdata;
 	});
-  }
-
-  @Mutation()
-  getDefaultKhaltiPublicKey(@Ctx() ctx: RequestContext, @Args() args: any) { //if error is occurred, use our payment gateway
-	postdata["PUBLICKEY"] = process.env.khalti_default_public_key;
-	return postdata;
   }
 
 }

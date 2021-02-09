@@ -1,6 +1,5 @@
 import { NgModule, Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UserInputError } from '@vendure/core';
 import { SharedModule, CustomFieldControl, CustomFieldConfigType, registerCustomFieldComponent } from '@vendure/admin-ui/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
