@@ -191,6 +191,16 @@ apiOptions: {
 		  
 		  
 		  {
+		   name: 'globaldiscountinherit',
+			type:'boolean',
+			label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Inherit Global Discount Value?',
+		   }],	
+		   defaultValue:true
+		  },
+		  
+		  {
 		   name: 'discounttype',
 		   type: 'string',
 		   defaultValue: 'amount',
@@ -201,27 +211,43 @@ apiOptions: {
 		  },
 		  
 		  {
-		   name: 'originalprice',
-		   type: 'int',
-		   //defaultValue: '',
-		   label: [{
-			  languageCode: LanguageCode.en,
-			  value: 'Original Price',
-		   }]
-		  },
-		  
-		  {
-		   name: 'discountby',
+		   name: 'discountvalue',
 		   type:'float',
 		   defaultValue: 0.00,   //this is is rupees for amount. Convert to paisa on backend conversion
 		   label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Discount By',
+			  value: 'Discount Value',
 		   }],
 		  },
 		  
 		  
 		],
+		
+		GlobalSettings:[
+		
+		  {
+		   name: 'globaldiscounttype',
+		   type: 'string',
+		   defaultValue: 'amount',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Global Discount Type',
+		   }]
+		  },
+		  
+		  {
+		   name: 'globaldiscountvalue',
+		   type:'float',
+		   defaultValue: 0.00,   //this is is rupees for amount. Convert to paisa on backend conversion
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Global Discount Value',
+		   }],
+		  },
+		  
+		
+		],
+		
 		Address: [
 		 { 
 		   name: 'district', 
