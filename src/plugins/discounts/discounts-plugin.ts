@@ -1,5 +1,5 @@
 import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
-import { Ctx, RequestContext, ProductVariant, ProductVariantService, GlobalSettingsService, Channel, PluginCommonModule, VendurePlugin, TransactionalConnection } from '@vendure/core';
+import { Ctx, RequestContext, ProductVariant, ProductVariantService, GlobalSettingsService, Channel, PluginCommonModule, VendurePlugin, TransactionalConnection, InternalServerError  } from '@vendure/core';
 import gql from 'graphql-tag';
 import {getConnection, In} from 'typeorm';
 
@@ -75,7 +75,7 @@ export class DiscountEntityResolver {
 	  return Discount;
 	 
 	 }else{
-	  return null;
+	  throw new InternalServerError("The product variant doesn't exist");
 	 }
   }
   

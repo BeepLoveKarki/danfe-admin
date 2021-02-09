@@ -66,6 +66,7 @@ import { ProductVariantExtensionPlugin } from './plugins/channels/product-varian
 
 import { NepalPlugin } from './plugins/miscellanous/nepal-plugin';
 import { DiscountsPlugin } from './plugins/discounts/discounts-plugin';
+import { DiscountsOrderPlugin } from './plugins/discounts/discounts-order-plugin';
 
 import path from 'path';
 
@@ -448,6 +449,7 @@ apiOptions: {
 		NepalPlugin,
 		DiscountsPlugin,
 		GlobalSettingsPlugin,
+		DiscountsOrderPlugin,
 		
 		ProductExtensionPlugin,
 		ProductVariantExtensionPlugin,

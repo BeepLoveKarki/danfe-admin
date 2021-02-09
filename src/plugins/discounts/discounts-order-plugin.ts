@@ -1,122 +1,93 @@
-import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
-import { Ctx, RequestContext, ProductVariant, ProductVariantService, GlobalSettingsService, Channel, PluginCommonModule, VendurePlugin, TransactionalConnection } from '@vendure/core';
+import { SessionService, OrderService, ProductVariantService, InternalServerError } from '@vendure/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
-import {getConnection, In} from 'typeorm';
+import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin } from '@vendure/core';
+
 
 const schemaExtension = gql`
-	
-	type Discount{
-	      discounttag: String
-	      discounttype: String
-		  discountvalue: String
-		  discountamount: Int
-		  discountedamount: Int
-	}
-	
-    extend type ProductVariant {
-		discount: Discount!
+    extend type Mutation {
+        addItemToOrderAdvanced(productVariantId: ID!, quantity: Int!, discountedamount: Int!): UpdateOrderItemsResult!
     }
 `;
 
-@Resolver('ProductVariant')
-export class DiscountEntityResolver {
+
+@Resolver()
+export class DiscountsOrderResolver {
+  constructor(private orderService: OrderService, private sessionService: SessionService, private variantService: ProductVariantService) {}
+
+  @Mutation()
+  async addItemToOrderAdvanced(@Ctx() ctx: RequestContext, @Args() args: any) {
+	const productvariant = await this.variantService.findOne(ctx,args.productVariantId);
+	if(productvariant){
+	 
+	 let proddata = JSON.parse(JSON.stringify(productvariant));
+	 let realprice = proddata.price;
+	 
+	 const order = await this.getOrderFromContext(ctx, true);
+	 
+	 if(order!=undefined){
 	
-  constructor(private connection: TransactionalConnection, private variantservice: ProductVariantService, private globalsettingservice: GlobalSettingsService) {}
-  
-  @ResolveField()
-  async discount(@Ctx() ctx: RequestContext, @Parent() variant: ProductVariant) {
-	 let Discount = <any>{};
-	 let productvariant = await this.variantservice.findOne(ctx,variant.id);
-	 
-	 if(productvariant){
-	   
-	   let proddata = JSON.parse(JSON.stringify(productvariant));
-	   let pdata = JSON.parse(JSON.stringify(productvariant.customFields));	   
-	   
-	   if(pdata.discountvalue!=0){
-	   Discount["discounttag"] = pdata.discounttag; 
-	   Discount["discounttype"] = pdata.discounttype;   
-	   
-	   if(pdata.discounttype=="Amount"){
-	     Discount["discountvalue"] = proddata.currencyCode+" "+String(pdata.discountvalue);
-		 Discount["discountamount"]=Math.floor(pdata.discountvalue*100); //fix amount discount 
-	   }
-	   
-	   if(pdata.discounttype=="Percentage"){
-		 Discount["discountvalue"] = String(pdata.discountvalue)+"%";
-		 Discount["discountamount"]=Math.floor((pdata.discountvalue/100)*proddata.priceWithTax); //fix percent discount 
-	   }
-	   
-	   if(pdata.discounttype=="New Price"){
-		 Discount["discountvalue"] = proddata.currencyCode+" "+String(pdata.discountvalue);
-	     Discount["discountamount"] = Math.floor(proddata.priceWithTax-pdata.discountvalue*100); //fix new price
-	   }
-	   
-	   if(Discount["discountamount"]<0){
-	      Discount["discountamount"]=0;
-	   }
-	   
-	   
-	   Discount["discountedamount"] = proddata.priceWithTax-Discount["discountamount"]; 
-	   
-	  }else{
-		 if(pdata.globaldiscountinherit){
-	        Discount = this.checkglobal(ctx,proddata);
-			return Discount;
-		 }else{
-		   Discount["discounttag"] = pdata.discounttag; 
-		   Discount["discounttype"] = pdata.discounttype;  
-		   Discount["discountvalue"] = 0;
-		   Discount["discountamount"]= 0;
-		   Discount["discountedamount"] = proddata.priceWithTax; 
-		 }
+	  order.lines.forEach((val,index)=>{
+	    console.log(val.productVariant.id);
+		console.log(val.productVariant.price);
+	  });
+	  
+	  if(args.discountedamount!=realprice){
+	    let input = <any>{};
+	    input["id"]=args.productVariantId;
+	    input["price"]=args.discountedamount;
+	    let vinput = new Array(input);
+	    const updatedvariant = await this.variantService.update(ctx,vinput); //create new
+		console.log(updatedvariant);
+	 }
+	  
+	  const result = await this.orderService.addItemToOrder(ctx, order.id, args.productVariantId, args.quantity, args.customFields);
+	  
+	  if(args.discountedamount!=realprice){
+	     let ninput = <any>{};
+	     ninput["id"]=args.productVariantId;
+	     ninput["price"]=realprice;
+	     let nvinput = new Array(ninput);
+	     await this.variantService.update(ctx,nvinput); //delete new
 	  }
-	   
-	  return Discount;
+	  
+	  return result;
 	 
-	 }else{
-	  return null;
 	 }
+	
+	}else{
+	  throw new InternalServerError("The product variant doesn't exist");
+	}
   }
   
-  async checkglobal(@Ctx() ctx: RequestContext,proddata:any){
-     
-	 let Discount = <any>{};
-	 
-	 let settings = await this.globalsettingservice.getSettings(ctx);
-	 let gdiscounts = JSON.parse(JSON.stringify(settings.customFields));
-	 
-	 if(gdiscounts.globaldiscountvalue!=0){
-	   Discount["discounttag"] = gdiscounts.globaldiscounttag; 
-	   Discount["discounttype"] = gdiscounts.globaldiscounttype;
-	   Discount["discountvalue"] = gdiscounts.globaldiscountvalue;
-	   
-	   if(gdiscounts.globaldiscounttype=="Amount"){
-	     Discount["discountvalue"] = proddata.currencyCode+" "+String(gdiscounts.globaldiscountvalue);
-		 Discount["discountamount"]=Math.floor(gdiscounts.globaldiscountvalue*100); //fix amount discount 
-	   }
-	   
-	   if(gdiscounts.globaldiscounttype=="Percentage"){
-		 Discount["discountvalue"] = String(gdiscounts.globaldiscountvalue)+"%";
-		 Discount["discountamount"]=Math.floor((gdiscounts.globaldiscountvalue/100)*proddata.priceWithTax); //fix percent discount 
-	   }
-	   
-	   if(Discount["discountamount"]<0){
-	      Discount["discountamount"]=0;
-	   }
-	   
-	   Discount["discountedamount"] = proddata.priceWithTax-Discount["discountamount"]; 
-	   
-	 }else{
-	   Discount["discounttag"] = gdiscounts.globaldiscounttag; 
-	   Discount["discounttype"] = gdiscounts.globaldiscounttype;  
-	   Discount["discountvalue"] = 0;
-	   Discount["discountamount"]= 0;
-	   Discount["discountedamount"] = proddata.priceWithTax; 
-	 }
-	 
-	 return Discount;
-  }
+  async getOrderFromContext(@Ctx() ctx: RequestContext, createIfNotExists = false) {
+        if (!ctx.session) {
+            throw new InternalServerError(`error.no-active-session`);
+        }
+        
+		let order = ctx.session.activeOrderId
+            ? await this.orderService.findOne(ctx, ctx.session.activeOrderId)
+            : undefined;
+        if (order && order.active === false) {
+            // edge case where an inactive order may not have been
+            // removed from the session, i.e. the regular process was interrupted
+            await this.sessionService.unsetActiveOrder(ctx, ctx.session);
+            order = undefined;
+        }
+		
+        if (!order) {
+            if (ctx.activeUserId) {
+                order = await this.orderService.getActiveOrderForUser(ctx, ctx.activeUserId);
+            }
+            if (!order && createIfNotExists) {
+                order = await this.orderService.create(ctx, ctx.activeUserId);
+            }
+            if (order) {
+                await this.sessionService.setActiveOrder(ctx, ctx.session, order);
+            }
+        }
+        return order || undefined;
+    }
 
 }
 
@@ -124,13 +95,10 @@ export class DiscountEntityResolver {
   imports: [PluginCommonModule],
   shopApiExtensions: {
     schema: schemaExtension,
-    resolvers: [DiscountEntityResolver],
-  },
-  adminApiExtensions: {
-    schema: schemaExtension,
-    resolvers: [DiscountEntityResolver],
+    resolvers: [DiscountsOrderResolver],
   }
 })
 
 
-export class DiscountsPlugin {}
+
+export class DiscountsOrderPlugin {}
