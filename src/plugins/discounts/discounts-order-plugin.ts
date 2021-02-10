@@ -26,19 +26,13 @@ export class DiscountsOrderResolver {
 	 const order = await this.getOrderFromContext(ctx, true);
 	 
 	 if(order!=undefined){
-	
-	  order.lines.forEach((val,index)=>{
-	    console.log(val.productVariant.id);
-		console.log(val.productVariant.price);
-	  });
 	  
 	  if(args.discountedamount!=realprice){
 	    let input = <any>{};
 	    input["id"]=args.productVariantId;
 	    input["price"]=args.discountedamount;
 	    let vinput = new Array(input);
-	    const updatedvariant = await this.variantService.update(ctx,vinput); //create new
-		console.log(updatedvariant);
+	    await this.variantService.update(ctx,vinput);
 	 }
 	  
 	  const result = await this.orderService.addItemToOrder(ctx, order.id, args.productVariantId, args.quantity, args.customFields);
@@ -48,7 +42,7 @@ export class DiscountsOrderResolver {
 	     ninput["id"]=args.productVariantId;
 	     ninput["price"]=realprice;
 	     let nvinput = new Array(ninput);
-	     await this.variantService.update(ctx,nvinput); //delete new
+	     await this.variantService.update(ctx,nvinput);
 	  }
 	  
 	  return result;
