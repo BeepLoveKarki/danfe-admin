@@ -16,7 +16,6 @@
     "cs",
     "fr"
   ],
-  "loginUrl": "/admin/login",
   "hideVendureBranding": false,
   "hideVersion": false
 }

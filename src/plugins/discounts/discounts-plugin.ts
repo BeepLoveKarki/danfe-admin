@@ -34,6 +34,7 @@ export class DiscountEntityResolver {
 	   let pdata = JSON.parse(JSON.stringify(productvariant.customFields));	   
 	   
 	   if(pdata.discountvalue!=0){
+		   
 	   Discount["discounttag"] = pdata.discounttag; 
 	   Discount["discounttype"] = pdata.discounttype;   
 	   
@@ -60,15 +61,27 @@ export class DiscountEntityResolver {
 	   Discount["discountedamount"] = proddata.priceWithTax-Discount["discountamount"]; 
 	   
 	  }else{
-		 if(pdata.globaldiscountinherit){
+		 if(pdata.discounttype=="New Price"){
+		  
+		  Discount["discounttag"] = pdata.discounttag; 
+	      Discount["discounttype"] = pdata.discounttype; 
+		  Discount["discountvalue"] = proddata.currencyCode+" "+String(pdata.discountvalue);
+	      Discount["discountamount"] = Math.floor(proddata.priceWithTax-pdata.discountvalue*100); //fix new price
+		  Discount["discountedamount"] = proddata.priceWithTax-Discount["discountamount"]; 
+		   
+		 }else{
+		  
+		  if(pdata.globaldiscountinherit){
 	        Discount = this.checkglobal(ctx,proddata);
 			return Discount;
-		 }else{
+		  }else{
 		   Discount["discounttag"] = pdata.discounttag; 
 		   Discount["discounttype"] = pdata.discounttype;  
 		   Discount["discountvalue"] = 0;
 		   Discount["discountamount"]= 0;
 		   Discount["discountedamount"] = proddata.priceWithTax; 
+		  }
+		 
 		 }
 	  }
 	   
