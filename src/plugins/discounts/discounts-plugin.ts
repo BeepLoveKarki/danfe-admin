@@ -31,6 +31,15 @@ export class DiscountEntityResolver {
 	 if(productvariant){
 	   
 	   let proddata = JSON.parse(JSON.stringify(productvariant));
+	   
+	   let realprice;
+	   
+	   if(proddata.listPriceIncludesTax){
+	    realprice = proddata.priceWithTax;
+	   }else{
+        realprice = proddata.price;
+	   }	 
+	   
 	   let pdata = JSON.parse(JSON.stringify(productvariant.customFields));	   
 	   
 	   if(pdata.discountvalue!=0){
@@ -45,12 +54,12 @@ export class DiscountEntityResolver {
 	   
 	   if(pdata.discounttype=="Percentage"){
 		 Discount["discountvalue"] = String(pdata.discountvalue)+"%";
-		 Discount["discountamount"]=Math.floor((pdata.discountvalue/100)*proddata.priceWithTax); //fix percent discount 
+		 Discount["discountamount"]=Math.floor((pdata.discountvalue/100)*realprice); //fix percent discount 
 	   }
 	   
 	   if(pdata.discounttype=="New Price"){
 		 Discount["discountvalue"] = proddata.currencyCode+" "+String(pdata.discountvalue);
-	     Discount["discountamount"] = Math.floor(proddata.priceWithTax-pdata.discountvalue*100); //fix new price
+	     Discount["discountamount"] = Math.floor(realprice-pdata.discountvalue*100); //fix new price
 	   }
 	   
 	   if(Discount["discountamount"]<0){
@@ -58,7 +67,7 @@ export class DiscountEntityResolver {
 	   }
 	   
 	   
-	   Discount["discountedamount"] = proddata.priceWithTax-Discount["discountamount"]; 
+	   Discount["discountedamount"] = realprice-Discount["discountamount"]; 
 	   
 	  }else{
 		 if(pdata.discounttype=="New Price"){
@@ -66,20 +75,20 @@ export class DiscountEntityResolver {
 		  Discount["discounttag"] = pdata.discounttag; 
 	      Discount["discounttype"] = pdata.discounttype; 
 		  Discount["discountvalue"] = proddata.currencyCode+" "+String(pdata.discountvalue);
-	      Discount["discountamount"] = Math.floor(proddata.priceWithTax-pdata.discountvalue*100); //fix new price
-		  Discount["discountedamount"] = proddata.priceWithTax-Discount["discountamount"]; 
+	      Discount["discountamount"] = Math.floor(realprice-pdata.discountvalue*100); //fix new price
+		  Discount["discountedamount"] = realprice-Discount["discountamount"]; 
 		   
 		 }else{
 		  
 		  if(pdata.globaldiscountinherit){
-	        Discount = this.checkglobal(ctx,proddata);
+	        Discount = await this.checkglobal(ctx,proddata,realprice);
 			return Discount;
 		  }else{
 		   Discount["discounttag"] = pdata.discounttag; 
 		   Discount["discounttype"] = pdata.discounttype;  
 		   Discount["discountvalue"] = 0;
 		   Discount["discountamount"]= 0;
-		   Discount["discountedamount"] = proddata.priceWithTax; 
+		   Discount["discountedamount"] = realprice; 
 		  }
 		 
 		 }
@@ -92,7 +101,7 @@ export class DiscountEntityResolver {
 	 }
   }
   
-  async checkglobal(@Ctx() ctx: RequestContext,proddata:any){
+  async checkglobal(@Ctx() ctx: RequestContext,proddata:any,realprice:any){
      
 	 let Discount = <any>{};
 	 
@@ -111,21 +120,21 @@ export class DiscountEntityResolver {
 	   
 	   if(gdiscounts.globaldiscounttype=="Percentage"){
 		 Discount["discountvalue"] = String(gdiscounts.globaldiscountvalue)+"%";
-		 Discount["discountamount"]=Math.floor((gdiscounts.globaldiscountvalue/100)*proddata.priceWithTax); //fix percent discount 
+		 Discount["discountamount"]=Math.floor((gdiscounts.globaldiscountvalue/100)*realprice); //fix percent discount 
 	   }
 	   
 	   if(Discount["discountamount"]<0){
 	      Discount["discountamount"]=0;
 	   }
 	   
-	   Discount["discountedamount"] = proddata.priceWithTax-Discount["discountamount"]; 
+	   Discount["discountedamount"] = realprice-Discount["discountamount"]; 
 	   
 	 }else{
 	   Discount["discounttag"] = gdiscounts.globaldiscounttag; 
 	   Discount["discounttype"] = gdiscounts.globaldiscounttype;  
 	   Discount["discountvalue"] = 0;
 	   Discount["discountamount"]= 0;
-	   Discount["discountedamount"] = proddata.priceWithTax; 
+	   Discount["discountedamount"] = realprice;
 	 }
 	 
 	 return Discount;

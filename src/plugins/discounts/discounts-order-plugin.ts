@@ -1,4 +1,4 @@
-import { SessionService, OrderService, ProductVariantService, InternalServerError } from '@vendure/core';
+import { SessionService, OrderService, ProductVariantService, ProductVariant, GlobalSettingsService, InternalServerError } from '@vendure/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin } from '@vendure/core';
@@ -6,38 +6,47 @@ import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin }
 
 const schemaExtension = gql`
     extend type Mutation {
-        addItemToOrderAdvanced(productVariantId: ID!, quantity: Int!, discountedamount: Int!): UpdateOrderItemsResult!
+        addItemToOrderAdvanced(productVariantId: ID!, quantity: Int!): UpdateOrderItemsResult!
     }
 `;
 
 
 @Resolver()
 export class DiscountsOrderResolver {
-  constructor(private orderService: OrderService, private sessionService: SessionService, private variantService: ProductVariantService) {}
+  constructor(private orderService: OrderService, private sessionService: SessionService, private variantService: ProductVariantService, private globalsettingservice: GlobalSettingsService) {}
 
   @Mutation()
   async addItemToOrderAdvanced(@Ctx() ctx: RequestContext, @Args() args: any) {
+	
 	const productvariant = await this.variantService.findOne(ctx,args.productVariantId);
+	
 	if(productvariant){
 	 
+	 let discountedamount = await this.checkdiscount(ctx,productvariant);
 	 let proddata = JSON.parse(JSON.stringify(productvariant));
-	 let realprice = proddata.price;
+	 
+	 let realprice;
+	 if(proddata.listPriceIncludesTax){
+	    realprice = proddata.priceWithTax;
+	 }else{
+        realprice = proddata.price;
+	 }	 
 	 
 	 const order = await this.getOrderFromContext(ctx, true);
 	 
 	 if(order!=undefined){
 	  
-	  if(args.discountedamount!=realprice){
+	  if(discountedamount!=realprice){
 	    let input = <any>{};
 	    input["id"]=args.productVariantId;
-	    input["price"]=args.discountedamount;
+	    input["price"]=discountedamount;
 	    let vinput = new Array(input);
 	    await this.variantService.update(ctx,vinput);
 	 }
 	  
 	  const result = await this.orderService.addItemToOrder(ctx, order.id, args.productVariantId, args.quantity, args.customFields);
 	  
-	  if(args.discountedamount!=realprice){
+	  if(discountedamount!=realprice){
 	     let ninput = <any>{};
 	     ninput["id"]=args.productVariantId;
 	     ninput["price"]=realprice;
@@ -52,7 +61,108 @@ export class DiscountsOrderResolver {
 	}else{
 	  throw new InternalServerError("The product variant doesn't exist");
 	}
+	
   }
+  
+  
+  async checkdiscount(@Ctx() ctx: RequestContext, productvariant: any) {
+	 let Discount = <any>{};
+	 
+	 if(productvariant){
+	   
+	   let proddata = JSON.parse(JSON.stringify(productvariant));
+	   let pdata = JSON.parse(JSON.stringify(productvariant.customFields));	   
+	   
+	   let realprice;
+	   
+	   if(proddata.listPriceIncludesTax){
+	     realprice=proddata.priceWithTax;
+	   }else{
+	     realprice=proddata.price;
+	   }
+	   
+	   if(pdata.discountvalue!=0){
+	   
+	   if(pdata.discounttype=="Amount"){
+		 Discount["discountamount"]=Math.floor(pdata.discountvalue*100); //fix amount discount 
+	   }
+	   
+	   if(pdata.discounttype=="Percentage"){
+		 Discount["discountamount"]=Math.floor((pdata.discountvalue/100)*realprice); //fix percent discount 
+	   }
+	   
+	   if(pdata.discounttype=="New Price"){
+		 Discount["discountvalue"] = proddata.currencyCode+" "+String(pdata.discountvalue);
+	     Discount["discountamount"] = Math.floor(realprice-pdata.discountvalue*100); //fix new price
+	   }
+	   
+	   if(Discount["discountamount"]<0){
+	      Discount["discountamount"]=0;
+	   }
+	   
+	   
+	   Discount["discountedamount"] = realprice-Discount["discountamount"]; 
+	   
+	  }else{
+		 if(pdata.discounttype=="New Price"){
+			 
+	      Discount["discountamount"] = Math.floor(realprice-pdata.discountvalue*100); //fix new price
+		  Discount["discountedamount"] = realprice-Discount["discountamount"]; 
+		   
+		 }else{
+		  
+		  if(pdata.globaldiscountinherit){
+	        Discount = await this.checkglobal(ctx,realprice);
+			return Discount;
+		  }else{
+		   
+		   Discount["discountamount"]= 0;
+		   Discount["discountedamount"] = realprice; 
+		  }
+		 
+		 }
+	  }
+	   
+	  return Discount["discountedamount"];
+	 
+	 }else{
+	  throw new InternalServerError("The product variant doesn't exist");
+	 }
+  }
+  
+  
+  async checkglobal(@Ctx() ctx: RequestContext,realprice:any){
+     
+	 let Discount = <any>{};
+	 
+	 let settings = await this.globalsettingservice.getSettings(ctx);
+	 let gdiscounts = JSON.parse(JSON.stringify(settings.customFields));
+	 
+	 if(gdiscounts.globaldiscountvalue!=0){
+	   Discount["discountvalue"] = gdiscounts.globaldiscountvalue;
+	   
+	   if(gdiscounts.globaldiscounttype=="Amount"){
+		 Discount["discountamount"]=Math.floor(gdiscounts.globaldiscountvalue*100); //fix amount discount 
+	   }
+	   
+	   if(gdiscounts.globaldiscounttype=="Percentage"){
+		 Discount["discountamount"]=Math.floor((gdiscounts.globaldiscountvalue/100)*realprice); //fix percent discount 
+	   }
+	   
+	   if(Discount["discountamount"]<0){
+	      Discount["discountamount"]=0;
+	   }
+	   
+	   Discount["discountedamount"] = realprice-Discount["discountamount"]; 
+	   
+	 }else{ 
+	   Discount["discountamount"]= 0;
+	   Discount["discountedamount"] = realprice; 
+	 }
+	 
+	 return Discount["discountedamount"];
+  }
+  
   
   async getOrderFromContext(@Ctx() ctx: RequestContext, createIfNotExists = false) {
         if (!ctx.session) {
