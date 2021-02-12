@@ -6,7 +6,8 @@ import {
 	NativeAuthenticationStrategy,
 	defaultPromotionConditions,
 	LanguageCode,
-	defaultShippingEligibilityChecker
+	defaultShippingEligibilityChecker,
+	defaultShippingCalculator
 } from '@vendure/core'; 
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin,configureS3AssetStorage } from '@vendure/asset-server-plugin';
@@ -60,6 +61,9 @@ import { AssetsPlugin } from './plugins/assets/assets-plugin';
 
 import { ShippingDistrictChecker } from './plugins/shipping-logics/shipping-district-checker';
 import { ShippingDistrictAmountChecker } from './plugins/shipping-logics/shipping-district-amount-checker';
+import { AlwaysShipping } from './plugins/shipping-logics/always-shipping';
+
+import { externalShippingCalculator } from './plugins/shipping-logics/shipping-calculator';
 
 import { ProductExtensionPlugin } from './plugins/channels/product-extension-plugin';
 import { ProductVariantExtensionPlugin } from './plugins/channels/product-variant-extension-plugin';
@@ -116,11 +120,16 @@ apiOptions: {
 	 ],
     },*/
 	shippingOptions: {
-    shippingEligibilityCheckers: [
-      defaultShippingEligibilityChecker,
-      ShippingDistrictChecker,
-	  ShippingDistrictAmountChecker
-     ],
+     shippingEligibilityCheckers: [
+       defaultShippingEligibilityChecker,
+       ShippingDistrictChecker,
+	   ShippingDistrictAmountChecker,
+	   AlwaysShipping
+      ],
+	  shippingCalculators: [
+       defaultShippingCalculator,
+       externalShippingCalculator
+      ],
     },
 	assetOptions: <any>{
 	  permittedFileTypes:[
