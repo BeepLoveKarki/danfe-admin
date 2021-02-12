@@ -72,6 +72,8 @@ import { NepalPlugin } from './plugins/miscellanous/nepal-plugin';
 import { DiscountsPlugin } from './plugins/discounts/discounts-plugin';
 import { DiscountsOrderPlugin } from './plugins/discounts/discounts-order-plugin';
 
+import { ProductUpdatePlugin } from './plugins/products/product-update-module';
+
 import path from 'path';
 
 
@@ -177,7 +179,8 @@ apiOptions: {
 		   label: [{
 			  languageCode: LanguageCode.en,
 			  value: 'Visit Number',
-		   }],	
+		   }],
+           defaultValue:0		   
 		  }, 
 		],
 		
@@ -458,6 +461,7 @@ apiOptions: {
 		DiscountsPlugin,
 		GlobalSettingsPlugin,
 		DiscountsOrderPlugin,
+		ProductUpdatePlugin,
 		
 		ProductExtensionPlugin,
 		ProductVariantExtensionPlugin,

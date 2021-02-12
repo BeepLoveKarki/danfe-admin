@@ -1,4 +1,4 @@
-import { SessionService, OrderService, ProductVariantService, ProductVariant, GlobalSettingsService, InternalServerError } from '@vendure/core';
+import { SessionService, OrderService, ProductVariantService, ProductVariant, GlobalSettingsService, InternalServerError, NegativeQuantityError } from '@vendure/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin } from '@vendure/core';
@@ -6,7 +6,7 @@ import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin }
 
 const schemaExtension = gql`
     extend type Mutation {
-        addItemToOrderAdvanced(productVariantId: ID!, quantity: Int!): UpdateOrderItemsResult!
+        addItemToOrderAdvanced(productVariantId: ID!, quantity: Int!): UpdateOrderItemsResult
     }
 `;
 
@@ -25,7 +25,9 @@ export class DiscountsOrderResolver {
 	 let discountedamount = await this.checkdiscount(ctx,productvariant);
 	 let proddata = JSON.parse(JSON.stringify(productvariant));
 	 
-	 let realprice;
+	 let realprice; //real price of item
+	 let addablenum; //add able items to cart after price update with discount
+	 
 	 if(proddata.listPriceIncludesTax){
 	    realprice = proddata.priceWithTax;
 	 }else{
@@ -36,7 +38,7 @@ export class DiscountsOrderResolver {
 	 
 	 if(order!=undefined){
 	  
-	  if(discountedamount!=realprice){
+	  if(discountedamount!=realprice){ //change price to price with discount
 	    let input = <any>{};
 	    input["id"]=args.productVariantId;
 	    input["price"]=discountedamount;
@@ -44,9 +46,43 @@ export class DiscountsOrderResolver {
 	    await this.variantService.update(ctx,vinput);
 	 }
 	  
-	  const result = await this.orderService.addItemToOrder(ctx, order.id, args.productVariantId, args.quantity, args.customFields);
+	  let result;
+	  if(args.quantity>0){
+	     result = await this.orderService.addItemToOrder(ctx, order.id, args.productVariantId, args.quantity, args.customFields);
+	  }else{
+		let lflag = 0;
+	    for(let i=0; i<order.lines.length; i++){
+		   let line = order.lines[i];
+		   if(line.productVariant.id==args.productVariantId){
+			  lflag = 1;
+		      let removalid = line.id;
+			  addablenum = line.quantity+args.quantity;
+			  
+			  if(addablenum>=0){
+			       
+				let removedItem = await this.orderService.removeItemFromOrder(ctx,order.id,removalid);
+			    
+				if(removedItem){
+				  
+				  if(addablenum!=0){	
+				    result = await this.orderService.addItemToOrder(ctx, order.id, args.productVariantId, addablenum, args.customFields);
+				  }
+				  
+				}else{
+			      return new InternalServerError("Some unexpected server error occurred.");
+			    }
+			  
+			  }
+			  
+			  break;
+		   }
+		}
+	   if(lflag==0){
+	       return new NegativeQuantityError();
+	   }
+	  }
 	  
-	  if(discountedamount!=realprice){
+	  if(discountedamount!=realprice){  //change price to price without discount
 	     let ninput = <any>{};
 	     ninput["id"]=args.productVariantId;
 	     ninput["price"]=realprice;
@@ -54,12 +90,24 @@ export class DiscountsOrderResolver {
 	     await this.variantService.update(ctx,nvinput);
 	  }
 	  
+	  if(addablenum != undefined){
+	    
+		if(addablenum==0){
+	      return null;
+	    }
+	  
+	    if(addablenum<0){
+	      return new InternalServerError("Cannot add negative quantity order to cart for this item");
+	    }
+		
+	  }
+	  
 	  return result;
 	 
 	 }
 	
 	}else{
-	  throw new InternalServerError("The product variant doesn't exist");
+	  return new InternalServerError("The product variant doesn't exist");
 	}
 	
   }
@@ -126,7 +174,7 @@ export class DiscountsOrderResolver {
 	  return Discount["discountedamount"];
 	 
 	 }else{
-	  throw new InternalServerError("The product variant doesn't exist");
+	  return new InternalServerError("The product variant doesn't exist");
 	 }
   }
   
