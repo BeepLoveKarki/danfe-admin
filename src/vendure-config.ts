@@ -357,7 +357,7 @@ apiOptions: {
 		  
 		  {
 		   name: 'contactnumber',
-		   type: 'int',
+		   type: 'string',
 		   list: true,
 		   label: [{
 			  languageCode: LanguageCode.en,
