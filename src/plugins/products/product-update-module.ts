@@ -34,7 +34,7 @@ export class ProductUpdateResolver {
 	let productget = await this.productService.findOne(ctx,args.id);
 	let product = JSON.parse(JSON.stringify(productget));
 	let newnum = 0;
-	if(product && product.customFields.visitnumber){
+	if(product){
 	   newnum = product.customFields.visitnumber+1;
 	}
 	input["customFields"]["visitnumber"] = newnum;
