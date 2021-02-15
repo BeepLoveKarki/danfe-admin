@@ -37,6 +37,7 @@
     "node-fetch": "^2.6.0",
     "pem": "^1.14.4",
     "pg": "8.2.1",
+    "referral-code-generator": "^1.0.8",
     "typescript": "^3.9.2"
   },
   "devDependencies": {

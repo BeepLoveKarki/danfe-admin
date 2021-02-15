@@ -43,6 +43,8 @@ import { KhaltiCredentialsPlugin } from './payment-gateways/khalti-merchant/khal
 import { EsewaMerchantPaymentHandler } from './payment-gateways/esewa-merchant/esewa-merchant-payment-handler';
 import { EsewaCredentialsPlugin } from './payment-gateways/esewa-merchant/esewa-credentials-mutation';
 
+import { DanfeBalancePaymentHandler } from './payment-gateways/danfe-balance/danfe-balance-payment-handler';
+
 //import { EsewaPersonalPaymentHandler } from './payment-gateways/esewa-personal/esewa-personal-payment-handler';
 
 import { CashPaymentHandler } from './payment-gateways/cash/cash-payment-handler';
@@ -70,10 +72,14 @@ import { ProductVariantExtensionPlugin } from './plugins/channels/product-varian
 
 import { NepalPlugin } from './plugins/miscellanous/nepal-plugin';
 import { DiscountsPlugin } from './plugins/discounts/discounts-plugin';
+import { ReferralCodePlugin } from './plugins/miscellanous/referral-code-plugin';
 import { DiscountsOrderPlugin } from './plugins/discounts/discounts-order-plugin';
 import { ProductVariantDiscountPlugin } from './plugins/discounts/productvariant-discount-plugin';
 
 import { ProductUpdatePlugin } from './plugins/products/product-update-module';
+
+import { BalancePlugin } from './plugins/balance/balance-module';
+import { BalanceAdminPlugin } from './plugins/balance/balance-admin-module';
 
 import path from 'path';
 
@@ -168,10 +174,33 @@ apiOptions: {
 		 //KhaltiPersonalPaymentHandler,
 		 ConnectIPSPaymentHandler,
 		 BankDepositPaymentHandler,
-		 CashPaymentHandler
+		 CashPaymentHandler,
+		 DanfeBalancePaymentHandler
 		],
     },
     customFields: {
+		
+		Customer:[
+		 {
+			 name:'balance',
+			 type: 'float',
+			 label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Danfe Balance',
+		     }],
+             defaultValue:0.0
+		 },
+		 
+		 {
+			 name:'referralcode',
+			 type: 'string',
+			 label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Referral Code',
+		     }]
+		 }
+		 
+		],
 		
 		Product:[
 		 {
@@ -291,15 +320,24 @@ apiOptions: {
 		   }]
 		  },
 		  
+		  {
+		    name: 'referrerbalance',
+			type: 'float',
+			label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Referrer Balance/Bonus',
+		   }],
+		   defaultValue: 0.0
+		  },
 		  
 		  {
-		   name: 'undermaintenance',
-		   type:'boolean',
-		   label: [{
+		    name: 'refereebalance',
+			type: 'float',
+			label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Under Maintenance?',
-		   }],	
-		   defaultValue:false 
+			  value: 'Referee Balance/Bonus',
+		   }],
+		   defaultValue: 0.0
 		  },
 		  
 		 {
@@ -387,7 +425,17 @@ apiOptions: {
 			  languageCode: LanguageCode.en,
 			  value: 'Contact Person(s) [Separate name, post and number by -. Ex: A-CEO-99]',
 		   }]
-		  },	  
+		  },
+
+          {
+		   name: 'undermaintenance',
+		   type:'boolean',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Under Maintenance?',
+		   }],	
+		   defaultValue:false 
+		  },		  
 		  
 		
 		],
@@ -464,6 +512,9 @@ apiOptions: {
 		DiscountsOrderPlugin,
 		ProductUpdatePlugin,
 		ProductVariantDiscountPlugin,
+		BalancePlugin,
+		BalanceAdminPlugin,
+		ReferralCodePlugin,
 		
 		ProductExtensionPlugin,
 		ProductVariantExtensionPlugin,

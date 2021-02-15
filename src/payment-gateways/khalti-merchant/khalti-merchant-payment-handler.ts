@@ -32,19 +32,6 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
 		let url = 'https://khalti.com/api/v2/payment/verify/';
 		let config;
 		
-		if(metadata["error"]){ //if error is occurred, use our payment gateway
-		   
-		   config = {
-			method: 'post',
-			body : data,
-			headers: { 
-			  'Content-Type': 'application/json',
-			  'Authorization': `Key ${args["Secret Key"]}`
-			}
-          };
-		
-		}else{
-		
 	     config = {
 			method: 'post',
 			body : data,
@@ -53,8 +40,6 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
 			  'Authorization': `Key ${process.env.khalti_default_secret_key}`
 			}
          };
-		
-		}
 		 
 		 let response = await fetch(url,config);
 		 let resp = await response.json();
@@ -75,7 +60,7 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
 		 }else{
 		   
 		  return {
-                amount: Math.ceil(order.total),
+                amount: amount,
                 state: 'Declined' as 'Declined',
                 metadata: {
 					public:{
@@ -90,7 +75,7 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
 	     
 	   } catch (err) {
 	       return {
-                amount: Math.ceil(order.total),
+                amount: amount,
                 state: 'Declined' as 'Declined',
                 metadata: {
 				  public:{
