@@ -186,7 +186,7 @@ apiOptions: {
 			 type: 'float',
 			 label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Danfe Balance',
+			  value: 'Danfe Coins',
 		     }],
              defaultValue:0.0
 		 },
@@ -218,7 +218,7 @@ apiOptions: {
 			type:'boolean',
 			label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Inherit Global Balance Increase?',
+			  value: 'Inherit Global Coin Increase?',
 		   }],	
 		   defaultValue:true
 		  },
@@ -228,7 +228,7 @@ apiOptions: {
 		   type:'float',
 		   label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Balance Increase Amount',
+			  value: 'Coin Increase Amount',
 		   }],
            defaultValue:0		   
 		  }, 
@@ -345,7 +345,7 @@ apiOptions: {
 			type: 'float',
 			label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Referrer Balance/Bonus',
+			  value: 'Referrer Coin/Bonus',
 		   }],
 		   defaultValue: 0.0
 		  },
@@ -355,7 +355,7 @@ apiOptions: {
 			type: 'float',
 			label: [{
 			  languageCode: LanguageCode.en,
-			  value: 'Referee Balance/Bonus',
+			  value: 'Referee Coin/Bonus',
 		   }],
 		   defaultValue: 0.0
 		  },
