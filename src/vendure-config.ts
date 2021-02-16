@@ -212,6 +212,26 @@ apiOptions: {
 		   }],
            defaultValue:0		   
 		  }, 
+		  
+		  {
+			name: 'balanceinherit',
+			type:'boolean',
+			label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Inherit Global Balance Increase?',
+		   }],	
+		   defaultValue:true
+		  },
+		  
+		  {
+		   name: 'balanceincrease',
+		   type:'float',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Balance Increase Amount',
+		   }],
+           defaultValue:0		   
+		  }, 
 		],
 		
 		Collection: [
@@ -339,6 +359,16 @@ apiOptions: {
 		   }],
 		   defaultValue: 0.0
 		  },
+		  
+		  {
+		   name: 'globalbalanceincrease',
+		   type:'float',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Global Balance Increase amount',
+		   }],
+           defaultValue:0		   
+		  }, 
 		  
 		 {
 		   name: 'ecommercename',
