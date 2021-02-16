@@ -81,6 +81,8 @@ import { ProductUpdatePlugin } from './plugins/products/product-update-module';
 import { BalancePlugin } from './plugins/balance/balance-module';
 import { BalanceAdminPlugin } from './plugins/balance/balance-admin-module';
 
+import { PaymentMethodsPlugin } from './plugins/payment-methods/payment-methods';
+
 import path from 'path';
 
 
@@ -545,6 +547,7 @@ apiOptions: {
 		BalancePlugin,
 		BalanceAdminPlugin,
 		ReferralCodePlugin,
+		PaymentMethodsPlugin,
 		
 		ProductExtensionPlugin,
 		ProductVariantExtensionPlugin,
@@ -574,14 +577,14 @@ apiOptions: {
 					user: process.env.EMAIL_USER!,
 					pass: process.env.EMAIL_PASS! ,
 				}
-             },
+             },*/
             
 			globalTemplateVars: {
                 fromAddress: process.env.FROM_EMAIL!,
                 verifyEmailAddressUrl: process.env.STOREFRONT_URL!+'account/verify',
                 passwordResetUrl: process.env.STOREFRONT_URL!+'account/reset-password',
                 changeEmailAddressUrl: process.env.STOREFRONT_URL!+'account/change-email-address',
-            }*/
+            }
 			
         }),
         AdminUiPlugin.init({
