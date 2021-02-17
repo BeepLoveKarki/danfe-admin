@@ -14,6 +14,10 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
         'Merchant Id': { 
 		   type:'string'	   
 		},
+		'Production Mode':{
+		   type:'boolean',
+		   defaultValue:false
+		}
 		
     },
     
@@ -27,7 +31,13 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
         postdata["rid"] = metadata.rid;
 		 
 		let data =JSON.stringify(postdata);
-		let url = 'https://uat.esewa.com.np/epay/transrec';
+		let url;
+		
+		if(String(args["Production Mode"]) == "false"){
+		  url = 'https://uat.esewa.com.np/epay/transrec';
+		}else{
+		  url = 'https://esewa.com.np/epay/transrec';
+		}
 		
 		let config = {
 			method: 'post',
@@ -39,11 +49,11 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
         };
 		 
 		 let response = await fetch(url,config);
-		 let resp = await response.json();
+		 let resp = await response.text();
 		 
 		 console.log(resp);
 		 
-		 if(resp["state"]["name"]=="Completed"){
+		 /*if(resp["state"]["name"]=="Completed"){
 		    
 			return {
                 amount: resp.amount,
@@ -56,7 +66,7 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 				},
            };
 		 
-		}
+		}*/
 		 
 		return {
                 amount: Math.ceil(order.total),

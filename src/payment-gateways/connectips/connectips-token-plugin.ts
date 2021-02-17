@@ -21,6 +21,7 @@ const schemaExtension = gql`
 		REMARKS: String!
 		PARTICULARS: String!
 		TOKEN: String!
+		PRODUCTIONMODE: String!
     }
 	
 	input ConnectIPSInput{
@@ -79,36 +80,21 @@ export class ConnectIPSTokenResolver {
 				if(data.items[i]["configArgs"][j]["name"]=="App Name"){
 				    postdata["APPNAME"] = data.items[i]["configArgs"][j]["value"];
 				}
-				/*if(data.items[i]["configArgs"][j]["name"]=="Currency"){
+				if(data.items[i]["configArgs"][j]["name"]=="Currency"){
 				    postdata["TXNCRNCY"] = data.items[i]["configArgs"][j]["value"];
-				}*/
+				}
+				if(data.items[i]["configArgs"][j]["name"]=="Production Mode"){
+				    postdata["PRODUCTIONMODE"] = String(data.items[i]["configArgs"][j]["value"]);
+				}
+				
 			 }
 			 
 			 break;
 		  }
 	   }
-	   postdata["TXNCRNCY"] = process.env.ips_default_txn_currency;
 	   postdata["TOKEN"] = gettoken();
 	   return postdata;
 	});
-  }
-
-  @Mutation()
-  createDefaultConnectIPSToken(@Ctx() ctx: RequestContext, @Args() args: any) { //if error is occurred, use our payment gateway
-	let num = Math.floor(Math.random()*100000001).toString();
-	postdata["TXNID"] = "DANFEIPS-"+num;
-	postdata["TXNDATE"] = getdate();
-	postdata["TXNAMT"] = Math.ceil(args.input.total);
-	postdata["REFERENCEID"] = "DANFE-REF-"+num; 
-	postdata["REMARKS"] = "DANFE-ORDER-PAYMENT";
-	postdata["PARTICULARS"] = "PAID FOR ORDER BY CUSTOMER";
-	postdata["MERCHANTID"] = Number(process.env.ips_default_merchant_id);
-	postdata["APPID"] = process.env.ips_default_app_id;
-	postdata["APPNAME"] = process.env.ips_default_app_name;
-	postdata["TXNCRNCY"] = process.env.ips_default_txn_currency;
-	
-	postdata["TOKEN"] = gettoken();
-	return postdata;
   }
 
 }

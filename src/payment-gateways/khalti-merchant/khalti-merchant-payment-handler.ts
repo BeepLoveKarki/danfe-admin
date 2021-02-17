@@ -23,6 +23,7 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
     
 	async createPayment(ctx,order, amount, args, metadata) {
 	   
+	   
 	   try {
 		   
 		postdata["token"] = metadata["token"];
@@ -37,7 +38,7 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
 			body : data,
 			headers: { 
 			  'Content-Type': 'application/json',
-			  'Authorization': `Key ${process.env.khalti_default_secret_key}`
+			  'Authorization': `Key ${args["Secret Key"]}`
 			}
          };
 		 

@@ -8,6 +8,7 @@ let postdata = <any>{};
 const schemaExtension = gql`
     type Esewa {
 		MERCHANTID: String!
+		PRODUCTIONMODE: String!
     }
 	
     extend type Mutation {
@@ -31,6 +32,11 @@ export class EsewaCredentialsResolver {
 			    if(data.items[i]["configArgs"][j]["name"]=="Merchant Id"){
 				    postdata["MERCHANTID"] = data.items[i]["configArgs"][j]["value"];
 				}
+				
+				if(data.items[i]["configArgs"][j]["name"]=="Production Mode"){
+				    postdata["PRODUCTIONMODE"] = String(data.items[i]["configArgs"][j]["value"]);
+				}
+				
 			 }
 			 
 			 break;
