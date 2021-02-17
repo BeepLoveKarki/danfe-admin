@@ -25,12 +25,20 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 	   
 	   try {
 		   
-		postdata["amt"] = Math.ceil(amount);
+		postdata["amt"] = metadata.amt;
 		postdata["scd"] = args["Merchant Id"];
 		postdata["pid"] = metadata.pid;
         postdata["rid"] = metadata.rid;
-		 
-		let data =JSON.stringify(postdata);
+		
+		/*let data = "";
+		Object.keys(postdata).forEach((val,index)=>{
+		  let mdata = val+"="+postdata[val]+"&";
+		  console.log(mdata);
+		  data+=mdata;
+		});
+		let ndata = data.substring(0,data.length-1);
+		console.log(ndata);*/
+		
 		let url;
 		
 		if(String(args["Production Mode"]) == "false"){
@@ -39,40 +47,47 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 		  url = 'https://esewa.com.np/epay/transrec';
 		}
 		
+		console.log(url);
+		
 		let config = {
 			method: 'post',
-			body : data,
+			body : postdata,
+        };
+		
+		/*let config = {
+			method: 'post',
+			body : postdata,
 			headers: { 
 			  'Content-Type': 'application/json',
-			  //'Authorization': `Key ${args.secretKey}`
 			}
-        };
+        };*/
+		
 		 
 		 let response = await fetch(url,config);
-		 let resp = await response.text();
+		 
+		 let resp = String(await response.text());
 		 
 		 console.log(resp);
 		 
-		 /*if(resp["state"]["name"]=="Completed"){
-		    
-			return {
-                amount: resp.amount,
+		 if(resp.includes("Success")){
+		   return {
+                amount: amount,
                 state: 'Settled' as 'Settled',
-                transactionId: resp.idx,
                 metadata: {
 				   public:{
 					message:"Success"
 				   }
 				},
            };
-		 
-		}*/
+		 }
 		 
 		return {
                 amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
-                    errorMessage: "Error Payment"
+				  public:{
+                    errorMessage: "Error during payment"
+				  }
                 },
           };
 		 
@@ -82,7 +97,9 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
                 amount: Math.ceil(order.total),
                 state: 'Declined' as 'Declined',
                 metadata: {
+				  public:{
                     errorMessage: err.message
+				  }
                 },
             };
 	   }
