@@ -9,6 +9,7 @@ const schemaExtension = gql`
         zonesnepal: [String!]!
 		districtsnepal(zone: String): [String!]!
 		citiesnepal: [String!]!
+		areas(district:String!): [String!]!
     }
 `;
 
@@ -36,6 +37,11 @@ export class NepalResolver {
   @Query()
   citiesnepal(@Ctx() ctx: RequestContext, @Args() args: any) {
 	return Object.keys(Nepal.Cities);
+  }
+  
+  @Query()
+  areas(@Ctx() ctx: RequestContext, @Args() args: any) {
+	return Object.keys(Nepal.getCitiesByDistrict(args.district));
   }
 
 }
