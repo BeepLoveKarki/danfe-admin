@@ -2,6 +2,9 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 import gql from 'graphql-tag';
 import { Ctx, PluginCommonModule, RequestContext, VendureConfig, VendurePlugin } from '@vendure/core';
 import Nepal from 'nepal-js';
+import fs from 'fs';
+import path from 'path';
+import csv from 'csvtojson';
 
 const schemaExtension = gql`
 	
@@ -40,8 +43,30 @@ export class NepalResolver {
   }
   
   @Query()
-  areas(@Ctx() ctx: RequestContext, @Args() args: any) {
-	return Object.keys(Nepal.getCitiesByDistrict(args.district));
+  async areas(@Ctx() ctx: RequestContext, @Args() args: any) {
+	//return Object.keys(Nepal.getCitiesByDistrict(args.district));
+	
+	let fpath = path.join(__dirname,'../../shipping-rates/'+args.district+'.csv');
+	
+	let areas = new Array();
+	
+	try{
+	 
+	 if (fs.existsSync(fpath)) {
+	  
+	  const array = await csv().fromFile(fpath);
+	  array.forEach((val,index)=>{
+	     areas.push(val["PLACE"]);
+	  });
+	  
+	 }
+	   
+	 return areas;
+	
+	}catch(err){
+	  return areas;
+	}
+	
   }
 
 }
