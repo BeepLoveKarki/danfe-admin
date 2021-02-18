@@ -22,54 +22,8 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
     },
     
 	async createPayment(ctx, order, amount, args, metadata) {
-	   
-	   try {
-		   
-		postdata["amt"] = metadata.amt;
-		postdata["scd"] = args["Merchant Id"];
-		postdata["pid"] = metadata.pid;
-        postdata["rid"] = metadata.rid;
-		
-		/*let data = "";
-		Object.keys(postdata).forEach((val,index)=>{
-		  let mdata = val+"="+postdata[val]+"&";
-		  console.log(mdata);
-		  data+=mdata;
-		});
-		let ndata = data.substring(0,data.length-1);
-		console.log(ndata);*/
-		
-		let url;
-		
-		if(String(args["Production Mode"]) == "false"){
-		  url = 'https://uat.esewa.com.np/epay/transrec';
-		}else{
-		  url = 'https://esewa.com.np/epay/transrec';
-		}
-		
-		console.log(url);
-		
-		let config = {
-			method: 'post',
-			body : postdata,
-        };
-		
-		/*let config = {
-			method: 'post',
-			body : postdata,
-			headers: { 
-			  'Content-Type': 'application/json',
-			}
-        };*/
-		
 		 
-		 let response = await fetch(url,config);
-		 
-		 let resp = String(await response.text());
-		 
-		 console.log(resp);
-		 
-		 if(resp.includes("Success")){
+		 if(metadata.message=="Success"){
 		   return {
                 amount: amount,
                 state: 'Settled' as 'Settled',

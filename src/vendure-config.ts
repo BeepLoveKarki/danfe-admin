@@ -65,7 +65,7 @@ import { ShippingDistrictChecker } from './plugins/shipping-logics/shipping-dist
 import { ShippingDistrictAmountChecker } from './plugins/shipping-logics/shipping-district-amount-checker';
 import { AlwaysShipping } from './plugins/shipping-logics/always-shipping';
 
-//import { externalShippingCalculator } from './plugins/shipping-logics/shipping-calculator';
+import { externalShippingCalculator } from './plugins/shipping-logics/shipping-calculator';
 
 import { ProductExtensionPlugin } from './plugins/channels/product-extension-plugin';
 import { ProductVariantExtensionPlugin } from './plugins/channels/product-variant-extension-plugin';
@@ -137,10 +137,10 @@ apiOptions: {
 	   ShippingDistrictAmountChecker,
 	   AlwaysShipping
       ],
-	  /*shippingCalculators: [
+	  shippingCalculators: [
        defaultShippingCalculator,
        externalShippingCalculator
-      ],*/
+      ],
     },
 	assetOptions: <any>{
 	  permittedFileTypes:[
@@ -249,6 +249,14 @@ apiOptions: {
 		],
 		ProductVariant: [
 		 
+		 {
+		   name: 'weight',
+		   type: 'float',
+		   label: [{
+			  languageCode: LanguageCode.en,
+			  value: 'Weight in grams',
+		   }],
+		 },
 		 {
 		   name: 'minorder',
 		   type:'int',
