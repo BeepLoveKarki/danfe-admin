@@ -43,20 +43,8 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
                     errorMessage: "Error during payment"
 				  }
                 },
-          };
-		 
+          };	 
 	     
-	   } catch (err) {
-	       return {
-                amount: Math.ceil(order.total),
-                state: 'Declined' as 'Declined',
-                metadata: {
-				  public:{
-                    errorMessage: err.message
-				  }
-                },
-            };
-	   }
 	},
 	
 	async settlePayment(){

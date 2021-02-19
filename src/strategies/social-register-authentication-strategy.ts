@@ -55,7 +55,15 @@ export class SocialRegisterAuthenticationStrategy implements AuthenticationStrat
   }
 
   async authenticate(ctx: RequestContext, data: SocialRegisterAuthData): Promise<User | false> {
-    
+  
+    const existinguser = await this.userService.getUserByEmailAddress(ctx,data.emailAddress);
+  
+    if(existinguser){
+	  
+	  throw new UserInputError("An user with existing email address already exists");
+	
+	}else{
+	
 	let customer:any;
 	let a=0;
 	let referredcode;
@@ -118,6 +126,8 @@ export class SocialRegisterAuthenticationStrategy implements AuthenticationStrat
 	   }
 	}else{
 	   return false;
+	}
+  
 	}
   
   }
