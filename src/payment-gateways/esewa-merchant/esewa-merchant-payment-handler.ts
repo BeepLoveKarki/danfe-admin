@@ -27,17 +27,24 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
 		 
 		 if(metadata.message=="Success"){
 		   
+		   let resp = await fetch(metadata.url);
+		   let res = String(await resp.text());
+		  
+		  if(res.includes("Success")){
+		   
 		   return {
                 amount: amount,
-                state: 'Authorized' as 'Authorized',
+                state: 'Settled' as 'Settled',
                 metadata: {
 				   public:{
-				     message: "Authorized, Settlement Needed"
+				     message: "Success"
 				   },
-				   "State":"Success via Frontend. Need Verification via verification url",
+				   "State":"Success",
 				   "Verification Url": metadata.url
 				},
            };
+		 }
+		 
 		 }
 		 
 		return {
