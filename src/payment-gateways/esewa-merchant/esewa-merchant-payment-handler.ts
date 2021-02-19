@@ -23,14 +23,19 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
     
 	async createPayment(ctx, order, amount, args, metadata) {
 		 
+		 try{
+		 
 		 if(metadata.message=="Success"){
+		   
 		   return {
                 amount: amount,
-                state: 'Settled' as 'Settled',
+                state: 'Authorized' as 'Authorized',
                 metadata: {
 				   public:{
-					message:"Success"
-				   }
+				     message: "Authorized, Settlement Needed"
+				   },
+				   "State":"Success via Frontend. Need Verification via verification url",
+				   "Verification Url": metadata.url
 				},
            };
 		 }
@@ -43,7 +48,21 @@ export const EsewaMerchantPaymentHandler = new PaymentMethodHandler({
                     errorMessage: "Error during payment"
 				  }
                 },
-          };	 
+          };
+
+		 }catch(err){
+		   
+		   return {
+                amount: Math.ceil(order.total),
+                state: 'Declined' as 'Declined',
+                metadata: {
+				  public:{
+                    errorMessage: "Error during payment"
+				  }
+                },
+          };
+		  
+		 }			 
 	     
 	},
 	

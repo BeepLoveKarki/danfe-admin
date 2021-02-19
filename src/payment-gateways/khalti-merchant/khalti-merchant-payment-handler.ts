@@ -31,9 +31,7 @@ export const KhaltiMerchantPaymentHandler = new PaymentMethodHandler({
 		 
 		let data =JSON.stringify(postdata);
 		let url = 'https://khalti.com/api/v2/payment/verify/';
-		let config;
-		
-	     config = {
+		let config = {
 			method: 'post',
 			body : data,
 			headers: { 
