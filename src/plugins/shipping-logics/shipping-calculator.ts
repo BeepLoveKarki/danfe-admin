@@ -44,17 +44,21 @@ export const externalShippingCalculator = new ShippingCalculator({
 	  
 	  const array = await csv().fromFile(fpath);
 	  
+	  let flag = 0;
 	  for(let i =0;i<array.length;i++){
 	    if(array[i]["PLACE"]==area){
+		   flag = 1;
 		   rate = Math.ceil((array[i]["COST PER GRAM"]*100)*totalWeight); //cost per gram is in rs to converting to paisa
 		   deliveryDate = array[i]["ESTIMATED TIME"];
 		}
 		break;
 	  }
 	  
-	  toreturn["price"] = rate;
-	  toreturn["metadata"]["deliveryDate"] = deliveryDate;
-	  toreturn["metadata"]["possible"] = true;
+	  if(flag==1){
+	    toreturn["price"] = rate;
+	    toreturn["metadata"]["deliveryDate"] = deliveryDate;
+	    toreturn["metadata"]["possible"] = true;
+	  }
 	  
 	 }
 	
