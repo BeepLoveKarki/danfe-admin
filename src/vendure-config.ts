@@ -132,10 +132,10 @@ apiOptions: {
     },*/
 	shippingOptions: {
      shippingEligibilityCheckers: [
+	   AlwaysShipping,
        defaultShippingEligibilityChecker,
        ShippingDistrictChecker,
-	   ShippingDistrictAmountChecker,
-	   AlwaysShipping
+	   ShippingDistrictAmountChecker
       ],
 	  shippingCalculators: [
        defaultShippingCalculator,
@@ -449,7 +449,7 @@ apiOptions: {
 		  
 		  {
 		   name: 'companyemail',
-		   type: 'int',
+		   type: 'string',
 		   list: true,
 		   label: [{
 			  languageCode: LanguageCode.en,
@@ -459,7 +459,7 @@ apiOptions: {
 		  
 		  {
 		   name: 'contactperson',
-		   type: 'int',
+		   type: 'string',
 		   list: true,
 		   label: [{
 			  languageCode: LanguageCode.en,
