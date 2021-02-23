@@ -10,7 +10,7 @@ export const externalShippingCalculator = new ShippingCalculator({
     taxRate: {
       type: 'int',
       ui: { component: 'number-form-input', suffix: '%' },
-      label: [{ languageCode: LanguageCode.en, value: 'Tax rate' }],
+      label: [{ languageCode: LanguageCode.en, value: 'TAX/VAT Rate' }],
     },
   },
   

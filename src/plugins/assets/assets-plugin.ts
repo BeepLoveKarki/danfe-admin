@@ -10,6 +10,7 @@ const schemaExtension = gql`
     extend type Query {
         assets(options: AssetListOptions):  AssetList!
 		headassets: AssetList!
+		brandassets: AssetList!
     }
 	
 	input AssetListOptions
@@ -42,6 +43,28 @@ export class AssetsResolver {
       filter:{
         name: {
         contains: "danfeheader"
+       }
+      }
+	 };
+	
+	return this.listQueryBuilder
+		.build(Asset, options)
+		.getManyAndCount()
+		.then(([assets, totalItems]) => {
+			return {
+				items: assets,
+				totalItems
+			 };
+		 });
+  }
+  
+  @Query()
+  brandassets(@Ctx() ctx: RequestContext,  @Args() args: any) {
+	
+	const options = {
+      filter:{
+        name: {
+        contains: "danfebrand"
        }
       }
 	 };
